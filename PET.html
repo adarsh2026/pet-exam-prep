@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PET Exam Prep</title>
+<style>
+  :root{
+    --bg:#0b1220;
+    --card:#141d31;
+    --card2:#1b2740;
+    --accent:#22d3ee;
+    --accent2:#f97316;
+    --accent3:#a78bfa;
+    --text:#e5edf7;
+    --muted:#94a3b8;
+    --green:#34d399;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Segoe UI',Roboto,Arial,sans-serif;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(34,211,238,.10), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(249,115,22,.08), transparent 40%),
+      linear-gradient(180deg,#0b1220,#0a0f1c);
+    color:var(--text);
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+  header{
+    text-align:center;
+    padding:26px 15px 8px;
+  }
+  header h1{
+    font-size:24px;
+    background:linear-gradient(90deg,var(--accent),var(--accent3),var(--accent2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    font-weight:800;
+  }
+  .scheme{
+    max-width:860px;
+    margin:14px auto 0;
+    padding:12px 16px;
+    background:var(--card);
+    border:1px solid #26324d;
+    border-radius:14px;
+    font-size:12.5px;
+    color:var(--muted);
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 16px;
+    justify-content:center;
+  }
+  .scheme b{color:var(--accent);}
+
+  .progress-wrap{
+    max-width:860px;
+    margin:14px auto 0;
+    padding:12px 18px;
+    background:linear-gradient(135deg,var(--card),var(--card2));
+    border:1px solid #26324d;
+    border-radius:14px;
+  }
+  .progress-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:12.5px;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .progress-top b{color:var(--text);}
+  .progress-bar-outer{
+    width:100%;
+    height:9px;
+    background:#0b1220;
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid #26324d;
+  }
+  .progress-bar-inner{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--accent),var(--green));
+    border-radius:20px;
+    transition:width .4s ease;
+  }
+
+  /* ===== HOME: syllabus grid ===== */
+  #homeTitle{
+    text-align:center;
+    color:var(--muted);
+    font-size:13.5px;
+    margin:22px 0 12px;
+  }
+  .grid{
+    max-width:860px;
+    margin:0 auto;
+    padding:0 15px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(155px,1fr));
+    gap:14px;
+  }
+  .subj-card{
+    background:var(--card);
+    border:1px solid #26324d;
+    border-radius:16px;
+    padding:16px 12px;
+    cursor:pointer;
+    text-align:center;
+    transition:.18s;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+  }
+  .subj-card:hover{
+    border-color:var(--accent);
+    transform:translateY(-3px);
+  }
+  .subj-icon{font-size:30px;}
+  .subj-name{font-size:13.5px;font-weight:700;line-height:1.35;min-height:36px;}
+  .subj-marks{
+    font-size:10.5px;
+    color:#04222a;
+    background:var(--accent2);
+    padding:2px 9px;
+    border-radius:20px;
+    font-weight:700;
+  }
+  .subj-count{font-size:11px;color:var(--muted);}
+  .subj-progress-outer{
+    width:100%;height:5px;background:#0b1220;border-radius:10px;overflow:hidden;margin-top:4px;border:1px solid #26324d;
+  }
+  .subj-progress-inner{
+    height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:10px;
+  }
+
+  /* ===== SUBJECT VIEW ===== */
+  .topbar{
+    max-width:860px;
+    margin:16px auto 4px;
+    padding:0 15px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .backbtn{
+    background:var(--card);
+    border:1px solid #334155;
+    color:var(--accent);
+    padding:9px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .backbtn:hover{border-color:var(--accent);}
+  .searchBox{
+    background:var(--card);
+    color:var(--text);
+    border:1px solid #334155;
+    padding:11px 14px;
+    border-radius:10px;
+    font-size:14px;
+    outline:none;
+    flex:1;
+    min-width:0;
+  }
+  .searchBox:focus{border-color:var(--accent);}
+  .mockbtn{
+    background:linear-gradient(90deg,var(--accent2),var(--accent3));
+    border:none;
+    color:#2a1200;
+    padding:10px 16px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:800;
+    flex-shrink:0;
+    white-space:nowrap;
+  }
+  .mockbtn:hover{filter:brightness(1.08);}
+
+
+  .stats{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    margin:10px 0 6px;
+  }
+  .section-title{
+    text-align:center;
+    color:var(--accent);
+    font-size:19px;
+    font-weight:700;
+    margin:14px 0 2px;
+  }
+  .syllabus-note{
+    max-width:860px;
+    margin:10px auto 0;
+    padding:10px 16px;
+    background:var(--card2);
+    border:1px dashed #3a4970;
+    border-radius:10px;
+    font-size:12px;
+    line-height:1.6;
+    color:var(--muted);
+    text-align:center;
+  }
+  .syllabus-note b{color:var(--accent3);}
+  #container{
+    max-width:860px;
+    margin:0 auto;
+    padding:10px 15px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid #26324d;
+    border-radius:12px;
+    overflow:hidden;
+    transition:.2s;
+  }
+  .card.done{border-color:var(--green);}
+  .card:hover{border-color:var(--accent);}
+  .q{
+    padding:14px 16px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    font-weight:600;
+    font-size:14.5px;
+    line-height:1.5;
+  }
+  .q .qtext{flex:1;}
+  .q .side{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-shrink:0;
+  }
+  .check{
+    width:20px;height:20px;
+    border-radius:6px;
+    border:2px solid #3a4970;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    font-size:12px;
+    color:transparent;
+    flex-shrink:0;
+  }
+  .check.on{background:var(--green);border-color:var(--green);color:#04220f;}
+  .arrow{transition:.2s; color:var(--accent); font-size:14px;}
+  .card.open .arrow{transform:rotate(180deg);}
+  .a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    background:var(--card2);
+  }
+  .card.open .a{
+    padding:14px 16px;
+    max-height:1400px;
+  }
+  .a p{
+    color:#d1d5db;
+    line-height:1.7;
+    font-size:13.8px;
+    white-space:pre-line;
+  }
+  .ans{
+    color:var(--green);
+    font-weight:700;
+  }
+  .empty{
+    text-align:center;
+    color:var(--muted);
+    padding:40px 15px;
+    line-height:1.8;
+  }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    margin-top:30px;
+    padding:0 15px;
+  }
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-thumb{background:#334155;border-radius:10px;}
+
+  /* ===== EXAM SELECTOR DROPDOWN ===== */
+  .exam-select-wrap{
+    max-width:860px;
+    margin:0 auto;
+    padding:14px 15px 0;
+    display:flex;
+    justify-content:center;
+  }
+  #examSelect{
+    background:var(--card);
+    color:var(--text);
+    border:1px solid #334155;
+    padding:10px 16px;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:700;
+    outline:none;
+    cursor:pointer;
+    max-width:340px;
+    width:100%;
+    -webkit-appearance:none;
+    appearance:none;
+    background-image:linear-gradient(45deg,transparent 50%,var(--accent) 50%),linear-gradient(135deg,var(--accent) 50%,transparent 50%);
+    background-position:calc(100% - 20px) center,calc(100% - 15px) center;
+    background-size:5px 5px,5px 5px;
+    background-repeat:no-repeat;
+  }
+  #examSelect:focus{border-color:var(--accent);}
+  #examSelect option{background:var(--card);color:var(--text);}
+
+  /* ===== COMING SOON VIEW ===== */
+  .comingsoon-wrap{
+    max-width:600px;
+    margin:60px auto;
+    padding:40px 24px;
+    background:linear-gradient(135deg,var(--card),var(--card2));
+    border:1px solid #26324d;
+    border-radius:20px;
+    text-align:center;
+  }
+  .comingsoon-icon{font-size:52px;margin-bottom:14px;}
+  .comingsoon-wrap h2{
+    font-size:22px;
+    background:linear-gradient(90deg,var(--accent2),var(--accent3));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .comingsoon-wrap p{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.7;
+  }
+  .comingsoon-badge{
+    display:inline-block;
+    margin-top:16px;
+    padding:6px 16px;
+    border-radius:20px;
+    background:var(--accent2);
+    color:#2a1200;
+    font-weight:700;
+    font-size:12.5px;
+  }
+
+  /* ===== MOBILE RESPONSIVE ===== */
+  @media (max-width:600px){
+    header{padding:20px 12px 6px;}
+    header h1{font-size:19px;}
+    .exam-select-wrap{padding:12px 12px 0;}
+    #examSelect{font-size:13px;padding:9px 14px;max-width:100%;}
+    .scheme{
+      font-size:11px;
+      gap:5px 10px;
+      padding:10px 12px;
+      margin:12px auto 0;
+    }
+    .progress-wrap{padding:10px 14px;margin:12px auto 0;}
+    .progress-top{font-size:11.5px;}
+    #homeTitle{font-size:12.5px;margin:18px 0 10px;}
+    .grid{
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      padding:0 12px;
+    }
+    .subj-card{padding:12px 8px;border-radius:14px;gap:5px;}
+    .subj-icon{font-size:24px;}
+    .subj-name{font-size:12px;min-height:32px;}
+    .subj-marks{font-size:10px;padding:2px 8px;}
+    .subj-count{font-size:10px;}
+    .topbar{padding:0 12px;gap:8px;flex-wrap:wrap;}
+    .backbtn{padding:8px 12px;font-size:12.5px;}
+    .searchBox{padding:9px 12px;font-size:13px;}
+    .stats{font-size:12px;}
+    .section-title{font-size:16px;}
+    #container{padding:8px 12px;gap:10px;}
+    .q{padding:12px 13px;font-size:13.5px;gap:8px;}
+    .check{width:18px;height:18px;}
+    .a p{font-size:13px;}
+    footer{font-size:11px;padding:0 12px;}
+    .comingsoon-wrap{margin:36px 16px;padding:30px 18px;}
+    .comingsoon-icon{font-size:42px;}
+    .comingsoon-wrap h2{font-size:19px;}
+    .comingsoon-wrap p{font-size:13px;}
+  }
+  @media (max-width:380px){
+    .grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+    .subj-name{font-size:11.2px;}
+  }
+
+  /* ===== MOCK TEST ===== */
+  .mock-topbar{
+    max-width:700px;
+    margin:16px auto 0;
+    padding:0 15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .mock-progress-text{
+    font-size:13px;
+    font-weight:700;
+    color:var(--accent);
+  }
+  .mock-progress-bar-outer{
+    max-width:700px;
+    margin:10px auto 0;
+    padding:0 15px;
+  }
+  .mock-progress-bar-outer .mock-progress-bar-inner{
+    height:8px;
+    border-radius:6px;
+    background:linear-gradient(90deg,var(--accent2),var(--accent3));
+    width:0%;
+    transition:width .3s ease;
+  }
+  .mock-progress-bar-outer{
+    background:transparent;
+  }
+  #mockProgressBar{
+    height:8px;
+    border-radius:6px;
+    background:linear-gradient(90deg,var(--accent2),var(--accent3));
+    width:0%;
+    transition:width .3s ease;
+    max-width:670px;
+    margin:0 auto;
+  }
+  .mock-card{
+    max-width:700px;
+    margin:24px auto;
+    background:linear-gradient(135deg,var(--card),var(--card2));
+    border:1px solid #26324d;
+    border-radius:18px;
+    padding:26px 22px;
+  }
+  .mock-qtext{
+    font-size:16px;
+    line-height:1.65;
+    color:var(--text);
+    font-weight:600;
+    margin-bottom:18px;
+    white-space:pre-line;
+  }
+  .mock-options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .mock-option-btn{
+    text-align:left;
+    background:var(--card2);
+    border:1.5px solid #334155;
+    color:var(--text);
+    padding:13px 16px;
+    border-radius:12px;
+    font-size:14px;
+    line-height:1.5;
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .mock-option-btn:hover{border-color:var(--accent);}
+  .mock-option-btn.correct{
+    background:#14532d;
+    border-color:#16a34a;
+    color:#dcfce7;
+    font-weight:700;
+  }
+  .mock-option-btn.wrong{
+    background:#450a0a;
+    border-color:#dc2626;
+    color:#fecaca;
+    font-weight:700;
+  }
+  .mock-option-btn.disabled{
+    cursor:default;
+    opacity:0.85;
+  }
+  .mock-option-btn .opt-label{
+    font-weight:800;
+    color:var(--accent);
+    margin-right:8px;
+  }
+  .mock-option-btn.correct .opt-label,
+  .mock-option-btn.wrong .opt-label{color:inherit;}
+  .mock-feedback{
+    text-align:center;
+    font-weight:800;
+    font-size:14px;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:14px;
+  }
+  .mock-feedback.correct{background:rgba(22,163,74,0.15);color:#4ade80;}
+  .mock-feedback.wrong{background:rgba(220,38,38,0.15);color:#f87171;}
+  .mock-next-btn{
+    width:100%;
+    background:var(--accent);
+    color:#04121e;
+    border:none;
+    padding:13px;
+    border-radius:12px;
+    font-weight:800;
+    font-size:14.5px;
+    cursor:pointer;
+  }
+  .mock-next-btn:hover{filter:brightness(1.08);}
+
+  .mock-result-card{
+    max-width:520px;
+    margin:50px auto;
+    background:linear-gradient(135deg,var(--card),var(--card2));
+    border:1px solid #26324d;
+    border-radius:20px;
+    padding:40px 26px;
+    text-align:center;
+  }
+  .mock-result-emoji{font-size:54px;margin-bottom:6px;}
+  .mock-result-title{font-size:20px;font-weight:800;color:var(--text);margin-bottom:14px;}
+  .mock-result-score{
+    font-size:38px;
+    font-weight:900;
+    background:linear-gradient(90deg,var(--accent2),var(--accent3));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .mock-result-pct{font-size:15px;color:var(--muted);margin-top:4px;font-weight:700;}
+  .mock-result-msg{font-size:13.5px;color:var(--text);margin-top:16px;line-height:1.6;}
+  .mock-result-best{font-size:12px;color:var(--muted);margin-top:10px;}
+  .mock-result-actions{
+    display:flex;
+    gap:12px;
+    margin-top:24px;
+  }
+  .mock-retake-btn,.mock-back-btn{
+    flex:1;
+    padding:12px;
+    border-radius:12px;
+    font-weight:800;
+    font-size:13.5px;
+    cursor:pointer;
+    border:none;
+  }
+  .mock-retake-btn{background:var(--accent);color:#04121e;}
+  .mock-back-btn{background:var(--card2);color:var(--text);border:1px solid #334155;}
+
+  @media (max-width:600px){
+    .mock-topbar{padding:0 12px;}
+    .mock-progress-bar-outer{padding:0 12px;}
+    .mock-card{margin:16px 12px;padding:20px 16px;border-radius:14px;}
+    .mock-qtext{font-size:14.5px;}
+    .mock-option-btn{padding:12px 14px;font-size:13px;}
+    .mock-result-card{margin:30px 16px;padding:30px 18px;}
+    .mock-result-score{font-size:32px;}
+    .mock-result-actions{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎯 Exam Prep</h1>
+</header>
+
+<div class="exam-select-wrap">
+  <select id="examSelect">
+    <option value="pet">UPSSSC PET</option>
+    <option value="cgl">SSC CGL</option>
+  </select>
+</div>
+
+<div id="petApp">
+<div class="scheme">
+  <span><b>Mode:</b> Offline OMR</span>
+  <span><b>Questions:</b> 100</span>
+  <span><b>Marks:</b> 100 (1 per Q)</span>
+  <span><b>Negative:</b> 0.25 per wrong</span>
+  <span><b>Duration:</b> 2 hours</span>
+  <span><b>Medium:</b> Bilingual</span>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-top">
+    <span>📈 Overall Revision Progress</span>
+    <b id="progressText">0 / 0 (0%)</b>
+  </div>
+  <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar"></div></div>
+</div>
+
+<div id="homeView">
+  <div id="homeTitle">👇 Syllabus में से एक topic चुनें</div>
+  <div class="grid" id="subjGrid"></div>
+</div>
+
+<div id="subjectView" style="display:none;">
+  <div class="topbar">
+    <button class="backbtn" id="backBtn">← Back</button>
+    <input type="text" class="searchBox" id="searchBox" placeholder="🔍 Search within topic...">
+    <button class="mockbtn" id="mockBtn">🎯 Mock Test</button>
+  </div>
+  <div class="stats" id="statsBar"></div>
+  <div class="section-title" id="sectionTitle"></div>
+  <div class="syllabus-note" id="syllabusNote"></div>
+  <div id="container"></div>
+</div>
+
+<div id="mockView" style="display:none;">
+  <div class="mock-topbar">
+    <button class="backbtn" id="mockExitBtn">✕ Exit Test</button>
+    <div class="mock-progress-text" id="mockProgressText">Question 1 / 10</div>
+  </div>
+  <div class="mock-progress-bar-outer"><div class="mock-progress-bar-inner" id="mockProgressBar"></div></div>
+
+  <div id="mockQuizScreen">
+    <div class="mock-card">
+      <div class="mock-qtext" id="mockQText"></div>
+      <div class="mock-options" id="mockOptions"></div>
+      <div class="mock-feedback" id="mockFeedback" style="display:none;"></div>
+      <button class="mock-next-btn" id="mockNextBtn" style="display:none;">Next Question →</button>
+    </div>
+  </div>
+
+  <div id="mockResultScreen" style="display:none;">
+    <div class="mock-result-card">
+      <div class="mock-result-emoji" id="mockResultEmoji">🎉</div>
+      <div class="mock-result-title" id="mockResultTitle">Test Complete!</div>
+      <div class="mock-result-score" id="mockResultScore">0 / 0</div>
+      <div class="mock-result-pct" id="mockResultPct">0%</div>
+      <div class="mock-result-msg" id="mockResultMsg"></div>
+      <div class="mock-result-best" id="mockResultBest"></div>
+      <div class="mock-result-actions">
+        <button class="mock-retake-btn" id="mockRetakeBtn">🔁 Retake Test</button>
+        <button class="mock-back-btn" id="mockBackBtn">← Back to Topic</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>Tap a topic to open it · Tap a question to reveal the answer · Tick ✓ to mark revised — progress saves automatically on this device</footer>
+</div>
+
+<div id="cglApp" style="display:none;">
+  <div class="comingsoon-wrap">
+    <div class="comingsoon-icon">🚧</div>
+    <h2>SSC CGL Prep</h2>
+    <p>यह सेक्शन अभी तैयार किया जा रहा है। SSC CGL के लिए सभी टॉपिक्स जल्द जोड़े जाएँगे — तब तक UPSSSC PET सेक्शन से अपनी तैयारी जारी रखें।<br><br>This section is currently being built. All SSC CGL topics will be added soon — until then, continue your prep with the UPSSSC PET section.</p>
+    <div class="comingsoon-badge">Available Soon</div>
+  </div>
+</div>
+
+<script>
+
+/* ================= DATA ================= */
+const DATA = {
+"1. Indian History (5 marks)": [
+["दक्षिण एशिया में पहली नगरीय सभ्यता कौन-सी थी? / Which was the first urban civilization in South Asia?","हड़प्पा सभ्यता (सिंधु घाटी सभ्यता) / Harappan (Indus Valley) Civilization"],
+["हड़प्पा सभ्यता का सबसे बड़ा स्थल कौन-सा है? / The largest excavated Harappan site is?","राखीगढ़ी, हरियाणा / Rakhigarhi, Haryana"],
+["मोहनजोदड़ो का शाब्दिक अर्थ क्या है? / What does 'Mohenjo-daro' literally mean?","मृतकों का टीला / Mound of the Dead"],
+["ऋग्वेद कितने भजनों (सूक्तों) का संग्रह है? / The Rig Veda is a collection of how many hymns?","1,028 भजन / 1,028 hymns"],
+["बुद्ध ने दुःख से मुक्ति पर अपना पहला उपदेश कहाँ दिया था? / Where did the Buddha deliver his first sermon?","सारनाथ / Sarnath"],
+["गौतम बुद्ध का महापरिनिर्वाण कहाँ हुआ? / Where did Buddha attain Mahaparinirvana?","कुशीनगर / Kushinagar"],
+["जैन धर्म के 24वें और अंतिम तीर्थंकर कौन थे? / Who was the 24th and last Tirthankara of Jainism?","वर्धमान महावीर / Vardhamana Mahavira"],
+["मौर्य वंश का संस्थापक कौन था? / Who was the founder of the Mauryan dynasty?","चंद्रगुप्त मौर्य / Chandragupta Maurya"],
+["चंद्रगुप्त मौर्य के दरबार में यूनानी राजदूत कौन था? / Who was the Greek ambassador at Chandragupta Maurya's court?","मेगस्थनीज़ / Megasthenes"],
+["अशोक ने किस युद्ध के बाद बौद्ध धर्म अपनाया? / After which battle did Ashoka adopt Buddhism?","कलिंग युद्ध, 261 ई.पू. / Battle of Kalinga, 261 BCE"],
+["गुप्त काल को भारत का क्या कहा जाता है? / What is the Gupta period known as?","स्वर्ण युग / The Golden Age of India"],
+["नालंदा विश्वविद्यालय की स्थापना किसने की? / Who founded Nalanda University?","कुमारगुप्त प्रथम / Kumaragupta I"],
+["चीनी यात्री ह्वेनसांग किस शासक के काल में भारत आया? / Chinese traveller Hiuen Tsang visited India during whose reign?","हर्षवर्धन / Harshavardhana"],
+["हर्षवर्धन की राजधानी क्या थी? / What was Harshavardhana's capital?","कन्नौज / Kannauj"],
+["दिल्ली सल्तनत की स्थापना किसने की? / Who founded the Delhi Sultanate?","कुतुबुद्दीन ऐबक / Qutb-ud-din Aibak"],
+["गुलाम वंश की पहली और एकमात्र मुस्लिम महिला शासक कौन थीं? / Who was the first and only female Muslim ruler of the Slave Dynasty?","रज़िया सुल्तान / Razia Sultan"],
+["प्रथम पानीपत युद्ध किस वर्ष हुआ? / In which year was the First Battle of Panipat fought?","1526 (बाबर बनाम इब्राहीम लोदी) / 1526 (Babur vs Ibrahim Lodi)"],
+["मुगल सल्तनत की स्थापना किसने की? / Who founded the Mughal Empire?","बाबर / Babur"],
+["ताजमहल का निर्माण किसने करवाया? / Who built the Taj Mahal?","शाहजहाँ / Shah Jahan"],
+["अकबर के नवरत्नों में प्रसिद्ध संगीतकार कौन थे? / Who was the famous musician among Akbar's Navratnas?","तानसेन / Tansen"],
+["'दीन-ए-इलाही' धर्म की स्थापना किसने की? / Who founded the 'Din-i-Ilahi' religion?","अकबर / Akbar"],
+["शिवाजी का राज्याभिषेक कब हुआ? / When was Shivaji's coronation held?","1674"],
+["तीसरा पानीपत युद्ध किसके बीच हुआ? / Third Battle of Panipat was fought between?","मराठा और अहमद शाह अब्दाली / Marathas and Ahmad Shah Abdali (1761)"],
+["प्लासी का युद्ध किस वर्ष हुआ? / In which year was the Battle of Plassey fought?","1757"],
+["बक्सर का युद्ध किस वर्ष हुआ था? / In which year was the Battle of Buxar fought?","1764"],
+["वेदों की संख्या कितनी है? / How many Vedas are there?","4 (ऋग्वेद, सामवेद, यजुर्वेद, अथर्ववेद) / 4 (Rig, Sama, Yajur, Atharva)"],
+["गौतम बुद्ध का जन्म कहाँ हुआ था? / Where was Gautam Buddha born?","लुम्बिनी / Lumbini"],
+["महावीर स्वामी का जन्म कहाँ हुआ था? / Where was Mahavira born?","कुण्डग्राम, वैशाली / Kundagram, Vaishali"],
+["सबसे पहला मुगल शासक कौन था जिसने भारत पर आक्रमण किया? / Who was the first Mughal ruler to invade India?","बाबर / Babur"],
+["शेरशाह सूरी ने किस मुगल शासक को हराकर सत्ता हथियाई? / Sher Shah Suri defeated which Mughal ruler to seize power?","हुमायूँ / Humayun"],
+["अकबर और राणा प्रताप के बीच कौन-सा प्रसिद्ध युद्ध हुआ? / Which famous battle was fought between Akbar and Rana Pratap?","हल्दीघाटी का युद्ध, 1576 / Battle of Haldighati, 1576"],
+["औरंगजेब के बाद मुगल साम्राज्य किस दिशा में गया? / What happened to the Mughal Empire after Aurangzeb?","पतन की ओर अग्रसर हुआ / It declined"],
+["भारत में पुर्तगालियों ने सबसे पहले किस स्थान पर कब्जा किया? / Where did the Portuguese first establish control in India?","गोवा / Goa"],
+["ईस्ट इंडिया कंपनी की स्थापना कब हुई? / When was the East India Company established?","1600"],
+["1857 के विद्रोह की शुरुआत कहाँ से हुई? / From where did the Revolt of 1857 begin?","मेरठ / Meerut"],
+["1857 के विद्रोह के समय भारत का वायसराय कौन था? / Who was the Viceroy of India during the 1857 revolt?","लॉर्ड कैनिंग / Lord Canning"],
+["सिंधु घाटी सभ्यता का प्रमुख बंदरगाह कौन-सा था? / Which was the major port town of Indus Valley Civilization?","लोथल / Lothal"],
+["चोल वंश की राजधानी क्या थी? / What was the capital of the Chola dynasty?","तंजावुर / Thanjavur"],
+["विजयनगर साम्राज्य की स्थापना किसने की? / Who founded the Vijayanagar Empire?","हरिहर और बुक्का / Harihar and Bukka"],
+["Q. निम्नलिखित में से किस शासक के दरबार में विद्वानों को 'नवरत्न' के रूप में सम्मानित किया गया? (A) चंद्रगुप्त II (B) इनमें से कोई नहीं (C) श्रीगुप्त (D) समुद्रगुप्त / In whose court were scholars honoured as 'Navratnas'? (A) Chandragupta II (B) None of these (C) Srigupta (D) Samudragupta","चंद्रगुप्त II / Chandragupta II"],
+["Q. दिल्ली सल्तनत के निम्नलिखित राजवंशों में से किसने सबसे कम अवधि तक शासन किया? (A) खिलजी (B) लोदी (C) सैयद (D) तुगलक / Which dynasty of the Delhi Sultanate ruled for the shortest time? (A) Khilji (B) Lodhi (C) Sayyid (D) Tughlaq","खिलजी / Khilji"],
+["Q. डलहौज़ी ने अवध को ब्रिटिश साम्राज्य में किसके माध्यम से मिलाया? (A) सहायक गठबंधन (B) युद्ध (C) राज्य में अव्यवस्था के आरोप (D) हड़प नीति / Through what did Dalhousie annex Awadh for the British Empire? (A) Subsidiary Alliance (B) Waging war (C) State being maladministered (D) Doctrine of Lapse","राज्य में अव्यवस्था के आरोप के माध्यम से / Through the state being maladministered"],
+["Q. हड़प्पा का एक बंदरगाह बताइए। (A) लोथल (B) नागपट्टनम (C) महास्थानगढ़ (D) सिकंदरिया / Name a port town of Harappa. (A) Lothal (B) Nagapattinam (C) Mahasthangarh (D) Sikandariya","लोथल / Lothal"],
+["Q. बंगाल में किस आंदोलन के दौरान तिरंगा झंडा (लाल, हरा और पीला) डिज़ाइन किया गया था? (A) खिलाफत (B) सविनय अवज्ञा (C) स्वदेशी (D) दांडी मार्च / During which movement in Bengal was a tricolour flag (red, green, yellow) designed? (A) Khilafat (B) Civil Disobedience (C) Swadeshi (D) Dandi March","स्वदेशी आंदोलन / Swadeshi Movement"],
+["Q. खिलाफत की अस्थायी शक्तियों की रक्षा हेतु बॉम्बे में खिलाफत समिति का गठन किस वर्ष हुआ? (A) 1919 (B) 1931 (C) 1909 (D) 1930 / In which year was the Khilafat Committee formed in Bombay to defend the Khalifa's temporal powers? (A) 1919 (B) 1931 (C) 1909 (D) 1930","1919 / 1919"],
+["Q. 1857 की क्रांति की शुरुआत किनके द्वारा की गई थी? (A) सिपाहियों (B) बागान श्रमिकों (C) किसानों (D) जमींदारों / The Revolt of 1857 was started by whom? (A) The sepoys (B) Plantation workers (C) Peasants (D) Zamindars","सिपाहियों / The sepoys"],
+["सम्राट अशोक ने कलिंग युद्ध किस वर्ष लड़ा था? / In which year did Emperor Ashoka fight the Kalinga War?","261 ईसा पूर्व / 261 BCE"],
+["मौर्य साम्राज्य की स्थापना किसने की? / Who founded the Mauryan Empire?","चंद्रगुप्त मौर्य / Chandragupta Maurya"],
+["ताजमहल का निर्माण किसने करवाया था? / Who built the Taj Mahal?","शाहजहाँ / Shah Jahan"],
+["प्रथम पानीपत का युद्ध किस वर्ष हुआ था? / In which year was the First Battle of Panipat fought?","1526 (बाबर और इब्राहिम लोदी के बीच) / 1526 (between Babur and Ibrahim Lodi)"]
+],
+"2. Indian National Movement (5 marks)": [
+["भारतीय राष्ट्रीय कांग्रेस की स्थापना कब हुई? / When was the Indian National Congress founded?","1885, ए.ओ. ह्यूम द्वारा / 1885, by A.O. Hume"],
+["भारतीय राष्ट्रीय कांग्रेस के प्रथम अध्यक्ष कौन थे? / Who was the first president of INC?","व्योमेश चंद्र बनर्जी / Womesh Chandra Bonnerjee"],
+["बंगाल विभाजन किस वर्ष हुआ? / Partition of Bengal took place in?","1905 (लॉर्ड कर्जन द्वारा) / 1905 (by Lord Curzon)"],
+["शिमला सम्मेलन किस वर्ष आयोजित किया गया था? / Simla Conference was convened in the year?","1945"],
+["जलियाँवाला बाग हत्याकांड किस वर्ष हुआ? / In which year did the Jallianwala Bagh massacre occur?","1919 (13 अप्रैल), अमृतसर / 1919 (13 April), Amritsar"],
+["असहयोग आंदोलन किस घटना के बाद वापस लिया गया? / Non-Cooperation Movement was withdrawn after which incident?","चौरी-चौरा कांड, 1922 / Chauri Chaura incident, 1922"],
+["नमक सत्याग्रह (दांडी मार्च) किस वर्ष शुरू हुआ? / In which year did the Dandi March begin?","1930"],
+["भारत छोड़ो आंदोलन का नारा किसने दिया? / Who gave the call 'Do or Die' for the Quit India Movement?","महात्मा गांधी, 1942 / Mahatma Gandhi, 1942"],
+["आजाद हिंद फौज (INA) की स्थापना किसने की? / Who formed the Indian National Army (INA)?","सुभाष चंद्र बोस / Subhas Chandra Bose"],
+["साइमन कमीशन का बहिष्कार क्यों किया गया? / Why was the Simon Commission boycotted?","इसमें कोई भारतीय सदस्य नहीं था / It had no Indian members (1928)"],
+["पूना पैक्ट किनके बीच हुआ? / The Poona Pact was signed between?","महात्मा गांधी और बी.आर. अंबेडकर, 1932 / Mahatma Gandhi and B.R. Ambedkar, 1932"],
+["भारत का विभाजन किस योजना के तहत हुआ? / India's partition happened under which plan?","माउंटबेटन योजना, 1947 / Mountbatten Plan, 1947"],
+["'वंदे मातरम्' किस उपन्यास से लिया गया है? / 'Vande Mataram' is taken from which novel?","आनंदमठ, बंकिम चंद्र चट्टोपाध्याय / Anandmath, Bankim Chandra Chattopadhyay"],
+["गदर पार्टी की स्थापना कहाँ हुई थी? / Where was the Ghadar Party founded?","सैन फ्रांसिस्को, अमेरिका, 1913 / San Francisco, USA, 1913"],
+["'गरम दल' (उग्रवादी) का प्रमुख नेता कौन था? / Who was a prominent leader of the 'Extremist' group?","बाल गंगाधर तिलक / Bal Gangadhar Tilak"],
+["भारत की पहली महिला जिन्होंने कांग्रेस अध्यक्ष पद संभाला? / First woman to preside over the Indian National Congress?","एनी बेसेंट, 1917 / Annie Besant, 1917"],
+["स्वराज पार्टी की स्थापना किसने की? / Who founded the Swaraj Party?","चित्तरंजन दास और मोतीलाल नेहरू, 1923 / C.R. Das and Motilal Nehru, 1923"],
+["'पूर्ण स्वराज' का प्रस्ताव किस अधिवेशन में पारित हुआ? / The resolution of 'Purna Swaraj' was passed in which session?","लाहौर अधिवेशन, 1929 / Lahore Session, 1929"],
+["साइमन कमीशन भारत कब आया? / When did the Simon Commission visit India?","1928"],
+["भारतीय राष्ट्रीय सेना (INA) की महिला रेजिमेंट का क्या नाम था? / What was the name of INA's women's regiment?","रानी झांसी रेजिमेंट / Rani of Jhansi Regiment"],
+["कैबिनेट मिशन भारत कब आया? / When did the Cabinet Mission visit India?","1946"],
+["गांधी-इरविन समझौता किस वर्ष हुआ? / Gandhi-Irwin Pact was signed in?","1931"],
+["स्वतंत्र भारत के प्रथम गवर्नर-जनरल कौन थे? / Who was the first Governor-General of independent India?","लॉर्ड माउंटबेटन / Lord Mountbatten"],
+["भारतीय राष्ट्रीय कांग्रेस का पहला अधिवेशन कहाँ हुआ? / Where was the first session of the Indian National Congress held?","बॉम्बे (मुंबई) / Bombay (Mumbai), 1885"],
+["'भारतीय असंतोष के जनक' किसे कहा जाता है? / Who is called the 'Father of Indian Unrest'?","बाल गंगाधर तिलक / Bal Gangadhar Tilak"],
+["होमरूल आंदोलन की शुरुआत किसने की थी? / Who started the Home Rule Movement?","बाल गंगाधर तिलक और एनी बेसेंट / Bal Gangadhar Tilak and Annie Besant, 1916"],
+["रौलेट एक्ट किस वर्ष पारित हुआ? / In which year was the Rowlatt Act passed?","1919"],
+["असहयोग आंदोलन किस वर्ष शुरू हुआ? / In which year did the Non-Cooperation Movement begin?","1920"],
+["साइमन कमीशन के विरोध में 'साइमन गो बैक' का नारा किसने दिया? / Who was fatally injured while protesting against the Simon Commission with the slogan 'Simon Go Back'?","लाला लाजपत राय / Lala Lajpat Rai"],
+["भगत सिंह को किस मामले में फाँसी दी गई? / In which case was Bhagat Singh sentenced to hanging?","लाहौर षड्यंत्र केस / Lahore Conspiracy Case, 1931"],
+["गांधी जी ने दांडी मार्च की शुरुआत कहाँ से की? / From where did Gandhi start the Dandi March?","साबरमती आश्रम / Sabarmati Ashram"],
+["वर्ष 1942 में भारत छोड़ो प्रस्ताव किस अधिवेशन में पारित हुआ? / In which session was the Quit India resolution passed in 1942?","बॉम्बे अधिवेशन / Bombay Session (AICC)"],
+["'करो या मरो' का नारा किस आंदोलन से जुड़ा है? / The slogan 'Do or Die' is associated with which movement?","भारत छोड़ो आंदोलन / Quit India Movement"],
+["भारतीय स्वतंत्रता अधिनियम कब पारित हुआ? / When was the Indian Independence Act passed?","1947"],
+["भारत के प्रथम प्रधानमंत्री कौन थे? / Who was the first Prime Minister of India?","जवाहरलाल नेहरू / Jawaharlal Nehru"],
+["नेताजी सुभाष चंद्र बोस ने 'जय हिंद' का नारा कब दिया? / When did Netaji give the slogan 'Jai Hind'?","1941"],
+["'सरफरोशी की तमन्ना' के रचयिता कौन थे? / Who wrote 'Sarfaroshi ki Tamanna'?","रामप्रसाद बिस्मिल / Ram Prasad Bismil"],
+["Q. निम्नलिखित में से किस घटना की प्रतिक्रिया में भारत छोड़ो आंदोलन चलाया गया था? (A) कैबिनेट मिशन प्लान (B) वेवेल प्लान (C) साइमन कमीशन रिपोर्ट (D) क्रिप्स मिशन की विफलता / In response to which of the following events was Quit India Movement launched? (A) Cabinet Mission Plan (B) Wavell Plan (C) Simon Commission Report (D) Failure of Cripps Mission","क्रिप्स मिशन की विफलता / Failure of Cripps Mission"],
+["Q. निम्नलिखित में से किस व्यक्ति ने 'हिंद स्वराज' पुस्तक लिखी है? (A) सरदार पटेल (B) सरोजिनी नायडू (C) जवाहरलाल नेहरू (D) महात्मा गांधी / Who among the following wrote the book 'Hind Swaraj'? (A) Sardar Patel (B) Sarojini Naidu (C) Jawaharlal Nehru (D) Mahatma Gandhi","महात्मा गांधी / Mahatma Gandhi"],
+["जलियाँवाला बाग हत्याकांड किस वर्ष हुआ? / In which year did the Jallianwala Bagh massacre occur?","1919"],
+["आजाद हिंद फौज (INA) का नेतृत्व किसने किया? / Who led the Azad Hind Fauj (INA)?","सुभाष चंद्र बोस / Subhas Chandra Bose"],
+["चंपारण सत्याग्रह किस वर्ष हुआ? / In which year did the Champaran Satyagraha take place?","1917"],
+["चौरी-चौरा घटना के कारण कौन-सा आंदोलन वापस लिया गया? / Which movement was withdrawn due to the Chauri Chaura incident?","असहयोग आंदोलन / Non-Cooperation Movement"],
+["क्रिप्स मिशन भारत किस वर्ष आया? / In which year did the Cripps Mission come to India?","1942"],
+["कैबिनेट मिशन प्लान किस वर्ष प्रस्तुत किया गया? / In which year was the Cabinet Mission Plan presented?","1946"],
+["पूर्ण स्वराज्य का प्रस्ताव किस अधिवेशन में पारित हुआ? / In which session was the Poorna Swaraj resolution passed?","लाहौर अधिवेशन, 1929 / Lahore Session, 1929"],
+["आजाद हिंद फौज के सैनिकों पर मुकदमा कहाँ चलाया गया? / Where were the INA soldiers tried?","लाल किला, दिल्ली / Red Fort, Delhi"],
+["महात्मा गांधी की हत्या किस वर्ष हुई? / In which year was Mahatma Gandhi assassinated?","1948 (30 जनवरी) / 1948 (30 January)"],
+["रेडक्लिफ रेखा किन दो देशों के बीच सीमा निर्धारित करती है? / The Radcliffe Line demarcates the boundary between which two countries?","भारत और पाकिस्तान / India and Pakistan"],
+["साइमन कमीशन भारत किस वर्ष आया था? / In which year did the Simon Commission arrive in India?","1928"]
+],
+"3. Geography (5 marks)": [
+["भूमिगत चट्टान परतें जो भूजल का भंडारण व संचरण करती हैं, क्या कहलाती हैं? / Underground rock layers storing and transmitting groundwater are called?","जलभृत / Aquifer"],
+["रेगिस्तान में जानवर पानी का संरक्षण कैसे करते हैं? / How do desert animals conserve water?","रात्रिचर होकर और गाढ़ा मूत्र त्याग कर / By being nocturnal and excreting concentrated urine"],
+["मोनाज़ाइट रेत में कौन-सा खनिज पाया जाता है? / Which mineral is found in monazite sands?","थोरियम / Thorium"],
+["भारतीय मानसून को कौन-कौन से कारक प्रभावित करते हैं? / What factors affect the Indian monsoon?","हिंद महासागर, हिमालय, जेट स्ट्रीम — उपर्युक्त सभी / Indian Ocean, Himalayas, Jet Stream — all of the above"],
+["जनसंख्या पिरामिड में व्यापक आधार किस बात का संकेत है? / A wide base in a population pyramid indicates?","उच्च जन्म दर / High birth rate"],
+["धौलागिरी पर्वत शिखर किस देश में स्थित है? / Dhaulagiri mountain peak is located in which country?","नेपाल / Nepal"],
+["गढ़वाली किस राज्य का लोक नृत्य है? / Garhwali is a folk dance of which state?","उत्तराखंड / Uttarakhand"],
+["किस राज्य में द्विसदनीय विधानमंडल नहीं है? / Which state does not have a bicameral legislature?","राजस्थान / Rajasthan"],
+["भारत की सबसे लंबी नदी कौन-सी है? / Which is the longest river in India?","गंगा / Ganga"],
+["क्षेत्रफल में भारत का सबसे बड़ा राज्य कौन-सा है? / Which is the largest state of India by area?","राजस्थान / Rajasthan"],
+["कर्क रेखा भारत के कितने राज्यों से गुजरती है? / Through how many states does the Tropic of Cancer pass in India?","8 राज्य / 8 states"],
+["भारत का सबसे बड़ा मरुस्थल कौन-सा है? / Which is the largest desert in India?","थार मरुस्थल / Thar Desert"],
+["शालीमार बाग कहाँ स्थित है? / Shalimar Bagh is located in?","श्रीनगर / Srinagar"],
+["भारत की मानक याम्योत्तर (Standard Meridian) कहाँ से गुजरती है? / Where does India's Standard Meridian pass through?","मिर्ज़ापुर (82.5° पूर्व) / Mirzapur (82.5° East)"],
+["भारत की सबसे बड़ी खारे पानी की झील कौन-सी है? / Which is India's largest saltwater lake?","सांभर झील, राजस्थान / Sambhar Lake, Rajasthan"],
+["पश्चिमी घाट को यूनेस्को द्वारा क्या घोषित किया गया है? / What has UNESCO declared the Western Ghats?","विश्व धरोहर स्थल / World Heritage Site"],
+["भारत का दक्षिणतम बिंदु कौन-सा है? / What is the southernmost point of India?","इंदिरा पॉइंट, ग्रेट निकोबार / Indira Point, Great Nicobar"],
+["उत्तर प्रदेश की सबसे लंबी नदी कौन-सी है? / Which is the longest river flowing through Uttar Pradesh?","गंगा / Ganga"],
+["हिमालय की सबसे ऊँची चोटी कौन-सी है (भारत में)? / What is the highest peak of the Himalayas in India?","कंचनजंगा / Kanchenjunga"],
+["भारत में सबसे अधिक वर्षा कहाँ होती है? / Where is the highest rainfall recorded in India?","मॉसिनराम, मेघालय / Mawsynram, Meghalaya"],
+["भारत का कौन-सा राज्य 'भारत का उद्यान' कहलाता है? / Which Indian state is known as the 'Garden of India'?","हिमाचल प्रदेश / Himachal Pradesh"],
+["चिल्का झील किस राज्य में स्थित है? / Chilka Lake is located in which state?","ओडिशा / Odisha"],
+["विश्व की सबसे ऊँची पर्वत चोटी कौन-सी है? / Which is the highest mountain peak in the world?","माउंट एवरेस्ट / Mount Everest"],
+["भारत की सबसे लंबी सीमा किस देश के साथ लगती है? / India shares its longest border with which country?","बांग्लादेश / Bangladesh"],
+["भारत में सबसे अधिक जनसंख्या वाला राज्य कौन-सा है? / Which is the most populous state in India?","उत्तर प्रदेश / Uttar Pradesh"],
+["भारत का सबसे छोटा राज्य क्षेत्रफल की दृष्टि से कौन-सा है? / Which is the smallest state of India by area?","गोवा / Goa"],
+["गंगा नदी का उद्गम स्थल कहाँ है? / Where does the Ganga river originate?","गंगोत्री हिमनद / Gangotri Glacier"],
+["भारत की सबसे बड़ी नदी घाटी परियोजना कौन-सी है? / Which is India's largest river valley project?","भाखड़ा नांगल परियोजना / Bhakra Nangal Project"],
+["विश्व की सबसे बड़ी नदी कौन-सी है (जलग्रहण क्षेत्र में)? / Which is the largest river in the world by discharge?","अमेज़न नदी / Amazon River"],
+["भारत में कर्क रेखा किस राज्य से नहीं गुजरती? / Through which of these does the Tropic of Cancer NOT pass — Uttar Pradesh?","उत्तर प्रदेश (कर्क रेखा नहीं गुजरती) / Uttar Pradesh (Tropic of Cancer does not pass through it)"],
+["भारत का सबसे उत्तरी राज्य कौन-सा है? / Which is the northernmost state of India?","जम्मू और कश्मीर / Jammu and Kashmir"],
+["पृथ्वी की सबसे बाहरी परत क्या कहलाती है? / What is the outermost layer of the Earth called?","भूपर्पटी (क्रस्ट) / Crust"],
+["मानसून शब्द की उत्पत्ति किस भाषा से हुई? / The word 'monsoon' is derived from which language?","अरबी शब्द 'मौसिम' से / Arabic word 'Mausim'"],
+["भारत के किस राज्य में सबसे अधिक वन क्षेत्र है? / Which Indian state has the largest forest cover?","मध्य प्रदेश / Madhya Pradesh"],
+["उत्तर प्रदेश की राजधानी क्या है? / What is the capital of Uttar Pradesh?","लखनऊ / Lucknow"],
+["भारत का मानक समय किस देशांतर पर आधारित है? / Indian Standard Time is based on which longitude?","82.5° पूर्व / 82.5° East"],
+["Q. निम्नलिखित में से कौन से भारत के दो पड़ोसी द्वीप देश हैं? (A) सेशैल्स; ऑस्ट्रेलिया (B) मालदीव; म्यांमार (C) श्रीलंका; मालदीव (D) लक्षद्वीप; श्रीलंका / Which among the following are two neighbouring island countries of India? (A) Seychelles; Australia (B) Maldives; Myanmar (C) Sri Lanka; Maldives (D) Lakshadweep; Sri Lanka","श्रीलंका; मालदीव / Sri Lanka; Maldives"],
+["Q. ओमान की राजधानी क्या है? (A) मनामा (B) माले (C) मॉस्को (D) मस्कट / What is the capital of Oman? (A) Manama (B) Male (C) Moscow (D) Muscat","मस्कट / Muscat"],
+["Q. निम्नलिखित में से किस शहर को राजस्थान का 'सफेद शहर' कहा जाता है? (A) बीकानेर (B) अजमेर (C) उदयपुर (D) जयपुर / Which of the following cities is called the 'White City' of Rajasthan? (A) Bikaner (B) Ajmer (C) Udaipur (D) Jaipur","उदयपुर / Udaipur"],
+["Q. निम्नलिखित में से कौन-सा एक केंद्र शासित प्रदेश की राजधानी नहीं है? (A) दमन (B) पुडुचेरी (C) आइज़ोल (D) कवरत्ती / Among the following, which is not a capital of a Union Territory? (A) Daman (B) Puducherry (C) Aizawl (D) Kavaratti","आइज़ोल (यह मिजोरम राज्य की राजधानी है) / Aizawl (it is the capital of Mizoram, a state, not a UT)"],
+["Q. अरावली पर्वत श्रेणी में सबसे ऊँचा शिखर कौन-सा है? (A) डोडाबेट्टा (B) पचमढ़ी (C) गुरुशिखर (D) अनाइमुडी / What is the highest point in the Aravalli range? (A) Dodabetta (B) Pachmarhi (C) Gurushikhar (D) Anaimudi","गुरुशिखर / Gurushikhar"],
+["Q. सबसे ऊँचा भारतीय शिखर कौन-सा है? (A) कंचनजंगा (B) कामेत (C) K10 (D) नंदा देवी / Which is the highest Indian peak? (A) Kanchenjunga (B) Kamet (C) K10 (D) Nanda Devi","कंचनजंगा / Kanchenjunga"],
+["Q. ग्रीष्मकाल में उत्तरी मैदानों में बहने वाली गर्म पवन को क्या कहते हैं? (A) काल बैसाखी (B) मैंगो शावर (C) लू (D) व्यापारिक पवनें / The hot wind blowing in the northern plains in summers is known as? (A) Kaal Baisakhi (B) Mango Shower (C) Loo (D) Trade Winds","लू / Loo"],
+["विश्व की सबसे गहरी समुद्री खाई कौन-सी है? / Which is the deepest ocean trench in the world?","मारियाना ट्रेंच / Mariana Trench"],
+["भारत की सबसे लंबी नदी कौन-सी है? / Which is the longest river in India?","गंगा / Ganga"],
+["भारत का सबसे बड़ा रेगिस्तान कौन-सा है? / Which is India's largest desert?","थार मरुस्थल / Thar Desert"],
+["भारत का सबसे ऊँचा जलप्रपात कौन-सा है? / Which is India's highest waterfall?","जोग जलप्रपात (कर्नाटक) / Jog Falls (Karnataka)"],
+["भारत का सबसे दक्षिणी बिंदु कौन-सा है? / What is the southernmost point of India?","इंदिरा प्वाइंट (ग्रेट निकोबार) / Indira Point (Great Nicobar)"],
+["दक्कन का पठार भारत के किस भाग में स्थित है? / The Deccan Plateau is located in which part of India?","दक्षिणी भारत / Southern India"],
+["भारत का सबसे बड़ा मैंग्रोव वन कौन-सा है? / Which is India's largest mangrove forest?","सुंदरबन / Sundarbans"]
+],
+"4. Indian Economy (5 marks)": [
+["जल-बीज-उर्वरक प्रौद्योगिकी लोकप्रिय नाम से जानी जाती है? / Water-Seed-Fertilizer technology is popularly known as?","हरित क्रांति / Green Revolution"],
+["भारत का पहला बैंक 'बैंक ऑफ हिंदुस्तान' कब स्थापित हुआ था? / India's first bank, Bank of Hindoostan, was established in?","1770"],
+["UNCTAD का विस्तार करें। / Expand UNCTAD.","United Nations Conference on Trade and Development / यूनाइटेड नेशंस कॉन्फ्रेंस ऑन ट्रेड एंड डेवलपमेंट"],
+["निजी संपत्ति को सभी सामाजिक-आर्थिक बुराइयों का कारण किसने माना? / Who considered private property the cause of all social-economic evils?","मार्क्स और एंगेल्स / Marx and Engels"],
+["राष्ट्रीय कृषि नीति संसद में कब प्रस्तुत की गई? / The National Agricultural Policy was presented in Parliament on?","28 जुलाई, 2000 / 28 July 2000"],
+["GDP का पूर्ण रूप क्या है? / Full form of GDP?","सकल घरेलू उत्पाद / Gross Domestic Product"],
+["RBI किस दर पर बैंकों को अल्पकालीन ऋण देता है? / At which rate does RBI lend short-term funds to banks?","रेपो दर / Repo Rate"],
+["GST कब लागू किया गया था? / When was GST implemented in India?","1 जुलाई, 2017 / 1 July 2017"],
+["भारत की मुद्रा नीति कौन तय करता है? / Who decides India's monetary policy?","भारतीय रिज़र्व बैंक (RBI) / Reserve Bank of India (RBI)"],
+["भारत में योजना आयोग की जगह किसने ली? / What replaced the Planning Commission in India?","नीति आयोग / NITI Aayog, 2015"],
+["भारत की पहली पंचवर्षीय योजना कब शुरू हुई? / When did India's first Five-Year Plan begin?","1951"],
+["मिश्रित अर्थव्यवस्था का क्या अर्थ है? / What does a 'mixed economy' mean?","निजी और सार्वजनिक दोनों क्षेत्रों की भागीदारी वाली अर्थव्यवस्था / Economy with participation of both private and public sectors"],
+["भारत का केंद्रीय बैंक कौन-सा है? / Which is India's central bank?","भारतीय रिज़र्व बैंक (RBI) / Reserve Bank of India"],
+["RBI की स्थापना कब हुई थी? / When was RBI established?","1 अप्रैल, 1935 / 1 April 1935"],
+["भारत में विमुद्रीकरण (नोटबंदी) कब हुई? / When was demonetisation carried out in India?","8 नवंबर, 2016 / 8 November 2016"],
+["राष्ट्रीय ग्रामीण रोजगार गारंटी अधिनियम (मनरेगा) कब लागू हुआ? / When was MGNREGA implemented?","2005"],
+["भारत की मुद्रा 'रुपया' शब्द किस भाषा से लिया गया है? / The word 'Rupee' is derived from which language word?","संस्कृत शब्द 'रूप्यकम्' से / Sanskrit word 'Rupyakam'"],
+["भारत में हरित क्रांति के जनक किसे माना जाता है? / Who is regarded as the father of the Green Revolution in India?","एम.एस. स्वामीनाथन / M.S. Swaminathan"],
+["श्वेत क्रांति (ऑपरेशन फ्लड) का नेतृत्व किसने किया? / Who led the White Revolution (Operation Flood)?","डॉ. वर्गीज कुरियन / Dr. Verghese Kurien"],
+["'सेंसेक्स' किस एक्सचेंज से संबंधित है? / 'Sensex' is associated with which exchange?","बॉम्बे स्टॉक एक्सचेंज (BSE) / Bombay Stock Exchange"],
+["भारत में प्रत्यक्ष कर का उदाहरण है? / Example of a direct tax in India?","आयकर / Income Tax"],
+["भारत की पहली पंचवर्षीय योजना किस क्षेत्र पर केंद्रित थी? / India's First Five-Year Plan focused on which sector?","कृषि / Agriculture"],
+["राष्ट्रीय आय की गणना कौन-सी संस्था करती है? / Which body calculates India's national income?","राष्ट्रीय सांख्यिकी कार्यालय (NSO) / National Statistical Office (NSO)"],
+["Q. कृषि तथा ग्रामीण क्षेत्रों को वित्त-पोषण करने वाली एक केंद्रीय/शीर्ष संस्था कौन-सी है? (A) सिडबी (B) आई.एफ.सी.आई. (C) नाबार्ड (D) एक्ज़िम बैंक / Which is a central/apex institution for financing agricultural and rural sectors? (A) SIDBI (B) IFCI (C) NABARD (D) EXIM Bank","नाबार्ड (NABARD) / NABARD"],
+["Q. 1991 के आर्थिक सुधारों द्वारा निम्न में से किस समस्या की ओर ध्यान दिया गया था? (A) भारतीय रुपये का मूल्यह्रास (B) यह सभी (C) आर्थिक नीति की असफलता (D) विदेशी मुद्रा भंडार में संकट / Which issue was addressed through the Economic Reforms of 1991? (A) Depreciation of Indian rupee (B) All of these (C) Economic policy failure (D) Crisis in Foreign Exchange Reserves","यह सभी / All of these"],
+["Q. नई आर्थिक नीति को सामान्यतः विकास के किस मॉडल के रूप में भी जाना जाता है? (A) CNG (B) LNG (C) LPG (D) PNG / New Economic Policy is also popularly called which model of development? (A) CNG (B) LNG (C) LPG (D) PNG","LPG (उदारीकरण, निजीकरण, वैश्वीकरण) / LPG (Liberalisation, Privatisation, Globalisation)"],
+["स्वतंत्र भारत के प्रथम वित्त मंत्री कौन थे? / Who was independent India's first Finance Minister?","आर.के. षणमुखम शेट्टी / R.K. Shanmukham Chetty"],
+["भारत में हरित क्रांति किस दशक में शुरू हुई? / In which decade did the Green Revolution begin in India?","1960 के दशक में / In the 1960s"],
+["भारतीय रुपये (₹) के प्रतीक चिन्ह को किसने डिजाइन किया? / Who designed the symbol (₹) of the Indian Rupee?","डी. उदय कुमार / D. Udaya Kumar"],
+["योजना आयोग को नीति आयोग से किस वर्ष प्रतिस्थापित किया गया? / In which year was the Planning Commission replaced by NITI Aayog?","2015"],
+["भारत में पूँजी/प्रतिभूति बाजार का नियमन कौन-सी संस्था करती है? / Which body regulates the capital/securities market in India?","सेबी (SEBI) / SEBI"],
+["FDI का पूर्ण रूप क्या है? / What is the full form of FDI?","प्रत्यक्ष विदेशी निवेश / Foreign Direct Investment"],
+["रेपो दर वह दर है जिस पर: / Repo rate is the rate at which:","RBI वाणिज्यिक बैंकों को ऋण देता है / RBI lends money to commercial banks"],
+["भारत में बैंकों का पहला राष्ट्रीयकरण किस वर्ष हुआ? / In which year did the first bank nationalisation happen in India?","1969"],
+["बैंकों के राष्ट्रीयकरण का दूसरा चरण किस वर्ष हुआ? / In which year did the second phase of bank nationalisation take place?","1980"],
+["भारत का सबसे बड़ा सार्वजनिक क्षेत्र का बैंक कौन-सा है? / Which is India's largest public sector bank?","भारतीय स्टेट बैंक (SBI) / State Bank of India (SBI)"],
+["GDP का पूर्ण रूप क्या है? / What is the full form of GDP?","सकल घरेलू उत्पाद / Gross Domestic Product"],
+["राजकोषीय घाटा (Fiscal Deficit) का क्या अर्थ है? / What does 'Fiscal Deficit' mean?","सरकार के व्यय का राजस्व से अधिक होना / Government expenditure exceeding its revenue"],
+["भारत में मुद्रास्फीति सामान्यतः किससे मापी जाती है? / Inflation in India is generally measured using?","उपभोक्ता मूल्य सूचकांक (CPI) / Consumer Price Index (CPI)"],
+["प्रति व्यक्ति आय (Per Capita Income) का क्या अर्थ है? / What does 'Per Capita Income' mean?","प्रति व्यक्ति औसत आय / Average income per person"],
+["भारत में सबसे अधिक कार्यबल किस क्षेत्र में कार्यरत है? / Which sector employs the largest workforce in India?","कृषि क्षेत्र / Agriculture sector"],
+["कुटीर उद्योग की मुख्य विशेषता क्या है? / What is the key feature of cottage industries?","छोटे पैमाने पर घरेलू उत्पादन / Small-scale, household-based production"],
+["जमींदारी प्रथा को समाप्त करने का मुख्य उद्देश्य क्या था? / What was the main objective of abolishing the Zamindari system?","बिचौलिए भू-स्वामित्व को समाप्त करना / To end intermediary landlordism"],
+["आत्मनिर्भर भारत अभियान किस वर्ष शुरू हुआ? / In which year was the Atmanirbhar Bharat Abhiyan launched?","2020"],
+["पीएम-किसान सम्मान निधि योजना किस वर्ष शुरू हुई? / In which year was the PM-KISAN scheme launched?","2019"],
+["स्टार्टअप इंडिया पहल किस वर्ष शुरू हुई? / In which year was the Startup India initiative launched?","2016"],
+["भारत का आर्थिक सर्वेक्षण (Economic Survey) कौन-सा मंत्रालय प्रकाशित करता है? / Which ministry publishes India's Economic Survey?","वित्त मंत्रालय / Ministry of Finance"],
+["भुगतान संतुलन (Balance of Payments) किसका लेखा-जोखा दर्शाता है? / What does the 'Balance of Payments' record?","किसी देश के शेष विश्व के साथ लेन-देन का हिसाब / A country's transactions with the rest of the world"],
+["निगम कर (Corporate Tax) किस प्रकार के कर का उदाहरण है? / Corporate Tax is an example of which type of tax?","प्रत्यक्ष कर / Direct tax"],
+["सार्वजनिक क्षेत्र के उपक्रम (PSUs) मुख्यतः किसके स्वामित्व में होते हैं? / Public Sector Undertakings (PSUs) are mainly owned by?","सरकार / The Government"]
+],
+"5. Indian Constitution & Public Administration (5 marks)": [
+["संविधान का अनुच्छेद 44 किससे संबंधित है? / Article 44 of the Constitution relates to?","समान नागरिक संहिता / Uniform Civil Code"],
+["स्वतंत्रता के बाद सामुदायिक विकास कार्यक्रम कब शुरू हुआ? / Community Development Programme was started in?","1952"],
+["संविधान के अनुच्छेद 23 और 24 किसकी गारंटी देते हैं? / Articles 23 and 24 guarantee?","शोषण के खिलाफ अधिकार / Right against Exploitation"],
+["अनुच्छेद 170 के अनुसार राज्य विधान सभा में अधिकतम कितने सदस्य हो सकते हैं? / As per Article 170, max members in State Legislative Assembly?","500 (न्यूनतम 60) / 500 (minimum 60)"],
+["संविधान का भाग-I किससे संबंधित है? / Part-I of the Constitution is about?","संघ और उसका क्षेत्र / The Union and its Territory"],
+["संविधान का 'हृदय और आत्मा' किस अनुच्छेद को कहा जाता है? / Which Article is called the 'Heart and Soul' of the Constitution?","अनुच्छेद 32 / Article 32"],
+["मौलिक अधिकार संविधान के किस भाग में हैं? / Fundamental Rights are contained in which Part?","भाग III / Part III"],
+["नीति निदेशक तत्व (DPSP) किस देश के संविधान से लिए गए हैं? / DPSP were borrowed from which country's constitution?","आयरलैंड / Ireland"],
+["मौलिक कर्तव्य किस संशोधन द्वारा जोड़े गए? / Fundamental Duties were added by which Amendment?","42वां संशोधन, 1976 / 42nd Amendment, 1976"],
+["भारत के संविधान का जनक किसे कहा जाता है? / Who is called the Father of the Indian Constitution?","डॉ. बी.आर. अंबेडकर / Dr. B.R. Ambedkar"],
+["संविधान सभा के स्थायी अध्यक्ष कौन थे? / Who was the permanent President of the Constituent Assembly?","डॉ. राजेंद्र प्रसाद / Dr. Rajendra Prasad"],
+["राष्ट्रपति पर महाभियोग किस अनुच्छेद के तहत लगाया जा सकता है? / Under which Article can the President be impeached?","अनुच्छेद 61 / Article 61"],
+["राज्यसभा का पदेन सभापति कौन होता है? / Who is the ex-officio Chairman of the Rajya Sabha?","उपराष्ट्रपति / Vice-President"],
+["पंचायती राज व्यवस्था को संवैधानिक दर्जा किस संशोधन से मिला? / Panchayati Raj got constitutional status by which Amendment?","73वां संशोधन, 1992 / 73rd Amendment, 1992"],
+["राष्ट्रीय आपातकाल की घोषणा किस अनुच्छेद के तहत होती है? / Under which Article is a National Emergency declared?","अनुच्छेद 352 / Article 352"],
+["भारत का संविधान कब लागू हुआ? / When did the Constitution of India come into force?","26 जनवरी, 1950 / 26 January 1950"],
+["संविधान सभा की मसौदा समिति (Drafting Committee) के अध्यक्ष कौन थे? / Who was the chairman of the Drafting Committee?","डॉ. बी.आर. अंबेडकर / Dr. B.R. Ambedkar"],
+["भारत के प्रथम राष्ट्रपति कौन थे? / Who was the first President of India?","डॉ. राजेंद्र प्रसाद / Dr. Rajendra Prasad"],
+["उच्चतम न्यायालय के मुख्य न्यायाधीश की नियुक्ति कौन करता है? / Who appoints the Chief Justice of the Supreme Court?","राष्ट्रपति / The President"],
+["अनुच्छेद 1 में भारत को क्या कहा गया है? / Article 1 describes India as?","'भारत, जो राज्यों का संघ है' / 'India, that is Bharat, shall be a Union of States'"],
+["अनुच्छेद 2 किससे संबंधित है? / Article 2 deals with?","नए राज्यों का प्रवेश या स्थापना / Admission or establishment of new States"],
+["अनुच्छेद 3 संसद को क्या शक्ति देता है? / Article 3 empowers Parliament to?","नए राज्यों का निर्माण और सीमाओं में परिवर्तन / Form new states and alter boundaries of existing states"],
+["अनुच्छेद 5 से 11 किससे संबंधित हैं? / Articles 5 to 11 deal with?","नागरिकता / Citizenship"],
+["अनुच्छेद 14 किसकी गारंटी देता है? / Article 14 guarantees?","विधि के समक्ष समानता / Equality before Law"],
+["अनुच्छेद 15 किस आधार पर भेदभाव को प्रतिबंधित करता है? / Article 15 prohibits discrimination on grounds of?","धर्म, मूलवंश, जाति, लिंग या जन्म स्थान / Religion, race, caste, sex or place of birth"],
+["अनुच्छेद 16 किससे संबंधित है? / Article 16 relates to?","लोक नियोजन में अवसर की समानता / Equality of opportunity in public employment"],
+["अनुच्छेद 17 ने क्या समाप्त किया? / Article 17 abolishes?","अस्पृश्यता (छुआछूत) / Untouchability"],
+["अनुच्छेद 18 किससे संबंधित है? / Article 18 deals with?","उपाधियों का अंत / Abolition of Titles"],
+["अनुच्छेद 19 किससे संबंधित है? / Article 19 guarantees?","भाषण व अभिव्यक्ति सहित 6 स्वतंत्रताएँ / Six fundamental freedoms including speech and expression"],
+["अनुच्छेद 20 किससे सुरक्षा देता है? / Article 20 provides protection in respect of?","अपराधों के लिए दोष सिद्धि / Conviction for offences"],
+["अनुच्छेद 21 किससे संबंधित है? / Article 21 guarantees?","प्राण और दैहिक स्वतंत्रता का अधिकार / Right to Life and Personal Liberty"],
+["अनुच्छेद 21A किस संशोधन से जोड़ा गया और किससे संबंधित है? / Article 21A was added by which Amendment and relates to?","86वां संशोधन, 2002 — शिक्षा का अधिकार / 86th Amendment, 2002 — Right to Education (6-14 वर्ष)"],
+["अनुच्छेद 22 किससे संबंधित है? / Article 22 deals with?","गिरफ्तारी और निरोध के विरुद्ध संरक्षण / Protection against arrest and detention"],
+["अनुच्छेद 25 से 28 किससे संबंधित हैं? / Articles 25 to 28 relate to?","धर्म की स्वतंत्रता का अधिकार / Right to Freedom of Religion"],
+["अनुच्छेद 29 और 30 किससे संबंधित हैं? / Articles 29 and 30 relate to?","संस्कृति और शिक्षा संबंधी अधिकार (अल्पसंख्यक हित) / Cultural and Educational Rights (minority interests)"],
+["अनुच्छेद 32 के तहत कौन-सा अधिकार दिया गया है? / Article 32 provides which right?","संवैधानिक उपचारों का अधिकार / Right to Constitutional Remedies"],
+["अनुच्छेद 36 से 51 किससे संबंधित हैं? / Articles 36 to 51 deal with?","राज्य के नीति निदेशक तत्व (DPSP) / Directive Principles of State Policy"],
+["अनुच्छेद 40 किससे संबंधित है? / Article 40 relates to?","ग्राम पंचायतों का संगठन / Organisation of Village Panchayats"],
+["अनुच्छेद 45 किससे संबंधित है? / Article 45 relates to?","बाल्यावस्था की देखभाल और शिक्षा (6 वर्ष तक) / Provision for early childhood care and education"],
+["अनुच्छेद 51A किससे संबंधित है? / Article 51A relates to?","मौलिक कर्तव्य / Fundamental Duties"],
+["अनुच्छेद 52 किससे संबंधित है? / Article 52 relates to?","भारत के राष्ट्रपति / The President of India"],
+["अनुच्छेद 53 किसमें संघ की कार्यपालिका शक्ति निहित करता है? / Article 53 vests the Union's executive power in?","राष्ट्रपति / The President"],
+["अनुच्छेद 54 किससे संबंधित है? / Article 54 relates to?","राष्ट्रपति का निर्वाचन / Election of the President"],
+["अनुच्छेद 61 के अतिरिक्त, राष्ट्रपति का कार्यकाल कितना होता है (अनुच्छेद 56)? / As per Article 56, the President's term of office is?","5 वर्ष / 5 years"],
+["अनुच्छेद 63 किस पद का प्रावधान करता है? / Article 63 provides for the office of?","उपराष्ट्रपति / The Vice-President"],
+["अनुच्छेद 72 किससे संबंधित है? / Article 72 relates to?","राष्ट्रपति की क्षमादान शक्ति / President's power to grant pardons"],
+["अनुच्छेद 74 किससे संबंधित है? / Article 74 relates to?","राष्ट्रपति की सहायता हेतु मंत्रिपरिषद / Council of Ministers to aid the President"],
+["अनुच्छेद 75 किससे संबंधित है? / Article 75 relates to?","मंत्रियों से संबंधित अन्य उपबंध (प्रधानमंत्री की नियुक्ति सहित) / Other provisions about Ministers (incl. appointment of PM)"],
+["अनुच्छेद 76 किस पद का प्रावधान करता है? / Article 76 provides for the office of?","भारत का महान्यायवादी (Attorney General) / Attorney General for India"],
+["संविधान का भाग V किससे संबंधित है (अनुच्छेद 52-78)? / Part V of the Constitution (Articles 52-78) deals with?","संघ (केंद्र सरकार) / The Union (Central Government)"]
+],
+"6. General Science (5 marks)": [
+["एक तांबे के तार का प्रतिरोध 2×10⁻² ओम, लंबाई 2मी और अनुप्रस्थ क्षेत्रफल 1.7×10⁻⁶ m² है। प्रतिरोधकता क्या है? / Copper wire: R=2×10⁻² Ω, L=2m, A=1.7×10⁻⁶ m². Find resistivity.","1.7 × 10⁻⁸ ओम-मीटर / 1.7 × 10⁻⁸ ohm-metre"],
+["1 वाट किसके बराबर है? / 1 Watt is equal to?","1 जूल / 1 सेकंड / 1 joule per second"],
+["मीथेन हवा में ऑक्सीजन के साथ जलने पर कौन-से उत्पाद बनते हैं? / When methane burns in oxygen, what products form?","कार्बन डाइऑक्साइड और जल वाष्प / Carbon dioxide and water vapour"],
+["अम्ल जल में घुलने पर हाइड्रोजन किस रूप में अलग होता है? / When acid dissolves in water, hydrogen separates as?","धनात्मक हाइड्रोजन आयन (H⁺) / Positively charged hydrogen ion (H⁺)"],
+["गर्भाशय में बढ़ रहे भ्रूण को कौन-सा भाग पोषक तत्व देता है? / Which part provides nutrients to the growing foetus?","प्लेसेंटा / Placenta"],
+["साहा परमाणु भौतिकी संस्थान कहाँ स्थित है? / Where is the Saha Institute of Nuclear Physics situated?","कोलकाता / Kolkata"],
+["एक वयस्क मानव शरीर में कुल कितनी हड्डियाँ होती हैं? / Total number of bones in an adult human body?","206"],
+["विटामिन C की कमी से कौन-सा रोग होता है? / Deficiency of Vitamin C causes which disease?","स्कर्वी / Scurvy"],
+["न्यूटन का तृतीय नियम क्या बताता है? / What does Newton's Third Law state?","हर क्रिया की बराबर व विपरीत प्रतिक्रिया होती है / Every action has an equal and opposite reaction"],
+["प्रकाश संश्लेषण में पौधे किन दो चीज़ों को अवशोषित करते हैं? / In photosynthesis, plants absorb which two things?","कार्बन डाइऑक्साइड और सूर्य का प्रकाश / Carbon dioxide and sunlight"],
+["मानव शरीर का सामान्य तापमान कितना होता है? / Normal human body temperature is?","37°C (98.6°F)"],
+["जल का रासायनिक सूत्र क्या है? / Chemical formula of water?","H₂O"],
+["सामान्य नमक का रासायनिक सूत्र क्या है? / Chemical formula of common salt?","NaCl"],
+["मानव रक्त में लाल रक्त कणिकाओं (RBC) का मुख्य कार्य क्या है? / What is the main function of RBCs in human blood?","ऑक्सीजन का परिवहन / Transport of oxygen"],
+["प्रकाश का वेग निर्वात में कितना होता है? / Speed of light in vacuum is?","लगभग 3×10⁸ मीटर/सेकंड / About 3×10⁸ m/s"],
+["मानव शरीर की सबसे बड़ी ग्रंथि कौन-सी है? / Which is the largest gland in the human body?","यकृत (लिवर) / Liver"],
+["सूर्य के प्रकाश से शरीर में कौन-सा विटामिन बनता है? / Which vitamin is synthesized in the body from sunlight?","विटामिन D / Vitamin D"],
+["पौधों में जल का परिवहन किस ऊतक द्वारा होता है? / Which tissue transports water in plants?","जाइलम / Xylem"],
+["परमाणु का सबसे छोटा कण जो रासायनिक गुण बनाए रखता है, क्या कहलाता है? / The smallest particle of an element that retains its chemical properties is called?","परमाणु / Atom"],
+["मानव हृदय में कुल कितने कक्ष (chambers) होते हैं? / Total number of chambers in the human heart?","4"],
+["DNA का पूर्ण रूप क्या है? / Full form of DNA?","डीऑक्सीराइबोन्यूक्लिक अम्ल / Deoxyribonucleic Acid"],
+["ध्वनि की चाल हवा की अपेक्षा पानी में कैसी होती है? / Speed of sound in water compared to air is?","अधिक (तेज़) / Faster/greater"],
+["पौधों में श्वसन क्रिया किस अंग द्वारा होती है? / Respiration in plants mainly occurs through which part?","पत्तियों के रंध्र (स्टोमेटा) / Stomata of leaves"],
+["आवर्त सारणी में कुल कितने तत्व वर्ग (groups) होते हैं? / Total number of groups in the modern periodic table?","18"],
+["मानव शरीर में सबसे लंबी हड्डी कौन-सी है? / Which is the longest bone in the human body?","फीमर (जांघ की हड्डी) / Femur (thigh bone)"],
+["pH स्केल किसकी अम्लीयता/क्षारीयता मापता है? / The pH scale measures what?","किसी पदार्थ की अम्लीयता या क्षारीयता / Acidity or alkalinity of a substance"],
+["शुद्ध जल का pH मान कितना होता है? / What is the pH value of pure water?","7 (उदासीन) / 7 (neutral)"],
+["मानव शरीर में सबसे छोटी हड्डी कौन-सी है? / Which is the smallest bone in the human body?","स्टेप्स (कान की हड्डी) / Stapes (in the ear)"],
+["प्रकाश संश्लेषण की प्रक्रिया पौधे की किस कोशिका में होती है? / In which plant cell organelle does photosynthesis occur?","क्लोरोप्लास्ट / Chloroplast"],
+["वायुमंडल में सबसे अधिक मात्रा में कौन-सी गैस पाई जाती है? / Which gas is most abundant in the atmosphere?","नाइट्रोजन (लगभग 78%) / Nitrogen (about 78%)"],
+["मानव शरीर में रक्त का शुद्धिकरण किस अंग द्वारा होता है? / Which organ purifies/filters blood in the human body?","वृक्क (किडनी) / Kidney"],
+["ध्वनि तरंगें किस माध्यम में यात्रा नहीं कर सकतीं? / In which medium can sound waves not travel?","निर्वात (शून्य) / Vacuum"],
+["विटामिन K की कमी से क्या प्रभावित होता है? / Deficiency of Vitamin K affects what?","रक्त का थक्का जमना (Blood clotting) / Blood clotting"],
+["सूर्य में ऊर्जा किस प्रक्रिया से उत्पन्न होती है? / Energy in the Sun is produced by which process?","नाभिकीय संलयन (Nuclear Fusion) / Nuclear fusion"],
+["मानव आँख में प्रकाश को केंद्रित करने वाला भाग कौन-सा है? / Which part of the human eye focuses light?","लेंस / Lens"],
+["रक्त समूह की खोज किसने की थी? / Who discovered blood groups?","कार्ल लैंडस्टीनर / Karl Landsteiner"],
+["एक वयस्क मानव शरीर में कुल कितनी हड्डियाँ होती हैं? / How many bones are there in an adult human body?","206"],
+["सिरके का रासायनिक नाम क्या है? / What is the chemical name of vinegar?","एसीटिक अम्ल / Acetic acid"],
+["विद्युत धारा की SI इकाई क्या है? / What is the SI unit of electric current?","एम्पियर / Ampere"],
+["बल (Force) की SI इकाई क्या है? / What is the SI unit of force?","न्यूटन / Newton"],
+["हवा में ध्वनि की चाल लगभग कितनी होती है? / What is the approximate speed of sound in air?","लगभग 343 मीटर/सेकंड / About 343 m/s"],
+["इंसुलिन का उत्पादन शरीर के किस अंग में होता है? / Which organ of the body produces insulin?","अग्न्याशय (पैंक्रियास) / Pancreas"],
+["स्कर्वी रोग किस विटामिन की कमी से होता है? / Scurvy is caused by the deficiency of which vitamin?","विटामिन C / Vitamin C"],
+["प्रथम सफल हृदय प्रत्यारोपण किसने किया था? / Who performed the first successful heart transplant?","क्रिश्चियन बर्नार्ड, 1967 / Christiaan Barnard, 1967"],
+["पेनिसिलिन की खोज किसने की थी? / Who discovered Penicillin?","अलेक्जेंडर फ्लेमिंग / Alexander Fleming"],
+["मीथेन का रासायनिक सूत्र क्या है? / What is the chemical formula of Methane?","CH₄"],
+["कमरे के तापमान पर कौन-सी धातु द्रव अवस्था में पाई जाती है? / Which metal is liquid at room temperature?","पारा (मरकरी) / Mercury"],
+["मानव शरीर का सामान्य तापमान कितना होता है? / What is the normal temperature of the human body?","लगभग 37°C (98.6°F) / About 37°C (98.6°F)"],
+["गुब्बारों में सामान्यतः कौन-सी गैस भरी जाती है? / Which gas is commonly used to fill balloons?","हीलियम / Helium"],
+["प्रकाश संश्लेषण की प्रक्रिया में पौधे कौन-सी गैस अवशोषित करते हैं? / Which gas do plants absorb during photosynthesis?","कार्बन डाइऑक्साइड / Carbon dioxide"]
+],
+"7. Elementary Arithmetic (5 marks)": [
+["20 मिनट एक घंटे का कितना प्रतिशत है? / 20 minutes is what percent of an hour?","33⅓%"],
+["4 अंकों की सबसे छोटी संख्या जो 9 से पूर्णतः विभाज्य है, वह है? / The least 4-digit number exactly divisible by 9 is?","1008"],
+["यदि 3x − 14 = 4 तो x = ? / If 3x − 14 = 4 then x = ?","6"],
+["एक भिन्न से अंश में 1 घटाने पर 1/3 और हर में 8 जोड़ने पर 1/4 हो जाती है। भिन्न ज्ञात करें। / A fraction becomes 1/3 when 1 is subtracted from numerator and 1/4 when 8 is added to denominator. Find it.","5/12"],
+["मीना की आयु का वर्ग उसकी आयु के 8 गुना से 9 अधिक है। उसकी आयु ज्ञात करें। / The square of Meena's age is 9 more than 8 times her age. Find her age.","9 वर्ष / 9 years"],
+["HCF और LCM में क्या संबंध है? / Relation between HCF and LCM of two numbers?","दो संख्याओं का गुणनफल = HCF × LCM / Product of two numbers = HCF × LCM"],
+["साधारण ब्याज (SI) का सूत्र क्या है? / Formula for Simple Interest?","SI = (P × R × T) / 100"],
+["चक्रवृद्धि ब्याज (CI) का सूत्र क्या है? / Formula for Compound Interest?","CI = P(1+R/100)^T − P"],
+["औसत निकालने का सूत्र क्या है? / Formula for Average?","प्रेक्षणों का योग ÷ प्रेक्षणों की संख्या / Sum of observations ÷ Number of observations"],
+["एक वस्तु ₹800 में बेचकर 20% लाभ हुआ। क्रय मूल्य ज्ञात करें। / An item sold for ₹800 giving 20% profit. Find cost price.","₹666.67 (लगभग) / ₹666.67 (approx.), CP = SP×100/(100+20)"],
+["10, 15 और 20 का LCM क्या है? / LCM of 10, 15 and 20?","60"],
+["36 और 60 का HCF क्या है? / HCF of 36 and 60?","12"],
+["यदि किसी संख्या का 25% 50 है, तो वह संख्या क्या है? / If 25% of a number is 50, the number is?","200"],
+["एक ट्रेन 60 किमी/घंटा की गति से 3 घंटे में कितनी दूरी तय करेगी? / A train at 60 km/h travels how far in 3 hours?","180 किमी / 180 km"],
+["दो संख्याओं का अनुपात 3:5 है और उनका योग 40 है। बड़ी संख्या क्या है? / Two numbers are in ratio 3:5 and sum to 40. Find the larger number.","25"],
+["एक व्यक्ति ₹1000 में एक वस्तु खरीदकर ₹1150 में बेचता है। लाभ प्रतिशत ज्ञात करें। / A man buys an item for ₹1000 and sells for ₹1150. Find profit %.","15%"],
+["₹5000 पर 10% वार्षिक दर से 2 वर्ष का साधारण ब्याज ज्ञात करें। / Find simple interest on ₹5000 at 10% p.a. for 2 years.","₹1000"],
+["यदि किसी वर्ग का क्षेत्रफल 144 वर्ग सेमी है, तो उसकी भुजा ज्ञात करें। / If area of a square is 144 sq.cm, find its side.","12 सेमी / 12 cm"],
+["एक आयत की लंबाई 12 मी और चौड़ाई 8 मी है। उसका क्षेत्रफल ज्ञात करें। / A rectangle has length 12m and breadth 8m. Find its area.","96 वर्ग मीटर / 96 sq.m"],
+["1 से 10 तक की संख्याओं का औसत ज्ञात करें। / Find the average of numbers 1 to 10.","5.5"],
+["एक व्यक्ति 5 घंटे में 300 किमी की यात्रा करता है। उसकी औसत गति ज्ञात करें। / A person travels 300 km in 5 hours. Find average speed.","60 किमी/घंटा / 60 km/h"],
+["किसी संख्या का 3/4 भाग 60 है, तो संख्या ज्ञात करें। / 3/4 of a number is 60. Find the number.","80"],
+["दो अंकों की एक संख्या के अंकों का योग 9 है और संख्या उसके अंकों को पलटने से बनी संख्या से 27 अधिक है। संख्या ज्ञात करें। / A 2-digit number has digit sum 9 and is 27 more than the number formed by reversing digits. Find it.","63"],
+["एक दुकानदार ₹40 अंकित मूल्य की वस्तु पर 10% छूट देता है। विक्रय मूल्य ज्ञात करें। / A shopkeeper gives 10% discount on an item marked ₹40. Find selling price.","₹36"],
+["A अकेला किसी काम को 10 दिन में और B अकेला उसी काम को 15 दिन में पूरा करता है। दोनों मिलकर काम कितने दिन में पूरा करेंगे? / A alone can do a job in 10 days, B alone in 15 days. In how many days will both together finish it?","6 दिन / 6 days"],
+["₹2000 की राशि पर 5% वार्षिक दर से 2 वर्ष का चक्रवृद्धि ब्याज ज्ञात करें। / Find compound interest on ₹2000 at 5% p.a. for 2 years.","₹205 (2000×(1.05)²−2000)"],
+["तीन संख्याओं का अनुपात 2:3:5 है और उनका योग 100 है। सबसे बड़ी संख्या ज्ञात करें। / Three numbers are in ratio 2:3:5 and sum to 100. Find the largest number.","50"],
+["एक व्यक्ति की आयु उसके पुत्र की आयु से 3 गुना है। यदि पुत्र की आयु 12 वर्ष है, तो पिता की आयु क्या है? / A man's age is 3 times his son's age. If son is 12 years old, find father's age.","36 वर्ष / 36 years"],
+["किसी संख्या के 20% और 30% का योग 60 है। संख्या ज्ञात करें। / Sum of 20% and 30% of a number is 60. Find the number.","120"],
+["₹15000 का 8% कितना होगा? / What is 8% of ₹15000?","₹1200"],
+["एक ट्रेन 100 मीटर लंबी 36 किमी/घंटा की गति से चलती है। एक खंभे को पार करने में कितना समय लगेगा? / A 100m train runs at 36 km/h. How long will it take to cross a pole?","10 सेकंड / 10 seconds"],
+["दो संख्याओं का LCM 60 और HCF 5 है। यदि एक संख्या 15 है, तो दूसरी संख्या ज्ञात करें। / LCM of two numbers is 60, HCF is 5. If one number is 15, find the other.","20"],
+["200 का 15% कितना होगा? / What is 15% of 200?","30"],
+["10, 20, 30, 40, 50 का औसत ज्ञात करें। / Find the average of 10, 20, 30, 40, 50.","30"],
+["किस दर पर एक राशि साधारण ब्याज से 5 वर्ष में दोगुनी हो जाएगी? / At what rate will a sum double itself in 5 years at simple interest?","20% वार्षिक / 20% per annum"],
+["क्रय मूल्य ₹80 और विक्रय मूल्य ₹100 हो, तो लाभ प्रतिशत ज्ञात करें। / If cost price is ₹80 and selling price is ₹100, find the profit percentage.","25%"],
+["दो संख्याओं का अनुपात 4:5 है और उनका योग 90 है। छोटी संख्या ज्ञात करें। / Two numbers are in ratio 4:5 and sum to 90. Find the smaller number.","40"],
+["60 किमी/घंटा की गति से 3 घंटे में तय की गई दूरी ज्ञात करें। / Find the distance covered at 60 km/h in 3 hours.","180 किमी / 180 km"],
+["4 और 6 का लघुत्तम समापवर्त्य (LCM) ज्ञात करें। / Find the LCM of 4 and 6.","12"],
+["12 और 18 का महत्तम समापवर्तक (HCF) ज्ञात करें। / Find the HCF of 12 and 18.","6"],
+["225 का वर्गमूल ज्ञात करें। / Find the square root of 225.","15"],
+["किसी संख्या का 25% 50 है, तो संख्या ज्ञात करें। / 25% of a number is 50. Find the number.","200"],
+["₹4000 पर 5% वार्षिक दर से 3 वर्ष का साधारण ब्याज ज्ञात करें। / Find simple interest on ₹4000 at 5% p.a. for 3 years.","₹600"],
+["A किसी काम को 6 दिन में और B उसी काम को 12 दिन में पूरा करता है। दोनों मिलकर काम कितने दिनों में पूरा करेंगे? / A can finish a job in 6 days, B in 12 days. In how many days will both together finish it?","4 दिन / 4 days"],
+["50 से 75 तक कितने प्रतिशत की वृद्धि हुई? / What is the percentage increase from 50 to 75?","50%"],
+["6 सेमी भुजा वाले वर्ग का परिमाप ज्ञात करें। / Find the perimeter of a square with side 6 cm.","24 सेमी / 24 cm"],
+["7 सेमी त्रिज्या वाले वृत्त का क्षेत्रफल ज्ञात करें (π = 22/7)। / Find the area of a circle with radius 7 cm (π = 22/7).","154 वर्ग सेमी / 154 sq. cm"],
+["₹1000 पर 10% वार्षिक दर से 1 वर्ष का चक्रवृद्धि ब्याज ज्ञात करें। / Find compound interest on ₹1000 at 10% p.a. for 1 year.","₹100"],
+["एक संख्या को 20% बढ़ाया गया फिर 20% घटाया गया। शुद्ध परिवर्तन ज्ञात करें। / A number is increased by 20% then decreased by 20%. Find the net change.","4% की कमी / A net decrease of 4%"],
+["यदि a:b = 2:3 और b:c = 4:5 है, तो a:c ज्ञात करें। / If a:b = 2:3 and b:c = 4:5, find a:c.","8:15"]
+],
+"8. General Hindi (5 marks)": [
+["'दाता' पुल्लिंग शब्द है, उसका स्त्रीलिंग रूप क्या है? / 'दाता' is masculine; its feminine form is?","दात्री"],
+["'ठण्डा पानी पीना चाहिए।' यह किस विशेषण का उदाहरण है? / 'ठण्डा पानी पीना चाहिए' is an example of which adjective?","गुणवाचक विशेषण / Qualitative adjective"],
+["'उपाय' का विलोम शब्द क्या है? / Antonym of 'उपाय' is?","निरुपाय"],
+["'साहित्य और जीवन का घोर संबंध है।' इसका शुद्ध रूप क्या है? / Correct the sentence: 'साहित्य और जीवन का घोर संबंध है।'","साहित्य और जीवन का घनिष्ठ संबंध है।"],
+["'अंक में भरना' मुहावरे का सही अर्थ क्या है? / Meaning of the idiom 'अंक में भरना'?","गले लगाना / To embrace"],
+["संधि के कितने भेद हैं? / How many types of संधि are there?","तीन: स्वर संधि, व्यंजन संधि, विसर्ग संधि / Three: Swar, Vyanjan, Visarg"],
+["समास के कितने भेद हैं? / How many types of समास are there?","छह: तत्पुरुष, द्वंद्व, द्विगु, बहुव्रीहि, अव्ययीभाव, कर्मधारय / Six types"],
+["रस के कितने भेद माने गए हैं? / How many रस are traditionally recognized?","नौ (9) / Nine (9)"],
+["कारक के कितने भेद होते हैं? / How many types of कारक are there?","आठ (8) / Eight (8)"],
+["'नीला' का स्त्रीलिंग रूप क्या है? / Feminine form of 'नीला' is?","नीली"],
+["'रात' का पर्यायवाची शब्द बताइए। / Give a synonym of 'रात'.","रजनी / निशा"],
+["'क्रोध' का पर्यायवाची शब्द क्या है? / Synonym of 'क्रोध'?","रोष / गुस्सा"],
+["'अंधा क्या चाहे दो आँखें' लोकोक्ति का अर्थ क्या है? / Meaning of the proverb 'अंधा क्या चाहे दो आँखें'?","जो चाहिए वही मिल जाना / Getting exactly what one wanted"],
+["शुद्ध वर्तनी चुनिए: 'परिक्षा' या 'परीक्षा'? / Choose correct spelling: 'परिक्षा' or 'परीक्षा'?","परीक्षा"],
+["हिंदी वर्णमाला में कुल कितने स्वर हैं? / How many vowels (स्वर) are there in Hindi alphabet?","11"],
+["हिंदी वर्णमाला में कुल कितने व्यंजन हैं? / How many consonants (व्यंजन) are there in Hindi alphabet?","33"],
+["'गंगा' का पर्यायवाची शब्द बताइए। / Give a synonym of 'गंगा'.","भागीरथी / जाह्नवी"],
+["'आकाश' का पर्यायवाची शब्द क्या है? / Synonym of 'आकाश'?","गगन / नभ / अंबर"],
+["'सुख' का विलोम शब्द क्या है? / Antonym of 'सुख'?","दुख"],
+["'नाक में दम करना' मुहावरे का अर्थ क्या है? / Meaning of the idiom 'नाक में दम करना'?","बहुत परेशान करना / To harass greatly"],
+["'दूध का दूध पानी का पानी' लोकोक्ति का अर्थ क्या है? / Meaning of proverb 'दूध का दूध पानी का पानी'?","पूरा न्याय करना / To give complete justice"],
+["तत्सम और तद्भव शब्दों में क्या अंतर है? / Difference between तत्सम and तद्भव words?","तत्सम — संस्कृत से ज्यों का त्यों लिए गए शब्द; तद्भव — संस्कृत से बदलकर बने शब्द / Tatsam are unchanged Sanskrit words; Tadbhav are derived/modified forms"],
+["'राम ने रावण को मारा' वाक्य किस वाच्य का उदाहरण है? / 'राम ने रावण को मारा' is an example of which वाच्य (voice)?","कर्तृवाच्य / Active voice (Kartrivachya)"],
+["हिंदी में कुल कितने कारक चिन्ह (विभक्ति) प्रयोग होते हैं? / Total number of case markers (विभक्ति) used in Hindi?","8"],
+["वचन के कितने भेद होते हैं? / How many types of वचन (number) are there?","2 (एकवचन, बहुवचन) / 2 (Singular, Plural)"],
+["लिंग के कितने भेद होते हैं? / How many types of लिंग (gender) are there?","2 (पुल्लिंग, स्त्रीलिंग) / 2 (Masculine, Feminine)"],
+["काल के कितने भेद होते हैं? / How many types of काल (tense) are there?","3 (भूत, वर्तमान, भविष्य) / 3 (Past, Present, Future)"],
+["संधि के कितने भेद होते हैं? / How many types of संधि (sandhi) are there?","3 (स्वर संधि, व्यंजन संधि, विसर्ग संधि) / 3 (Vowel, Consonant, Visarga sandhi)"],
+["समास के कितने भेद होते हैं? / How many types of समास (compound words) are there?","6 (अव्ययीभाव, तत्पुरुष, कर्मधारय, द्विगु, द्वंद्व, बहुव्रीहि) / 6 types"],
+["परंपरागत रूप से रस के कितने भेद माने गए हैं? / Traditionally how many types of रस (Ras) are recognised?","9 (नवरस) / 9 (Navras)"],
+["छंद मुख्यतः कितने प्रकार के होते हैं? / How many main types of छंद (metre) are there?","2 (मात्रिक, वार्णिक) / 2 (Matrik, Varnik)"],
+["अलंकार के मुख्य कितने भेद हैं? / How many main types of अलंकार (figures of speech) are there?","2 (शब्दालंकार, अर्थालंकार) / 2 (Shabdalankar, Arthalankar)"],
+["'यमक' किस प्रकार का अलंकार है? / 'Yamak' is which type of अलंकार?","शब्दालंकार / Shabdalankar"],
+["'उपमा' किस प्रकार का अलंकार है? / 'Upama' is which type of अलंकार?","अर्थालंकार / Arthalankar"],
+["'राम-सा वीर कौन?' में कौन-सा अलंकार है? / Which अलंकार is present in 'Ram-sa veer kaun'?","उपमा अलंकार / Upama Alankar"],
+["कारक के कितने भेद होते हैं? / How many types of कारक (case) are there?","8"],
+["सर्वनाम के कितने भेद होते हैं? / How many types of सर्वनाम (pronoun) are there?","6"],
+["विशेषण के कितने भेद होते हैं? / How many types of विशेषण (adjective) are there?","4"],
+["क्रिया के मुख्य कितने भेद होते हैं? / How many main types of क्रिया (verb) are there?","2 (सकर्मक, अकर्मक) / 2 (Transitive, Intransitive)"],
+["'पानी' का पर्यायवाची शब्द बताइए। / Give a synonym of 'पानी'.","जल / नीर"],
+["'रात' का पर्यायवाची शब्द बताइए। / Give a synonym of 'रात'.","रात्रि / निशा"],
+["'अमृत' का विलोम शब्द क्या है? / Antonym of 'अमृत'?","विष"],
+["'जीवन' का विलोम शब्द क्या है? / Antonym of 'जीवन'?","मृत्यु"],
+["'अंधे के हाथ बटेर लगना' मुहावरे का अर्थ क्या है? / Meaning of the idiom 'अंधे के हाथ बटेर लगना'?","अचानक बड़ा लाभ मिलना / To get a great benefit unexpectedly"],
+["'ऊँट के मुँह में जीरा' लोकोक्ति का अर्थ क्या है? / Meaning of the proverb 'ऊँट के मुँह में जीरा'?","आवश्यकता से बहुत कम मिलना / Getting far less than what is needed"],
+["उपसर्ग किसे कहते हैं? / What is called उपसर्ग (prefix)?","शब्द से पहले लगने वाला शब्दांश जो नया अर्थ देता है / A word part added before a word that gives it new meaning"],
+["प्रत्यय किसे कहते हैं? / What is called प्रत्यय (suffix)?","शब्द के अंत में लगने वाला शब्दांश जो नया अर्थ देता है / A word part added at the end of a word that gives it new meaning"],
+["'सुगंध' शब्द में प्रयुक्त उपसर्ग क्या है? / What is the prefix used in the word 'सुगंध'?","सु"],
+["हिंदी की मानक बोली किसे माना जाता है? / Which dialect is considered the standard form of Hindi?","खड़ी बोली / Khari Boli"],
+["हिंदी को भारत की राजभाषा कब घोषित किया गया? / When was Hindi declared the official language of India?","14 सितंबर, 1949 / 14 September 1949"]
+],
+"9. General English (5 marks)": [
+["Choose the indirect form: He said, \"I shall do my best\".","He said that he would do his best."],
+["Choose the antonym of: Victory","Defeat"],
+["Choose the correctly spelt word: Gratious / Graycious / Gracious / Grasious","Gracious"],
+["Fill in the blank with the correct article: She is ___ honest woman.","an"],
+["Choose the correct passive voice of: 'He wrote a letter.'","A letter was written by him."],
+["One word substitution: A person who loves books is called?","Bibliophile"],
+["Idiom meaning 'to start a conversation':","Break the ice"],
+["Synonym of 'Abundant':","Plentiful"],
+["Choose the correct sentence: 'Neither of the boys have done their homework.' / 'Neither of the boys has done his homework.'","Neither of the boys has done his homework."],
+["Antonym of 'Ancient':","Modern"],
+["Fill in the blank: She has been living here ___ 2015.","since"],
+["Choose the correct plural of 'Child':","Children"],
+["One word substitution: A place where birds are kept:","Aviary"],
+["Idiom meaning 'to face a problem directly':","Take the bull by the horns"],
+["Choose the correct comparative form: 'Good, ___, Best'","Better"],
+["Fill in the correct preposition: He is good ___ Mathematics.","at"],
+["Choose the correct tense: 'She ___ (finish) her homework before dinner.'","had finished"],
+["One word substitution: A person who does not believe in God:","Atheist"],
+["Synonym of 'Benevolent':","Kind / Generous"],
+["Antonym of 'Optimistic':","Pessimistic"],
+["Choose the correct sentence: 'Each of the students have submitted their assignment.' / 'Each of the students has submitted his assignment.'","Each of the students has submitted his assignment."],
+["Idiom meaning 'to keep something secret':","Keep it under wraps"],
+["Choose the correctly spelt word: Recieve / Receive / Recive / Receeve","Receive"],
+["Fill in the blank with correct article: I saw ___ elephant at the zoo.","an"],
+["One word substitution: A person who can speak two languages:","Bilingual"],
+["Choose the correct passive voice of: 'They are building a bridge.'","A bridge is being built by them."],
+["Fill in the blank with correct preposition: The train arrived ___ time.","on"],
+["Synonym of 'Diligent':","Hardworking / Industrious"],
+["Antonym of 'Generous':","Stingy / Miserly"],
+["Choose the correct direct form: She said, \"I am going to the market.\"","She said that she was going to the market."],
+["One word substitution: A person who studies the stars and planets:","Astronomer"],
+["Idiom meaning 'to work very hard':","Burn the midnight oil"],
+["Fill in the blank: Neither the teacher nor the students ___ present.","were"],
+["Choose the correct spelling: Occassion / Occasion / Ocassion / Occassion","Occasion"],
+["Antonym of 'Diligent':","Lazy / Idle"],
+["Choose the correct plural of 'Child':","Children"],
+["Choose the correct plural of 'Mouse':","Mice"],
+["Past tense of 'Go':","Went"],
+["Past participle of 'Eat':","Eaten"],
+["Synonym of 'Happy':","Joyful / Glad"],
+["Antonym of 'Difficult':","Easy"],
+["One word substitution: A place where books are kept:","Library"],
+["Idiom meaning of 'Once in a blue moon':","Rarely"],
+["Fill in the correct article: I have ___ pen.","a"],
+["Choose the correct sentence: 'He don't like tea.' or 'He doesn't like tea.'","He doesn't like tea."],
+["Synonym of 'Brave':","Courageous"],
+["Antonym of 'Ancient':","Modern"],
+["One word substitution: A person who cannot read or write:","Illiterate"],
+["Fill in the correct preposition: She is afraid ___ dogs.","of"],
+["Choose the correctly spelt word: Necessary / Neccessary / Neccesary","Necessary"]
+],
+"10. Logical Reasoning (5 marks)": [
+["विनोद ने विशाल को अपने पिता की पत्नी के इकलौते भाई के बेटे के रूप में पेश किया। विनोद का विशाल से क्या संबंध है? / Vinod introduces Vishal as the son of the only brother of his father's wife. How is Vinod related to Vishal?","ममेरा भाई / Cousin (maternal uncle's son)"],
+["लीप वर्ष का पहला दिन बुधवार है, तो उस वर्ष 31 दिसंबर को सप्ताह का कौन-सा दिन था? / First day of a leap year is Wednesday; what day was 31st December that year?","गुरुवार / Thursday"],
+["N, M से अधिक बुद्धिमान है। M, Y जितना बुद्धिमान नहीं है। X, Y से अधिक बुद्धिमान है लेकिन N जितना नहीं। सबसे अधिक बुद्धिमान कौन है? / N is more intelligent than M; M is not as intelligent as Y; X is more intelligent than Y but not N. Who is the most intelligent?","N"],
+["संख्या श्रृंखला: 3, 3, 4.5, 9, 22.5, ? / Number series: 3, 3, 4.5, 9, 22.5, ?","67.5 (गुणक पैटर्न: ×1, ×1.5, ×2, ×2.5, ×3 / multiplier pattern ×1,×1.5,×2,×2.5,×3)"],
+["यदि किसी कोड में CAT को DBU लिखा जाए, तो DOG को कैसे लिखेंगे? / If CAT is coded as DBU, how is DOG coded?","EPH (प्रत्येक अक्षर +1 / each letter +1)"],
+["दर्पण प्रतिबिंब में क्या बदलता है? / What changes in a mirror image?","बायाँ-दायाँ (ऊपर-नीचे same रहता है) / Left-right (up-down stays the same)"],
+["श्रृंखला पूरी करें: A, C, F, J, ? / Complete the series: A, C, F, J, ?","O (अंतर पैटर्न +2,+3,+4,+5 / gap pattern +2,+3,+4,+5)"],
+["यदि किसी परिवार में 'A' 'B' का भाई है और 'B' 'C' की माँ है, तो A, C से किस प्रकार संबंधित है? / If A is B's brother and B is C's mother, how is A related to C?","मामा / Maternal Uncle"],
+["दिशा प्रश्न: राम उत्तर की ओर 5 किमी चलता है, फिर पूर्व की ओर 3 किमी। वह अपने प्रारंभिक बिंदु से कितनी दूर है? / Ram walks 5 km north, then 3 km east. How far is he from the starting point?","√34 किमी ≈ 5.83 किमी / √34 km ≈ 5.83 km"],
+["कैलेंडर आधारित: यदि 1 जनवरी 2024 सोमवार है, तो 1 जनवरी 2025 किस दिन होगा? (2024 लीप वर्ष) / If 1 Jan 2024 is Monday (leap year), what day is 1 Jan 2025?","बुधवार / Wednesday"],
+["वर्ग समीकरण/सादृश्य: पुस्तक : पढ़ना :: भोजन : ? / Analogy: Book : Read :: Food : ?","खाना / Eat"],
+["विषम शब्द छाँटिए: सेब, आम, गाजर, केला / Find the odd one out: Apple, Mango, Carrot, Banana","गाजर (यह फल नहीं सब्ज़ी है) / Carrot (it's a vegetable, others are fruits)"],
+["एक आदमी उत्तर की ओर मुँह करके खड़ा है। वह दायीं ओर घूमता है, फिर घड़ी की दिशा में 180° घूमता है। अब उसका मुँह किस दिशा में है? / A man faces North, turns right, then turns 180° clockwise. Which direction does he face now?","पश्चिम / West"],
+["श्रृंखला पूरी करें: 2, 6, 12, 20, 30, ? / Complete the series: 2, 6, 12, 20, 30, ?","42 (n(n+1) पैटर्न / n(n+1) pattern)"],
+["यदि 'फूल' को 'पेड़' कहा जाए, 'पेड़' को 'नदी', 'नदी' को 'पहाड़' कहा जाए, तो मछली कहाँ पाई जाएगी? / If 'flower' is called 'tree', 'tree' is called 'river', 'river' is called 'mountain', where would fish be found?","पहाड़ (नदी को पहाड़ कहा गया है) / Mountain (since river is called mountain)"],
+["सादृश्य: डॉक्टर : अस्पताल :: शिक्षक : ? / Analogy: Doctor : Hospital :: Teacher : ?","स्कूल / School"],
+["यदि किसी कूट भाषा में FRIEND को HUMJTK लिखा जाता है, तो CANDLE को कैसे लिखेंगे? / If FRIEND is coded as HUMJTK, how is CANDLE coded?","EDSFRK (प्रत्येक अक्षर बढ़ते क्रम में +2,+3,+4... / each letter shifts by increasing steps)"],
+["घड़ी में 3:15 बजे घंटे और मिनट की सुइयों के बीच का कोण क्या है? / What is the angle between hour and minute hand at 3:15?","7.5°"],
+["सादृश्य: पंख : पक्षी :: पंखुड़ी : ? / Analogy: Feather : Bird :: Petal : ?","फूल / Flower"],
+["श्रृंखला पूरी करें: 1, 4, 9, 16, 25, ? / Complete the series: 1, 4, 9, 16, 25, ?","36 (वर्ग संख्याएँ / perfect squares)"],
+["विषम शब्द छाँटिए: त्रिभुज, वर्ग, वृत्त, मेज़ / Find the odd one out: Triangle, Square, Circle, Table","मेज़ (यह ज्यामितीय आकृति नहीं है) / Table (not a geometric shape)"],
+["यदि दक्षिण-पूर्व को उत्तर कहा जाए, उत्तर-पूर्व को पश्चिम कहा जाए, तो दक्षिण को क्या कहा जाएगा? / If South-East is called North and North-East is called West, what will South be called?","उत्तर-पूर्व / North-East"],
+["रवि की माँ, सुमन के पिता की इकलौती बहन है। सुमन, रवि से किस प्रकार संबंधित है? / Ravi's mother is the only sister of Suman's father. How is Suman related to Ravi?","चचेरा/ममेरा भाई या बहन / Cousin"],
+["श्रृंखला: 5, 11, 23, 47, ? / Series: 5, 11, 23, 47, ?","95 (प्रत्येक संख्या ×2+1 / each number ×2+1)"],
+["यदि किसी कूट में 'GO' को '715' लिखा जाता है, तो 'SIT' को कैसे लिखेंगे (अक्षर स्थान के अनुसार)? / If 'GO' is coded as '715' (position in alphabet, summed differently), find pattern based coding for 'SIT'.","19+9+20 = 48 (वर्णमाला स्थान का योग / sum of alphabet positions)"],
+["दिए गए शब्दों को शब्दकोश क्रम में व्यवस्थित करें: Dog, Deer, Duck, Deep / Arrange in dictionary order: Dog, Deer, Duck, Deep","Deep, Deer, Dog, Duck"],
+["एक सामान्य पासे में 1 के विपरीत फलक पर कौन-सी संख्या होती है? / On a standard dice, which number is opposite to 1?","6 (1+6=7, विपरीत फलकों का योग सदैव 7 होता है) / 6 (opposite faces of a standard dice always sum to 7)"],
+["श्रृंखला पूरी करें: 3, 6, 9, 12, ? / Complete the series: 3, 6, 9, 12, ?","15"],
+["श्रृंखला पूरी करें: 2, 4, 8, 16, ? / Complete the series: 2, 4, 8, 16, ?","32"],
+["विषम संख्या छाँटिए: 4, 9, 16, 20 / Find the odd one out: 4, 9, 16, 20","20 (यह पूर्ण वर्ग नहीं है) / 20 (not a perfect square)"],
+["सादृश्य: पेन : लिखना :: चाकू : ? / Analogy: Pen : Write :: Knife : ?","काटना / Cut"],
+["सादृश्य: मछली : पानी :: पक्षी : ? / Analogy: Fish : Water :: Bird : ?","आकाश / Sky"],
+["A, B का पिता है। B, C का भाई है। C, D की पुत्री है। D, A से किस प्रकार संबंधित है? / A is B's father. B is C's brother. C is D's daughter. How is A related to D?","दादा (Grandfather) / Grandfather"],
+["एक व्यक्ति उत्तर की ओर मुँह करके खड़ा है। वह दायें मुड़ता है फिर पुनः दायें मुड़ता है। अब उसका मुँह किस दिशा में है? / A man faces North, turns right twice. Which direction does he face now?","दक्षिण / South"],
+["विषम आकृति छाँटिए: वर्ग, वृत्त, त्रिभुज, पानी / Find the odd one out: Square, Circle, Triangle, Water","पानी (यह ज्यामितीय आकृति नहीं है) / Water (not a geometric shape)"],
+["श्रृंखला पूरी करें: A, C, E, G, ? / Complete the series: A, C, E, G, ?","I"],
+["लुप्त संख्या ज्ञात करें: 5, 10, 20, 40, ? / Find the missing number: 5, 10, 20, 40, ?","80"],
+["यदि आज सोमवार है, तो 15 दिन बाद कौन-सा दिन होगा? / If today is Monday, what day will it be after 15 days?","मंगलवार / Tuesday"],
+["श्रृंखला पूरी करें: 1, 1, 2, 3, 5, 8, ? / Complete the series: 1, 1, 2, 3, 5, 8, ?","13"],
+["घड़ी में 6:00 बजे घंटे और मिनट की सुइयों के बीच का कोण क्या है? / What is the angle between hour and minute hand at 6:00?","180°"],
+["श्रृंखला पूरी करें: 100, 90, 81, 73, ? / Complete the series: 100, 90, 81, 73, ?","66"],
+["सादृश्य: लेखक : पुस्तक :: मूर्तिकार : ? / Analogy: Author : Book :: Sculptor : ?","मूर्ति / Sculpture"],
+["एक कूट भाषा में यदि 'BOOK' को 'CPPL' लिखा जाता है (प्रत्येक अक्षर +1), तो 'PEN' को कैसे लिखेंगे? / In a code, if 'BOOK' is written as 'CPPL' (each letter +1), how is 'PEN' coded?","QFO"],
+["कथन: सभी बिल्लियाँ जानवर हैं। सभी जानवर सजीव हैं। निष्कर्ष: सभी बिल्लियाँ सजीव हैं। क्या यह निष्कर्ष सही है? / Statement: All cats are animals. All animals are living things. Conclusion: All cats are living things. Is this valid?","हाँ, तार्किक रूप से सही है / Yes, it logically follows"],
+["20 विद्यार्थियों की एक पंक्ति में राज बाएँ से 7वें स्थान पर है। दाएँ से उसका स्थान क्या होगा? / In a row of 20 students, Raj is 7th from the left. What is his position from the right?","14वाँ / 14th"],
+["विषम संख्या छाँटिए: 121, 144, 169, 200 / Find the odd one out: 121, 144, 169, 200","200 (यह पूर्ण वर्ग नहीं है) / 200 (not a perfect square)"],
+["एक लीप वर्ष में कितने दिन होते हैं? / How many days are there in a leap year?","366"],
+["यदि 'A' का अर्थ '+', 'B' का अर्थ '−', 'C' का अर्थ '×' है, तो 10 A 5 C 2 = ? / If 'A' means '+' and 'C' means '×', then 10 A 5 C 2 = ?","20 (10 + 5×2 = 20) / 20 (10 + 5×2 = 20)"],
+["सादृश्य: अध्यापक : विद्यालय :: वकील : ? / Analogy: Teacher : School :: Lawyer : ?","न्यायालय / Court"],
+["श्रृंखला पूरी करें: 7, 14, 28, 56, ? / Complete the series: 7, 14, 28, 56, ?","112"]
+],
+"11. Current Affairs (10 marks)": [
+["डिफेंस रिसर्च एण्ड डेवलपमेंट ऑर्गनाइजेशन (DRDO) द्वारा विकसित नाग मार्क 2 किस प्रकार की मिसाइल है? / What type of missile is Nag Mark 2 by DRDO?","फायर-एण्ड-फॉरगेट एंटी-टैंक गाइडेड मिसाइल / Fire-and-Forget Anti-Tank Guided Missile"],
+["यूनाइटेड किंगडम आधिकारिक तौर पर CPTPP का 12वाँ सदस्य कब बना? / When did UK officially become the 12th member of CPTPP?","15 दिसंबर, 2024 / 15 December 2024"],
+["55वीं विश्व आर्थिक मंच वार्षिक बैठक, 2025 कहाँ आयोजित की गई थी? / Where was the 55th World Economic Forum Annual Meeting 2025 held?","दावोस-क्लोस्टर्स, स्विट्ज़रलैंड / Davos-Klosters, Switzerland"],
+["शक्ति और ताकत के प्रतीक किस पक्षी को दिसंबर 2024 में अमेरिका का राष्ट्रीय पक्षी घोषित किया गया? / Which bird was declared USA's national bird in Dec 2024?","बाल्ड ईगल / Bald Eagle"],
+["जनवरी 2025 में पेप्सिको द्वारा भारत व दक्षिण एशिया पेय पदार्थों के उपाध्यक्ष व महाप्रबंधक कौन नियुक्त हुए? / Who was appointed VP & GM for India & South Asia Beverages by PepsiCo in Jan 2025?","नितिन भंडारी / Nitin Bhandari"],
+["किस मंत्रालय ने 31 दिसंबर, 2024 को वार्षिक भूजल गुणवत्ता रिपोर्ट 2024 जारी की? / Which ministry released the Annual Groundwater Quality Report 2024?","केंद्रीय जल शक्ति मंत्रालय / Union Ministry of Jal Shakti"],
+["इसरो ने अंतरिक्ष में कौन-सी फसल सफलतापूर्वक उगाई? / Which crop did ISRO successfully sprout in space?","लोबिया / Cowpea"],
+["विझिंजम अंतर्राष्ट्रीय बंदरगाह कहाँ स्थित है? / Where is Vizhinjam International Seaport situated?","केरल / Kerala"],
+["किस देश ने ICC क्रिकेट विश्व टेस्ट चैंपियनशिप (WTC) 2025 का खिताब जीता? / Which country won the ICC WTC 2025 title?","दक्षिण अफ्रीका / South Africa"],
+["विश्व मरुस्थलीकरण एवं सूखा निवारण दिवस 2025 का विषय क्या था? / Theme of World Day to Combat Desertification and Drought 2025?","'भूमि को पुनर्स्थापित करें। अवसरों का लाभ उठाएँ।' / 'Restore the Land. Unlock the Opportunities.'"],
+["भारत का चंद्रयान-3 किस वर्ष चंद्रमा के दक्षिणी ध्रुव पर सफलतापूर्वक उतरा? / In which year did Chandrayaan-3 successfully land on the Moon's south pole?","2023 (23 अगस्त) / 2023 (23 August)"],
+["G20 शिखर सम्मेलन 2023 की मेज़बानी किस देश ने की? / Which country hosted the G20 Summit 2023?","भारत / India"],
+["भारत की पहली सेमीकंडक्टर चिप निर्माण इकाई किस राज्य में स्थापित हो रही है, जिसका शिलान्यास हुआ? / In which state is India's first major semiconductor fab plant coming up (foundation laid)?","गुजरात (धोलेरा) / Gujarat (Dholera)"],
+["2024 में भारत का मुख्य आर्थिक सलाहकार (CEA) कौन है? / Who is India's Chief Economic Advisor (verify latest before exam)?","वी. अनंत नागेश्वरन / V. Anantha Nageswaran"],
+["भारत की पहली वंदे भारत मेट्रो/स्लीपर ट्रेन सेवा किस मार्ग पर शुरू हुई (जाँच करें नवीनतम)? / India's first Vande Bharat sleeper/related expansion — check the latest route before exam.","नोट: यह जानकारी तेज़ी से बदलती है, नवीनतम स्रोत से जाँचें / Note: verify latest from a current source"],
+["Note: Current affairs is the fastest-changing section — the above are examples of the exact question style (recent appointments, DRDO/ISRO news, international summits, sports titles, awards, themes of international days). Revise a monthly current affairs magazine for the last 6-12 months before your exact exam date.","Practice tip — no fixed answer, keep this updated closer to your exam date from a reliable current affairs source."],
+["भारत ने 2023 क्रिकेट विश्व कप की मेज़बानी किस वर्ष की और फाइनल में किस देश ने खिताब जीता? / India hosted the 2023 Cricket World Cup; which country won the final?","ऑस्ट्रेलिया (भारत को हराकर) / Australia (defeating India)"],
+["G20 की अध्यक्षता 2023 के बाद किस देश को मिली? / Which country held the G20 presidency after India in 2023?","ब्राज़ील / Brazil"],
+["अंतरराष्ट्रीय योग दिवस प्रत्येक वर्ष किस तारीख को मनाया जाता है? / International Yoga Day is observed on which date every year?","21 जून / 21 June"],
+["भारत का पहला निजी क्षेत्र का रॉकेट प्रक्षेपण किस स्टार्टअप द्वारा किया गया? / India's first private-sector rocket launch was carried out by which startup?","स्काईरूट एयरोस्पेस (विक्रम-S) / Skyroot Aerospace (Vikram-S)"],
+["वर्ष 2024 के पेरिस ओलंपिक में भारत के लिए एकमात्र स्वर्ण पदक विजेता (या पदक तालिका) की जानकारी परीक्षा से पहले जाँचें। / Check the latest before exam: India's medal tally at the 2024 Paris Olympics.","नोट: नवीनतम स्रोत से जाँचें / Note: verify from a current source before exam"],
+["भारत का पहला स्वदेशी विमानवाहक पोत कौन-सा है? / What is India's first indigenous aircraft carrier?","आईएनएस विक्रांत (2022 में कमीशन) / INS Vikrant (commissioned in 2022)"],
+["चंद्रयान-3 चंद्रमा के दक्षिणी ध्रुव पर किस वर्ष सफलतापूर्वक उतरा? / In which year did Chandrayaan-3 successfully land near the Moon's south pole?","2023"],
+["भारत ने G20 शिखर सम्मेलन की मेज़बानी किस वर्ष की? / In which year did India host the G20 Summit?","2023 (नई दिल्ली) / 2023 (New Delhi)"],
+["2024 का G20 शिखर सम्मेलन किस देश ने आयोजित किया? / Which country hosted the 2024 G20 Summit?","ब्राज़ील (रियो डी जेनेरो) / Brazil (Rio de Janeiro)"],
+["भारत का पहला सौर मिशन आदित्य-L1 किस वर्ष प्रक्षेपित हुआ? / In which year was India's first solar mission Aditya-L1 launched?","2023"],
+["भारत जनसंख्या में विश्व का सबसे बड़ा देश (चीन को पीछे छोड़कर) किस वर्ष बना? / In which year did India become the world's most populous country, overtaking China?","2023"],
+["भारत की डिजिटल करेंसी (e-रुपी) का पायलट प्रोजेक्ट किस वर्ष शुरू हुआ? / In which year was India's digital currency (e-Rupee) pilot launched?","2022"],
+["नया संसद भवन किस वर्ष उद्घाटित हुआ? / In which year was the new Parliament building inaugurated?","2023"],
+["UPI भुगतान प्रणाली किस संस्था द्वारा संचालित है? / UPI payment system is operated by which body?","भारतीय राष्ट्रीय भुगतान निगम (NPCI) / National Payments Corporation of India (NPCI)"],
+["फीफा विश्व कप 2022 की मेज़बानी किस देश ने की? / Which country hosted the FIFA World Cup 2022?","कतर / Qatar"],
+["फीफा विश्व कप 2022 किस देश ने जीता? / Which country won the FIFA World Cup 2022?","अर्जेंटीना / Argentina"],
+["ICC क्रिकेट विश्व कप 2023 की मेज़बानी किस देश ने की? / Which country hosted the ICC Cricket World Cup 2023?","भारत / India"],
+["राष्ट्रमंडल खेल 2022 (Commonwealth Games) की मेज़बानी किसने की? / Who hosted the 2022 Commonwealth Games?","बर्मिंघम, इंग्लैंड / Birmingham, England"],
+["एशियाई खेल (2023 में आयोजित) की मेज़बानी किस शहर ने की? / Which city hosted the Asian Games (held in 2023)?","हांगझोऊ, चीन / Hangzhou, China"],
+["राष्ट्रीय शिक्षा नीति (NEP) किस वर्ष जारी की गई? / In which year was the National Education Policy (NEP) released?","2020"],
+["आयुष्मान भारत योजना किस वर्ष शुरू हुई? / In which year was the Ayushman Bharat scheme launched?","2018"],
+["स्वच्छ भारत मिशन किस वर्ष शुरू हुआ? / In which year was the Swachh Bharat Mission launched?","2014"],
+["मेक इन इंडिया पहल किस वर्ष शुरू हुई? / In which year was the Make in India initiative launched?","2014"],
+["जन धन योजना किस वर्ष शुरू हुई? / In which year was the Jan Dhan Yojana launched?","2014"],
+["भारत का मानव अंतरिक्ष उड़ान मिशन किस नाम से जाना जाता है? / What is India's human spaceflight mission called?","गगनयान / Gaganyaan"],
+["2023 का नोबेल शांति पुरस्कार किसे दिया गया? / Who was awarded the Nobel Peace Prize in 2023?","नर्गिस मोहम्मदी / Narges Mohammadi"],
+["संयुक्त राष्ट्र महासचिव कौन हैं? / Who is the Secretary-General of the United Nations?","एंटोनियो गुटेरेस / António Guterres"],
+["डिजिटल इंडिया कार्यक्रम किस वर्ष शुरू हुआ? / In which year was the Digital India programme launched?","2015"],
+["राष्ट्रीय हरित हाइड्रोजन मिशन किस वर्ष स्वीकृत हुआ? / In which year was the National Green Hydrogen Mission approved?","2023"],
+["बेटी बचाओ बेटी पढ़ाओ योजना किस वर्ष शुरू हुई? / In which year was the Beti Bachao Beti Padhao scheme launched?","2015"],
+["भारत की पहली पूर्णतः स्वदेशी 5G तकनीक किस कंपनी ने विकसित की? / Which company developed India's first fully indigenous 5G technology?","रिलायंस जियो (Jio) / Reliance Jio"],
+["वंदे भारत ट्रेन किस प्रकार की ट्रेन है? / What kind of train is Vande Bharat?","स्वदेशी सेमी-हाई-स्पीड ट्रेन / Indigenous semi-high-speed train"],
+["भारत का पहला हाइड्रोजन ईंधन सेल आधारित ट्रेन प्रोजेक्ट किससे संबंधित है? / India's first hydrogen fuel cell train project is associated with?","भारतीय रेलवे / Indian Railways"],
+["नमामि गंगे कार्यक्रम किससे संबंधित है? / The Namami Gange programme is related to?","गंगा नदी की सफाई और संरक्षण / Cleaning and conservation of the Ganga river"]
+],
+"12. General Awareness / Static GK (10 marks)": [
+["क्रोना निम्नलिखित में से किस देश की मुद्रा है? / Krona is the currency of which country?","स्वीडन / Sweden"],
+["एशिया-प्रशांत आर्थिक सहयोग (APEC) का मुख्यालय कहाँ है? / Headquarters of APEC?","सिंगापुर / Singapore"],
+["निम्नलिखित में से कौन-सा कलाकार एक प्रसिद्ध मधुबनी चित्रकार है? / Who among the following is a famous Madhubani painter?","भारती दयाल / Bharti Dayal"],
+["आधुनिक ओलंपिक खेल सबसे पहले किस शहर में आयोजित हुए थे? / Where were the modern Olympic Games first held?","एथेंस / Athens (1896)"],
+["अंतर्राष्ट्रीय ओलंपिक दिवस कब मनाया जाता है? / International Olympic Day is observed on?","23 जून / 23 June"],
+["भारत का सर्वोच्च नागरिक सम्मान कौन-सा है? / India's highest civilian award?","भारत रत्न / Bharat Ratna"],
+["भारत का राष्ट्रीय पक्षी क्या है? / India's national bird?","मोर / Peacock"],
+["भारत का सर्वोच्च शांतिकालीन वीरता पुरस्कार कौन-सा है? / India's highest peacetime gallantry award?","अशोक चक्र / Ashoka Chakra"],
+["भारत का सर्वोच्च युद्धकालीन वीरता पुरस्कार कौन-सा है? / India's highest wartime gallantry award?","परमवीर चक्र / Param Vir Chakra"],
+["राष्ट्रीय खेल पुरस्कारों में सर्वोच्च पुरस्कार कौन-सा है? / Highest National Sports Award?","मेजर ध्यानचंद खेल रत्न पुरस्कार / Major Dhyan Chand Khel Ratna Award"],
+["संयुक्त राष्ट्र संघ का मुख्यालय कहाँ है? / Headquarters of the United Nations?","न्यूयॉर्क / New York"],
+["विश्व स्वास्थ्य संगठन (WHO) का मुख्यालय कहाँ है? / Headquarters of WHO?","जिनेवा, स्विट्ज़रलैंड / Geneva, Switzerland"],
+["भारत का राष्ट्रीय पशु कौन-सा है? / India's national animal?","बाघ / Tiger"],
+["भारत का राष्ट्रीय फूल कौन-सा है? / India's national flower?","कमल / Lotus"],
+["भारत का राष्ट्रगान किसने लिखा? / Who wrote India's national anthem?","रवींद्रनाथ टैगोर / Rabindranath Tagore"],
+["भारत का राष्ट्रगीत ('वंदे मातरम्') किसने लिखा? / Who wrote the national song 'Vande Mataram'?","बंकिम चंद्र चट्टोपाध्याय / Bankim Chandra Chattopadhyay"],
+["नोबेल पुरस्कार किस देश से दिया जाता है? / From which country is the Nobel Prize awarded?","स्वीडन (शांति पुरस्कार नॉर्वे से) / Sweden (Peace prize from Norway)"],
+["भारत का सबसे ऊँचा टेलीविज़न टॉवर कौन-सा है? / India's tallest TV tower?","पीतमपुरा टीवी टॉवर, दिल्ली / Pitampura TV Tower, Delhi"],
+["FIFA का मुख्यालय कहाँ है? / Headquarters of FIFA?","ज्यूरिख, स्विट्ज़रलैंड / Zurich, Switzerland"],
+["भारत में सबसे पुराना पर्वतीय दर्रा कौन-सा है — खैबर या नाथूला? / Which is more well-known as a historic mountain pass — Khyber or Nathu La?","खैबर दर्रा / Khyber Pass"],
+["भारत का राष्ट्रीय जलीय जीव कौन-सा है? / India's national aquatic animal?","गंगा नदी डॉल्फिन / Ganges River Dolphin"],
+["भारत का राष्ट्रीय वृक्ष कौन-सा है? / India's national tree?","बरगद / Banyan Tree"],
+["भारत का राष्ट्रीय खेल कौन-सा है? / India's national sport?","हॉकी / Hockey"],
+["'भारत के लौह पुरुष' के नाम से किसे जाना जाता है? / Who is known as the 'Iron Man of India'?","सरदार वल्लभभाई पटेल / Sardar Vallabhbhai Patel"],
+["भारत के 'मिसाइल मैन' के नाम से किसे जाना जाता है? / Who is known as the 'Missile Man of India'?","डॉ. ए.पी.जे. अब्दुल कलाम / Dr. A.P.J. Abdul Kalam"],
+["ओलंपिक खेलों का प्रतीक चिन्ह कितने वृत्त (rings) से बना है? / How many rings make up the Olympic symbol?","5"],
+["विश्व का सबसे बड़ा लोकतंत्र किसे कहा जाता है? / Which country is called the 'largest democracy in the world'?","भारत / India"],
+["क्रिकेट विश्व कप ट्रॉफी सबसे अधिक बार किस देश ने जीती है? / Which country has won the Cricket World Cup the most times?","ऑस्ट्रेलिया / Australia"],
+["भारत का सबसे बड़ा पुस्तकालय कौन-सा है? / India's largest library?","राष्ट्रीय पुस्तकालय, कोलकाता / National Library, Kolkata"],
+["भारत की पहली महिला प्रधानमंत्री कौन थीं? / Who was India's first woman Prime Minister?","इंदिरा गांधी / Indira Gandhi"],
+["भारत की पहली महिला राष्ट्रपति कौन थीं? / Who was India's first woman President?","प्रतिभा पाटिल / Pratibha Patil"],
+["भारत का सर्वोच्च नागरिक सम्मान कौन-सा है? / What is India's highest civilian award?","भारत रत्न / Bharat Ratna"],
+["भारत का राष्ट्रगान किसने लिखा? / Who wrote India's National Anthem?","रवींद्रनाथ टैगोर / Rabindranath Tagore"],
+["भारत का राष्ट्रीय गीत किसने लिखा? / Who wrote India's National Song?","बंकिम चंद्र चट्टोपाध्याय / Bankim Chandra Chattopadhyay"],
+["भारत का राष्ट्रीय चिन्ह किससे लिया गया है? / India's national emblem is adapted from?","सारनाथ स्थित अशोक स्तंभ का सिंह शीर्ष / The Lion Capital of Ashoka at Sarnath"],
+["भारत का राष्ट्रीय पुष्प कौन-सा है? / What is India's national flower?","कमल / Lotus"],
+["भारत का राष्ट्रीय फल कौन-सा है? / What is India's national fruit?","आम / Mango"],
+["क्षेत्रफल की दृष्टि से भारत का सबसे बड़ा राज्य कौन-सा है? / Which is India's largest state by area?","राजस्थान / Rajasthan"],
+["जनसंख्या की दृष्टि से भारत का सबसे छोटा राज्य कौन-सा है? / Which is India's smallest state by population?","सिक्किम / Sikkim"],
+["भारत का सबसे लंबा राष्ट्रीय राजमार्ग कौन-सा है? / Which is India's longest national highway?","NH44"],
+["भारत के प्रथम नोबेल पुरस्कार विजेता कौन थे? / Who was India's first Nobel laureate?","रवींद्रनाथ टैगोर / Rabindranath Tagore"],
+["अंतरिक्ष में जाने वाले प्रथम भारतीय कौन थे? / Who was the first Indian to go to space?","राकेश शर्मा / Rakesh Sharma"],
+["भारत का सर्वोच्च वीरता पुरस्कार कौन-सा है? / What is India's highest gallantry award?","परमवीर चक्र / Param Vir Chakra"],
+["भारत का पहला उपग्रह कौन-सा था? / What was India's first satellite?","आर्यभट्ट (1975) / Aryabhata (1975)"],
+["'भारत का मसाला उद्यान' किस राज्य को कहा जाता है? / Which state of India is called the 'Spice Garden of India'?","केरल / Kerala"],
+["भारत का सबसे बड़ा नदी द्वीप कौन-सा है? / Which is India's largest river island?","माजुली (असम) / Majuli (Assam)"],
+["भारतीय राष्ट्रीय कांग्रेस के प्रथम अध्यक्ष कौन थे? / Who was the first President of the Indian National Congress?","डब्ल्यू.सी. बनर्जी / W.C. Bonnerjee"],
+["'गुलाबी नगरी' के नाम से कौन-सा शहर प्रसिद्ध है? / Which city is famous as the 'Pink City'?","जयपुर / Jaipur"],
+["'झीलों की नगरी' के नाम से कौन-सा शहर प्रसिद्ध है? / Which city is famous as the 'City of Lakes'?","उदयपुर / Udaipur"],
+["भारत का सबसे बड़ा क्रिकेट स्टेडियम कौन-सा है? / Which is India's largest cricket stadium?","नरेंद्र मोदी स्टेडियम, अहमदाबाद / Narendra Modi Stadium, Ahmedabad"]
+],
+"13. Hindi Unseen Passage Practice (10 marks)": [
+["गद्यांश 1: भारतीय साहित्य के क्षेत्र में सर्वप्रथम सैद्धांतिक आलोचना का विकास हुआ जिसे 'काव्य-शास्त्र' या 'अलंकार-शास्त्र' कहा जाता है। उपलब्ध ग्रंथों में प्राचीनतम रचना भरतमुनि द्वारा रचित 'नाट्य-शास्त्र' है जिसमें साहित्य के मानदंड के रूप में 'रस-सिद्धांत' की प्रतिष्ठा की गई है।\n\nQ: उपलब्ध ग्रंथों में प्राचीनतम रचना भरतमुनि द्वारा रचित कौन-सी है?","नाट्य-शास्त्र"],
+["(इसी गद्यांश पर आधारित) भारत के परवर्ती आचार्यों ने विशेषतः किसकी समस्या को लेकर अपने-अपने स्वतंत्र मत की प्रतिष्ठा की?","रस-निष्पत्ति"],
+["(इसी गद्यांश पर आधारित) भामह, उद्भट, दण्डी आदि आचार्यों ने रस के स्थान पर काव्य की आत्मा के रूप में किसकी प्रतिष्ठा की?","अलंकार"],
+["(इसी गद्यांश पर आधारित) परवर्ती युग में वामन द्वारा 'रीति-संप्रदाय', कुंतक द्वारा 'वक्रोक्ति संप्रदाय' तथा आनंद वर्द्धनाचार्य द्वारा किस संप्रदाय की प्रतिष्ठा हुई?","ध्वनि संप्रदाय"],
+["(इसी गद्यांश पर आधारित) किसने 'औचित्य संप्रदाय' की स्थापना की?","क्षेमेंद्र"],
+["गद्यांश 2: 'प्रभावती' सन् 1936 में प्रकाशित एक मौलिक ऐतिहासिक उपन्यास है। कथानक महाराज जयचन्द के समय का है। कान्यकुब्जेश्वर जयचन्द की रियासत दलमऊ की राजकुमारी प्रभावती का शिकार खेलते हुए लब्लगढ़ के युवराज देव से परिचय हुआ।\n\nQ: 'प्रभावती' किसकी बेटी है?","महेश्वर सिंह"],
+["(इसी गद्यांश पर आधारित) प्रभावती एक वीर नारी की तरह राजकुमार के साथ किस प्रकार का विवाह करती है?","गंधर्व विवाह"],
+["(इसी गद्यांश पर आधारित) प्रभावती किसके स्वयंवर के अवसर पर सशस्त्र सहायता देती है?","संयोगिता"],
+["(इसी गद्यांश पर आधारित) इस उपन्यास में प्रभावती नायिका होने पर भी किसका चरित्र अधिक प्रभावशाली है?","यमुना"],
+["(इसी गद्यांश पर आधारित) यमुना किससे प्रेम करती है?","वीरसिंह"],
+["गद्यांश 3: शिक्षा केवल पुस्तकीय ज्ञान प्राप्त करना नहीं है, बल्कि यह व्यक्ति के चरित्र निर्माण और सर्वांगीण विकास की प्रक्रिया है। सच्ची शिक्षा वह है जो मनुष्य को आत्मनिर्भर बनाए और समाज के प्रति उसके कर्तव्यों का बोध कराए।\n\nQ: लेखक के अनुसार सच्ची शिक्षा क्या करती है?","मनुष्य को आत्मनिर्भर बनाती है और समाज के प्रति कर्तव्यों का बोध कराती है"],
+["(इसी गद्यांश पर आधारित) शिक्षा केवल क्या नहीं है?","केवल पुस्तकीय ज्ञान प्राप्त करना"],
+["(इसी गद्यांश पर आधारित) शिक्षा किसकी प्रक्रिया है?","चरित्र निर्माण और सर्वांगीण विकास की"],
+["गद्यांश 4: जल ही जीवन है, यह कथन आज पूर्णतः सत्य सिद्ध हो रहा है। बढ़ती जनसंख्या और औद्योगीकरण के कारण जल स्रोत तेज़ी से प्रदूषित हो रहे हैं। यदि समय रहते जल संरक्षण के उपाय नहीं किए गए तो आने वाली पीढ़ियों को गंभीर जल संकट का सामना करना पड़ेगा।\n\nQ: जल स्रोत किन कारणों से प्रदूषित हो रहे हैं?","बढ़ती जनसंख्या और औद्योगीकरण के कारण"],
+["(इसी गद्यांश पर आधारित) यदि जल संरक्षण के उपाय नहीं किए गए तो क्या होगा?","आने वाली पीढ़ियों को गंभीर जल संकट का सामना करना पड़ेगा"],
+["(इसी गद्यांश पर आधारित) गद्यांश का मुख्य संदेश क्या है?","जल संरक्षण अत्यंत आवश्यक है"],
+["गद्यांश 5: परिश्रम सफलता की कुंजी है। जो व्यक्ति निरंतर परिश्रम करता है, वह किसी न किसी दिन अवश्य सफल होता है। आलस्य मनुष्य का सबसे बड़ा शत्रु है, जो उसे उन्नति के मार्ग से भटका देता है।\n\nQ: सफलता की कुंजी लेखक ने किसे बताया है?","परिश्रम"],
+["(इसी गद्यांश पर आधारित) मनुष्य का सबसे बड़ा शत्रु किसे बताया गया है?","आलस्य"],
+["(इसी गद्यांश पर आधारित) आलस्य मनुष्य को किस मार्ग से भटकाता है?","उन्नति के मार्ग से"],
+["गद्यांश 6: प्राचीन काल से ही भारत में गुरु-शिष्य परंपरा का विशेष महत्व रहा है। गुरु न केवल ज्ञान देता है बल्कि शिष्य के चरित्र निर्माण में भी महत्वपूर्ण भूमिका निभाता है। यही परंपरा भारतीय संस्कृति की नींव रही है।\n\nQ: गुरु-शिष्य परंपरा किस काल से चली आ रही है?","प्राचीन काल से"],
+["(इसी गद्यांश पर आधारित) गुरु शिष्य के लिए क्या भूमिका निभाता है (ज्ञान के अतिरिक्त)?","चरित्र निर्माण में महत्वपूर्ण भूमिका"],
+["(इसी गद्यांश पर आधारित) यह परंपरा किसकी नींव रही है?","भारतीय संस्कृति की"],
+["गद्यांश 7: संगठन में शक्ति होती है, यह बात हमारे पूर्वज सदियों से जानते थे। जब लोग मिलकर किसी कार्य को करते हैं, तो बड़ी से बड़ी बाधा भी आसानी से पार हो जाती है। इतिहास साक्षी है कि जब भी समाज बिखरा, तब कमजोर हुआ, और जब एकजुट हुआ, तब शक्तिशाली बना।\n\nQ: गद्यांश के अनुसार संगठन से क्या होता है?","बड़ी से बड़ी बाधा भी आसानी से पार हो जाती है"],
+["(इसी गद्यांश पर आधारित) समाज कब कमजोर हुआ है?","जब समाज बिखरा"],
+["(इसी गद्यांश पर आधारित) समाज कब शक्तिशाली बना है?","जब समाज एकजुट हुआ"],
+["(इसी गद्यांश पर आधारित) यह बात हमारे पूर्वज कब से जानते थे?","सदियों से"],
+["(इसी गद्यांश पर आधारित) गद्यांश का मुख्य विषय क्या है?","संगठन/एकता में शक्ति होना"],
+["गद्यांश 8: समय अमूल्य है और एक बार बीत जाने पर वापस नहीं आता। जो व्यक्ति समय का सदुपयोग करते हैं, वे जीवन में सफल होते हैं, जबकि समय गँवाने वाले पछताते रह जाते हैं। इसलिए हमें प्रत्येक क्षण का सही उपयोग करना चाहिए।\n\nQ: समय के बारे में गद्यांश में क्या कहा गया है?","समय अमूल्य है और बीत जाने पर वापस नहीं आता"],
+["(इसी गद्यांश पर आधारित) कौन-से व्यक्ति जीवन में सफल होते हैं?","जो समय का सदुपयोग करते हैं"],
+["(इसी गद्यांश पर आधारित) समय गँवाने वाले क्या करते रह जाते हैं?","पछताते रह जाते हैं"],
+["(इसी गद्यांश पर आधारित) हमें क्या करना चाहिए?","प्रत्येक क्षण का सही उपयोग करना चाहिए"],
+["गद्यांश 9: स्वास्थ्य ही सबसे बड़ा धन है। एक स्वस्थ शरीर में ही स्वस्थ मस्तिष्क का वास होता है। नियमित व्यायाम, संतुलित आहार और पर्याप्त नींद स्वस्थ जीवन के आधार स्तंभ हैं। दुर्भाग्यवश, आज की भागदौड़ भरी जिंदगी में लोग अपने स्वास्थ्य की उपेक्षा करने लगे हैं।\n\nQ: गद्यांश के अनुसार सबसे बड़ा धन क्या है?","स्वास्थ्य"],
+["(इसी गद्यांश पर आधारित) स्वस्थ जीवन के आधार स्तंभ क्या हैं?","नियमित व्यायाम, संतुलित आहार और पर्याप्त नींद"],
+["(इसी गद्यांश पर आधारित) आज लोग किसकी उपेक्षा करने लगे हैं?","अपने स्वास्थ्य की"],
+["(इसी गद्यांश पर आधारित) स्वस्थ मस्तिष्क का वास कहाँ होता है?","स्वस्थ शरीर में"],
+["गद्यांश 10: भारतीय संस्कृति विविधता में एकता का प्रतीक है। यहाँ अनेक भाषाएँ, धर्म और परंपराएँ एक साथ फलती-फूलती हैं। यही विविधता भारत की सबसे बड़ी शक्ति और पहचान है।\n\nQ: भारतीय संस्कृति किसका प्रतीक है?","विविधता में एकता का"],
+["(इसी गद्यांश पर आधारित) भारत की सबसे बड़ी शक्ति और पहचान क्या है?","विविधता (अनेक भाषाएँ, धर्म और परंपराएँ)"],
+["(इसी गद्यांश पर आधारित) भारत में क्या एक साथ फलता-फूलता है?","अनेक भाषाएँ, धर्म और परंपराएँ"],
+["गद्यांश 11: खेल केवल शारीरिक व्यायाम ही नहीं बल्कि अनुशासन, टीम भावना और खेल भावना भी सिखाते हैं। खेलों में भाग लेने से बच्चों का सर्वांगीण विकास होता है और वे जीवन की चुनौतियों का सामना करना सीखते हैं।\n\nQ: खेल क्या-क्या सिखाते हैं?","अनुशासन, टीम भावना और खेल भावना"],
+["(इसी गद्यांश पर आधारित) खेलों में भाग लेने से बच्चों का क्या होता है?","सर्वांगीण विकास"],
+["(इसी गद्यांश पर आधारित) बच्चे खेलों से क्या सामना करना सीखते हैं?","जीवन की चुनौतियों का सामना करना"],
+["गद्यांश 12: पर्यावरण संरक्षण आज की सबसे बड़ी आवश्यकता है। बढ़ते प्रदूषण और वनों की कटाई ने पृथ्वी के पारिस्थितिकी तंत्र को गंभीर खतरे में डाल दिया है। हमें अधिक से अधिक वृक्षारोपण करके इस समस्या का समाधान खोजना चाहिए।\n\nQ: आज की सबसे बड़ी आवश्यकता क्या बताई गई है?","पर्यावरण संरक्षण"],
+["(इसी गद्यांश पर आधारित) पारिस्थितिकी तंत्र को किन कारणों से खतरा है?","बढ़ते प्रदूषण और वनों की कटाई से"],
+["(इसी गद्यांश पर आधारित) इस समस्या का समाधान क्या बताया गया है?","अधिक से अधिक वृक्षारोपण करना"],
+["गद्यांश 13: पुस्तकें मनुष्य की सच्ची मित्र होती हैं। वे हमें ज्ञान देती हैं, हमारा मनोरंजन करती हैं और कठिन समय में हमारा साथ देती हैं। एक अच्छी पुस्तक जीवन भर के लिए मार्गदर्शक बन सकती है।\n\nQ: गद्यांश में पुस्तकों को क्या कहा गया है?","मनुष्य की सच्ची मित्र"],
+["(इसी गद्यांश पर आधारित) पुस्तकें हमें क्या देती हैं?","ज्ञान, मनोरंजन और कठिन समय में साथ"],
+["(इसी गद्यांश पर आधारित) एक अच्छी पुस्तक क्या बन सकती है?","जीवन भर के लिए मार्गदर्शक"],
+["गद्यांश 14: ईमानदारी सबसे बड़ा गुण माना जाता है। ईमानदार व्यक्ति भले ही तुरंत लाभ न पाए, परंतु समाज में उसका सम्मान और विश्वास बना रहता है। बेईमानी से मिली सफलता अस्थायी होती है।\n\nQ: सबसे बड़ा गुण किसे माना गया है?","ईमानदारी"],
+["(इसी गद्यांश पर आधारित) ईमानदार व्यक्ति को समाज में क्या मिलता है?","सम्मान और विश्वास"],
+["(इसी गद्यांश पर आधारित) बेईमानी से मिली सफलता कैसी होती है?","अस्थायी"]
+],
+"14. Graph Analysis & Interpretation (10 marks)": [
+["पाई चार्ट: 5 देशों द्वारा लॉन्च किए गए कुल उपग्रह = 12000। नॉर्वे 30%, आयरलैंड 20%, कनाडा 15%, बेल्जियम 25%, रोमानिया 10%। Q: बेल्जियम द्वारा प्रक्षेपित उपग्रहों की संख्या नॉर्वे की संख्या का कितना प्रतिशत है? / Belgium's satellites as % of Norway's satellites?","83.33% (बेल्जियम=3000, नॉर्वे=3600 → 3000/3600×100)"],
+["(इसी पाई चार्ट पर आधारित) आयरलैंड, बेल्जियम और नॉर्वे द्वारा प्रक्षेपित उपग्रहों की औसत संख्या ज्ञात कीजिए। / Average satellites launched by Ireland, Belgium and Norway together?","3000 ((2400+3000+3600)/3)"],
+["(इसी पाई चार्ट पर आधारित) कनाडा द्वारा प्रक्षेपित दूरस्थ व संचार उपग्रहों का अनुपात 3:2 है (कुल=1800)। संचार उपग्रहों की संख्या ज्ञात करें। / Canada's remote:communication ratio is 3:2 (total=1800). Find communication satellites.","720 (1800 × 2/5)"],
+["(इसी पाई चार्ट पर आधारित) रोमानिया और आयरलैंड द्वारा प्रक्षेपित उपग्रहों का कुल योग कितना है? / Total satellites launched by Romania and Ireland combined?","3600 (रोमानिया 1200 + आयरलैंड 2400)"],
+["बार ग्राफ: एक स्कूल में 5 वर्षों (2021-2025) में छात्र नामांकन: 2021=400, 2022=450, 2023=500, 2024=480, 2025=550। Q: 2021 से 2025 के बीच नामांकन में कुल प्रतिशत वृद्धि क्या है? / Bar graph, school enrolment 2021-25: 400,450,500,480,550. % increase from 2021 to 2025?","37.5% ((550-400)/400 × 100)"],
+["(इसी बार ग्राफ पर आधारित) किस वर्ष में पिछले वर्ष की तुलना में नामांकन घटा? / In which year did enrolment fall compared to the previous year?","2024 (500 से घटकर 480)"],
+["(इसी बार ग्राफ पर आधारित) 5 वर्षों में औसत वार्षिक नामांकन क्या है? / Average annual enrolment over the 5 years?","476 ((400+450+500+480+550)/5)"],
+["रेखा-ग्राफ: 3 दुकानों (A, B, C) की 2021-2025 शर्ट बिक्री दी गई है (यूनिट में): A: 100,120,140,160,180; B: 150,140,130,150,170; C: 90,110,130,150,170। Q: 2024 में दुकान A और दुकान C की बिक्री का अनुपात क्या है? / Line graph shirt sales; find ratio of A's and C's sales in 2024.","160:150 = 16:15"],
+["(इसी रेखा-ग्राफ पर आधारित) किस वर्ष में तीनों दुकानों की कुल बिक्री सबसे अधिक थी? / In which year was the combined sales of all three shops the highest?","2025 (180+170+170=520)"],
+["(इसी रेखा-ग्राफ पर आधारित) दुकान B की 2021 से 2025 तक बिक्री में औसत वार्षिक वृद्धि क्या है? / Average annual increase in shop B's sales from 2021 to 2025?","5 यूनिट प्रति वर्ष ((170-150)/4)"],
+["तालिका: 6 शहरों में कार्यशाला हेतु पंजीकरण संख्या व पुरुष:महिला अनुपात (जैसे बैंगलोर 1200, अनुपात 5:7)। Q: बैंगलोर में पुरुष व महिला पंजीकरण की संख्या अलग-अलग ज्ञात करें। / Table: registration + male:female ratio per city (Bangalore 1200, ratio 5:7). Find male and female counts.","पुरुष = 500, महिला = 700 (1200 × 5/12 और 1200 × 7/12)"],
+["(इसी तालिका शैली पर आधारित) यदि दिल्ली में पंजीकरण 1500 है और अनुपात 3:2 है, तो पुरुषों की संख्या क्या है? / If Delhi registration = 1500, ratio 3:2, find number of males.","900 (1500 × 3/5)"],
+["तालिका (मतदान डेटा): 5 शहरों में कुल मतदाता, मतदान न करने वालों का % और मतदान करने वालों में महिलाओं का % दिया गया है। Q: यदि किसी शहर में कुल मतदाता 20000, मतदान न करने वालों का % 15% है, तो कितने लोगों ने मतदान किया? / Voting table: if total voters=20000, 15% didn't vote, how many voted?","17000 (20000 × 85/100)"],
+["(इसी मतदान डेटा पर आधारित) यदि मतदान करने वालों में महिलाओं का % 40% है (कुल मतदान करने वाले 17000), तो महिला मतदाताओं की संख्या क्या है? / If 40% of those who voted (17000) were women, find number of women voters.","6800 (17000 × 40/100)"],
+["DI रणनीति नोट: बहु-चरणीय ग्राफ प्रश्नों में — पहले हर वर्ष/श्रेणी के सटीक मान नोट करें, फिर सीधे घटाव/भाग/अनुपात लगाएँ। जल्दबाजी में गलत बिंदु पढ़ना सबसे आम गलती है। / Strategy: for multi-step DI questions, first note down every value carefully, then apply subtraction/ratio directly. Misreading a value is the most common error.","अभ्यास से गति बढ़ाएँ, सटीकता पहले रखें / Practice to build speed, but prioritize accuracy first."],
+["पाई चार्ट: एक कंपनी के मासिक खर्च ₹60,000 में से किराया 25%, वेतन 40%, बिजली 10%, विज्ञापन 15%, अन्य 10%। Q: वेतन पर खर्च की गई राशि क्या है? / Pie chart: monthly expense ₹60,000; salary 40%. Find amount spent on salary.","₹24,000 (60000 × 40/100)"],
+["(इसी पाई चार्ट पर आधारित) किराए और बिजली पर मिलाकर कुल कितना खर्च हुआ? / Combined expenditure on rent and electricity?","₹21,000 (25%+10%=35% of 60000)"],
+["बार ग्राफ: 5 शहरों (A-E) में वार्षिक वर्षा (मिमी में): A=800, B=650, C=900, D=750, E=700। Q: सबसे अधिक और सबसे कम वर्षा वाले शहरों का अंतर ज्ञात करें। / Bar graph rainfall in 5 cities; find the difference between highest and lowest rainfall.","250 मिमी (900−650)"],
+["(इसी बार ग्राफ पर आधारित) पाँचों शहरों की औसत वर्षा ज्ञात करें। / Find the average rainfall of all 5 cities.","760 मिमी ((800+650+900+750+700)/5)"],
+["रेखा-ग्राफ: एक फैक्ट्री का उत्पादन (यूनिट में) 2020-2024: 200,240,260,300,340। Q: 2020 से 2024 तक उत्पादन में कुल प्रतिशत वृद्धि ज्ञात करें। / Line graph factory output 2020-24; find total % increase.","70% ((340-200)/200 × 100)"],
+["(इसी रेखा-ग्राफ पर आधारित) किन दो लगातार वर्षों के बीच सबसे अधिक वृद्धि हुई? / Between which two consecutive years was the increase highest?","2023 से 2024 (40 यूनिट वृद्धि) / 2023 to 2024 (increase of 40 units)"],
+["तालिका: 4 विद्यालयों में छात्र संख्या और उत्तीर्ण प्रतिशत — स्कूल P: 500 छात्र, 80% उत्तीर्ण। Q: स्कूल P में कितने छात्र उत्तीर्ण हुए? / Table: School P has 500 students, 80% pass. Find number who passed.","400 (500 × 80/100)"],
+["(इसी तालिका शैली पर आधारित) यदि स्कूल Q में 600 छात्र हैं और 75% उत्तीर्ण हुए, तो कितने छात्र अनुत्तीर्ण हुए? / If School Q has 600 students and 75% passed, how many failed?","150 (600 × 25/100)"],
+["बार ग्राफ: 5 कंपनियों (P-T) का वार्षिक उत्पादन (हजार यूनिट में): P=40, Q=55, R=35, S=60, T=45। Q: सबसे अधिक उत्पादन वाली कंपनी और सबसे कम उत्पादन वाली कंपनी के उत्पादन का अंतर ज्ञात करें। / Bar graph: annual production (in '000 units) of 5 companies P-T; find the difference between highest and lowest production.","25 हजार यूनिट (60−35) / 25 thousand units (60−35)"],
+["(इसी बार ग्राफ पर आधारित) सभी पाँच कंपनियों का कुल उत्पादन ज्ञात करें। / Find the total production of all 5 companies.","235 हजार यूनिट / 235 thousand units"],
+["(इसी बार ग्राफ पर आधारित) कंपनी S का उत्पादन कंपनी R के उत्पादन से कितने प्रतिशत अधिक है? / Company S's production is what percent more than Company R's?","लगभग 71.4% ((60−35)/35 × 100) / About 71.4%"],
+["पाई चार्ट: एक परिवार का मासिक बजट ₹40,000 में से भोजन 30%, किराया 25%, शिक्षा 20%, बचत 15%, अन्य 10%। Q: शिक्षा पर किए गए खर्च की राशि ज्ञात करें। / Pie chart: monthly budget ₹40,000; education 20%. Find amount spent on education.","₹8,000 (40000 × 20/100)"],
+["(इसी पाई चार्ट पर आधारित) भोजन और बचत पर मिलाकर कुल कितना खर्च हुआ? / Combined expenditure on food and savings?","₹18,000 (30%+15%=45% of 40000)"],
+["लाइन ग्राफ: एक कंपनी की वार्षिक बिक्री (लाख ₹ में) 2019-2023: 50, 65, 70, 90, 110। Q: 2019 से 2023 तक बिक्री में कुल प्रतिशत वृद्धि ज्ञात करें। / Line graph: annual sales (in ₹ lakh) 2019-23; find total % increase.","120% ((110−50)/50 × 100)"],
+["(इसी लाइन ग्राफ पर आधारित) किन दो लगातार वर्षों के बीच बिक्री में सबसे अधिक वृद्धि हुई? / Between which two consecutive years was the sales increase highest?","2022 से 2023 (₹20 लाख की वृद्धि) / 2022 to 2023 (increase of ₹20 lakh)"],
+["तालिका: 5 छात्रों के 3 विषयों में प्राप्तांक — छात्र A: गणित 80, विज्ञान 70, हिंदी 90। Q: छात्र A का तीनों विषयों में कुल प्राप्तांक ज्ञात करें। / Table: marks of 5 students; Student A: Maths 80, Science 70, Hindi 90. Find A's total marks.","240 (80+70+90)"],
+["(इसी तालिका शैली पर आधारित) यदि छात्र A का औसत ज्ञात करना हो, तो औसत क्या होगा? / Find the average of Student A's marks.","80 (240/3)"],
+["बार ग्राफ: एक शहर में 4 महीनों में हुई वर्षा (मिमी में): जनवरी=20, फरवरी=15, मार्च=45, अप्रैल=60। Q: मार्च और अप्रैल में मिलाकर कुल कितनी वर्षा हुई? / Bar graph rainfall over 4 months; find combined rainfall in March and April.","105 मिमी (45+60)"],
+["(इसी बार ग्राफ पर आधारित) फरवरी की तुलना में अप्रैल में वर्षा कितने प्रतिशत अधिक हुई? / Rainfall in April is what percent more than in February?","300% ((60−15)/15 × 100)"],
+["पाई चार्ट: एक स्कूल में 500 छात्रों का विषय चयन — विज्ञान 40%, वाणिज्य 30%, कला 30%। Q: वाणिज्य विषय चुनने वाले छात्रों की संख्या ज्ञात करें। / Pie chart: 500 students' subject choice; commerce 30%. Find number of students choosing commerce.","150 (500 × 30/100)"],
+["(इसी पाई चार्ट पर आधारित) विज्ञान और कला मिलाकर कितने छात्रों ने चयन किया? / Combined number of students choosing science and arts?","350 (40%+30%=70% of 500)"],
+["लाइन ग्राफ: एक शहर की जनसंख्या (लाख में) 2000-2020 (हर 5 वर्ष में): 10, 14, 20, 28, 38। Q: 2000 से 2020 तक जनसंख्या में कितने गुना वृद्धि हुई? / Line graph population (in lakh) every 5 years 2000-2020; find how many times population grew.","3.8 गुना (38/10) / 3.8 times (38/10)"],
+["(इसी लाइन ग्राफ पर आधारित) किस अवधि में जनसंख्या वृद्धि सबसे अधिक रही? / In which period was the population growth highest?","2015 से 2020 (10 लाख की वृद्धि) / 2015 to 2020 (increase of 10 lakh)"],
+["तालिका: 4 दुकानों की मासिक आय (₹ हजार में) — A=80, B=95, C=70, D=110। Q: सभी दुकानों की कुल आय ज्ञात करें। / Table: monthly income (₹'000) of 4 shops A=80,B=95,C=70,D=110. Find total income of all shops.","₹355 हजार / ₹355 thousand"],
+["(इसी तालिका पर आधारित) दुकान D की आय दुकान C की आय से कितने प्रतिशत अधिक है? / Shop D's income is what percent more than Shop C's?","लगभग 57.1% ((110−70)/70×100) / About 57.1%"],
+["बार ग्राफ: एक स्कूल में 5 वर्षों में नामांकित छात्रों की संख्या: 2019=200, 2020=220, 2021=250, 2022=270, 2023=310। Q: 2019 से 2023 तक नामांकन में कुल प्रतिशत वृद्धि ज्ञात करें। / Bar graph: enrolment over 5 years; find total % increase from 2019 to 2023.","55% ((310−200)/200×100)"],
+["(इसी बार ग्राफ पर आधारित) किन दो लगातार वर्षों में सबसे अधिक वृद्धि हुई? / Between which two consecutive years was the increase highest?","2022 से 2023 (40 की वृद्धि) / 2022 to 2023 (increase of 40)"],
+["पाई चार्ट: एक कंपनी के कुल कर्मचारी 800 में से — इंजीनियरिंग 35%, बिक्री 25%, HR 15%, वित्त 15%, अन्य 10%। Q: इंजीनियरिंग विभाग में कितने कर्मचारी हैं? / Pie chart: 800 total employees; engineering 35%. Find number in engineering.","280 (800×35/100)"],
+["(इसी पाई चार्ट पर आधारित) HR और वित्त विभाग मिलाकर कुल कितने कर्मचारी हैं? / Combined employees in HR and Finance?","240 (15%+15%=30% of 800)"],
+["लाइन ग्राफ: एक फल विक्रेता की मासिक बिक्री (किलो में) जनवरी से मई: 100, 120, 90, 150, 180। Q: सबसे अधिक और सबसे कम बिक्री वाले महीनों का अंतर ज्ञात करें। / Line graph fruit seller's monthly sales (kg) Jan-May; find difference between highest and lowest sales months.","90 किलो (180−90) / 90 kg (180−90)"],
+["(इसी लाइन ग्राफ पर आधारित) पाँचों महीनों की औसत बिक्री ज्ञात करें। / Find the average sales over the 5 months.","128 किलो ((100+120+90+150+180)/5) / 128 kg"],
+["तालिका: 4 वाहन कंपनियों की वार्षिक बिक्री (हजार में) — W=150, X=180, Y=120, Z=200। Q: कंपनी Z की बिक्री कंपनी Y की बिक्री से कितने गुना है? / Table: annual sales ('000) of 4 vehicle companies; find how many times Z's sales are compared to Y's.","लगभग 1.67 गुना (200/120) / About 1.67 times (200/120)"],
+["(इसी तालिका पर आधारित) सभी चार कंपनियों की कुल बिक्री ज्ञात करें। / Find the total sales of all four companies.","650 हजार / 650 thousand"],
+["बार ग्राफ: एक अस्पताल में 5 दिनों में भर्ती हुए मरीजों की संख्या: सोम=30, मंगल=45, बुध=25, गुरु=50, शुक्र=40। Q: सभी पाँच दिनों में भर्ती हुए मरीजों की औसत संख्या ज्ञात करें। / Bar graph: patients admitted over 5 days; find the average number of patients admitted.","38 (औसत = 190/5) / 38 (average = 190/5)"],
+["(इसी बार ग्राफ पर आधारित) गुरुवार को भर्ती मरीजों की संख्या बुधवार की तुलना में कितने प्रतिशत अधिक है? / Patients admitted on Thursday are what percent more than on Wednesday?","100% ((50−25)/25×100)"]
+]
+};
+
+/* ================= ICONS ================= */
+const ICONS = {
+  "1.":"🏛️","2.":"🇮🇳","3.":"🌍","4.":"💰","5.":"⚖️","6.":"🔬",
+  "7.":"➗","8.":"अ","9.":"🔤","10.":"🧩","11.":"📰","12.":"🌐",
+  "13.":"📖","14.":"📊"
+};
+function iconFor(subject){
+  const num = subject.split(".")[0] + ".";
+  return ICONS[num] || "📚";
+}
+function shortName(subject){
+  return subject.replace(/\s*\(.*?\)\s*$/,'').replace(/^\d+\.\s*/,'');
+}
+function marksOf(subject){
+  const m = subject.match(/\((\d+)\s*marks\)/i);
+  return m ? m[1] + " marks" : "";
+}
+
+/* ================= STATE ================= */
+const STORE_KEY = "petPrepProgressV3";
+function loadStore(){
+  try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ return {}; }
+}
+function saveStore(s){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(s)); }catch(e){}
+}
+let progress = loadStore();
+let currentSubject = null;
+
+function qKey(subject,i){ return subject + "|" + i; }
+
+function totalQuestions(){
+  return Object.values(DATA).reduce((a,arr)=>a+arr.length,0);
+}
+function doneCount(subjectFilter){
+  if(subjectFilter){
+    return Object.keys(progress).filter(k=>k.startsWith(subjectFilter+"|") && progress[k]).length;
+  }
+  return Object.keys(progress).filter(k=>progress[k]).length;
+}
+function updateProgressBar(){
+  const total = totalQuestions();
+  const done = doneCount();
+  const pct = total ? Math.round((done/total)*100) : 0;
+  document.getElementById('progressText').textContent = `${done} / ${total} (${pct}%)`;
+  document.getElementById('progressBar').style.width = pct + "%";
+}
+
+/* ================= DOM refs ================= */
+const homeView = document.getElementById('homeView');
+const subjectView = document.getElementById('subjectView');
+const subjGrid = document.getElementById('subjGrid');
+const container = document.getElementById('container');
+const searchBox = document.getElementById('searchBox');
+const statsBar = document.getElementById('statsBar');
+const sectionTitle = document.getElementById('sectionTitle');
+const syllabusNote = document.getElementById('syllabusNote');
+const backBtn = document.getElementById('backBtn');
+
+/* ================= HOME (syllabus grid) ================= */
+function renderHome(){
+  subjGrid.innerHTML = "";
+  Object.keys(DATA).forEach(subject=>{
+    const total = DATA[subject].length;
+    const done = doneCount(subject);
+    const pct = total ? Math.round((done/total)*100) : 0;
+    const card = document.createElement('div');
+    card.className = 'subj-card';
+    card.innerHTML = `
+      <div class="subj-icon">${iconFor(subject)}</div>
+      <div class="subj-name">${shortName(subject)}</div>
+      <div class="subj-marks">${marksOf(subject)}</div>
+      <div class="subj-count">${total} questions</div>
+      <div class="subj-progress-outer"><div class="subj-progress-inner" style="width:${pct}%"></div></div>
+    `;
+    card.addEventListener('click', ()=> openSubject(subject));
+    subjGrid.appendChild(card);
+  });
+  homeView.style.display = "";
+  subjectView.style.display = "none";
+}
+
+/* ================= SUBJECT VIEW ================= */
+function openSubject(subject){
+  currentSubject = subject;
+  searchBox.value = "";
+  homeView.style.display = "none";
+  subjectView.style.display = "";
+  renderQuestions(subject, "");
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function renderQuestions(subject, query=""){
+  container.innerHTML = "";
+  const allItems = DATA[subject];
+  const items = allItems
+    .map((qa,i)=>({q:qa[0],a:qa[1],idx:i}))
+    .filter(it => (it.q+it.a).toLowerCase().includes(query.toLowerCase()));
+
+  sectionTitle.textContent = `${iconFor(subject)} ${shortName(subject)}`;
+  syllabusNote.innerHTML = `<b>Note:</b> These are practice questions covering key areas of this topic as per the official UPSSSC PET syllabus. The actual exam may include additional questions from other parts of the syllabus too — use these to build your concepts, then revise the full syllabus topic-by-topic for complete coverage.`;
+  statsBar.textContent = `${items.length} of ${allItems.length} questions shown`;
+
+  if(items.length===0){
+    container.innerHTML = `<div class="empty">No matching question found. Try a different search term.</div>`;
+    return;
+  }
+
+  items.forEach(({q,a,idx})=>{
+    const key = qKey(subject, idx);
+    const isDone = !!progress[key];
+    const card = document.createElement('div');
+    card.className = 'card' + (isDone ? ' done':'');
+    card.innerHTML = `
+      <div class="q">
+        <span class="qtext">${idx+1}. ${q}</span>
+        <span class="side">
+          <span class="check ${isDone?'on':''}" data-key="${key}" title="Mark as revised">${isDone?'✓':''}</span>
+          <span class="arrow">▼</span>
+        </span>
+      </div>
+      <div class="a"><p><span class="ans">Answer:</span> ${a}</p></div>
+    `;
+    card.querySelector('.q').addEventListener('click', (e)=>{
+      if(e.target.classList.contains('check')) return;
+      card.classList.toggle('open');
+    });
+    card.querySelector('.check').addEventListener('click', (e)=>{
+      e.stopPropagation();
+      progress[key] = !progress[key];
+      saveStore(progress);
+      card.classList.toggle('done');
+      e.target.classList.toggle('on');
+      e.target.textContent = progress[key] ? '✓' : '';
+      updateProgressBar();
+    });
+    container.appendChild(card);
+  });
+}
+
+/* ================= MOCK TEST ================= */
+const MOCK_BEST_KEY = "petPrepMockBestV1";
+const mockView = document.getElementById('mockView');
+const mockBtn = document.getElementById('mockBtn');
+const mockExitBtn = document.getElementById('mockExitBtn');
+const mockProgressText = document.getElementById('mockProgressText');
+const mockProgressBar = document.getElementById('mockProgressBar');
+const mockQuizScreen = document.getElementById('mockQuizScreen');
+const mockResultScreen = document.getElementById('mockResultScreen');
+const mockQText = document.getElementById('mockQText');
+const mockOptions = document.getElementById('mockOptions');
+const mockFeedback = document.getElementById('mockFeedback');
+const mockNextBtn = document.getElementById('mockNextBtn');
+const mockResultEmoji = document.getElementById('mockResultEmoji');
+const mockResultTitle = document.getElementById('mockResultTitle');
+const mockResultScore = document.getElementById('mockResultScore');
+const mockResultPct = document.getElementById('mockResultPct');
+const mockResultMsg = document.getElementById('mockResultMsg');
+const mockResultBest = document.getElementById('mockResultBest');
+const mockRetakeBtn = document.getElementById('mockRetakeBtn');
+const mockBackBtn = document.getElementById('mockBackBtn');
+
+const MOCK_MAX_QUESTIONS = 30;
+const OPT_LABELS = ['A','B','C','D'];
+let mockQuestions = [];
+let mockIndex = 0;
+let mockCorrectCount = 0;
+let mockWrongCount = 0;
+let mockSubject = null;
+let mockAnswered = false;
+
+function shuffleArray(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function loadMockBest(){
+  try{ return JSON.parse(localStorage.getItem(MOCK_BEST_KEY)) || {}; }catch(e){ return {}; }
+}
+function saveMockBest(store){
+  try{ localStorage.setItem(MOCK_BEST_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+/* Build a 4-option MCQ for one question: correct answer + 3 distractors
+   pulled from other answers in the same subject (real data, just used out
+   of context as wrong choices), then shuffled. */
+function buildOptionsFor(subject, correctAnswer, excludeIdx){
+  const allAnswers = DATA[subject]
+    .map((qa,i)=>({text:qa[1], idx:i}))
+    .filter(item => item.idx !== excludeIdx && item.text.trim() !== correctAnswer.trim());
+
+  const seen = new Set([correctAnswer.trim()]);
+  const distractors = [];
+  const shuffled = shuffleArray(allAnswers);
+  for(const item of shuffled){
+    const norm = item.text.trim();
+    if(seen.has(norm)) continue;
+    seen.add(norm);
+    distractors.push(item.text);
+    if(distractors.length === 3) break;
+  }
+  // Fallback if subject too small to have 3 unique distractors
+  while(distractors.length < 3){
+    distractors.push("इनमें से कोई नहीं / None of the above");
+  }
+  const options = shuffleArray([correctAnswer, ...distractors]);
+  return options;
+}
+
+function startMockTest(subject){
+  mockSubject = subject;
+  const allItems = DATA[subject].map((qa,i)=>({q:qa[0], a:qa[1], idx:i}));
+  const count = Math.min(MOCK_MAX_QUESTIONS, allItems.length);
+  const picked = shuffleArray(allItems).slice(0, count);
+  mockQuestions = picked.map(item => ({
+    q: item.q,
+    a: item.a,
+    options: buildOptionsFor(subject, item.a, item.idx)
+  }));
+  mockIndex = 0;
+  mockCorrectCount = 0;
+  mockWrongCount = 0;
+
+  subjectView.style.display = "none";
+  homeView.style.display = "none";
+  mockView.style.display = "";
+  mockQuizScreen.style.display = "";
+  mockResultScreen.style.display = "none";
+  window.scrollTo({top:0, behavior:'smooth'});
+  renderMockQuestion();
+}
+
+function renderMockQuestion(){
+  const total = mockQuestions.length;
+  const q = mockQuestions[mockIndex];
+  mockAnswered = false;
+  mockProgressText.textContent = `Question ${mockIndex+1} / ${total}`;
+  mockProgressBar.style.width = `${Math.round((mockIndex/total)*100)}%`;
+  mockQText.textContent = `${mockIndex+1}. ${q.q}`;
+
+  mockOptions.innerHTML = "";
+  q.options.forEach((optText, i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'mock-option-btn';
+    btn.innerHTML = `<span class="opt-label">${OPT_LABELS[i]}.</span><span>${optText}</span>`;
+    btn.addEventListener('click', ()=> selectMockOption(btn, optText, q.a));
+    mockOptions.appendChild(btn);
+  });
+
+  mockFeedback.style.display = "none";
+  mockFeedback.className = "mock-feedback";
+  mockNextBtn.style.display = "none";
+}
+
+function selectMockOption(btn, chosenText, correctText){
+  if(mockAnswered) return;
+  mockAnswered = true;
+  const isCorrect = chosenText.trim() === correctText.trim();
+
+  Array.from(mockOptions.children).forEach(child=>{
+    child.classList.add('disabled');
+  });
+
+  if(isCorrect){
+    btn.classList.add('correct');
+    mockCorrectCount++;
+    mockFeedback.textContent = "✓ Correct!";
+    mockFeedback.className = "mock-feedback correct";
+  } else {
+    btn.classList.add('wrong');
+    mockWrongCount++;
+    mockFeedback.textContent = `✗ Wrong! Correct answer: ${correctText}`;
+    mockFeedback.className = "mock-feedback wrong";
+    Array.from(mockOptions.children).forEach((child, i)=>{
+      if(mockQuestions[mockIndex].options[i].trim() === correctText.trim()){
+        child.classList.add('correct');
+      }
+    });
+  }
+  mockFeedback.style.display = "";
+  mockNextBtn.style.display = "";
+  mockNextBtn.textContent = (mockIndex+1 >= mockQuestions.length) ? "Finish & See Score →" : "Next Question →";
+}
+
+function finishMockTest(){
+  const total = mockQuestions.length;
+  const pct = total ? Math.round((mockCorrectCount/total)*100) : 0;
+
+  mockQuizScreen.style.display = "none";
+  mockResultScreen.style.display = "";
+  mockProgressBar.style.width = "100%";
+  mockProgressText.textContent = `Completed ${total} / ${total}`;
+
+  mockResultScore.textContent = `${mockCorrectCount} / ${total}`;
+  mockResultPct.textContent = `${pct}% Score`;
+
+  let emoji, title, msg;
+  if(pct >= 80){
+    emoji = "🏆"; title = "Excellent Work!";
+    msg = "You've got a strong grip on this topic. Keep revising the ones you missed and you're exam-ready here!";
+  } else if(pct >= 60){
+    emoji = "👍"; title = "Good Job!";
+    msg = "Solid attempt! Go back and revise the questions you got wrong to push your score even higher.";
+  } else if(pct >= 40){
+    emoji = "📘"; title = "Keep Practicing!";
+    msg = "You're getting there. Revisit this topic's questions a couple more times before your exam.";
+  } else {
+    emoji = "💪"; title = "Needs More Revision";
+    msg = "Don't worry — go through this topic's questions again slowly and retake the test. You'll improve fast!";
+  }
+  mockResultEmoji.textContent = emoji;
+  mockResultTitle.textContent = title;
+  mockResultMsg.textContent = msg;
+
+  const bestStore = loadMockBest();
+  const prevBest = bestStore[mockSubject];
+  if(prevBest === undefined || pct > prevBest){
+    bestStore[mockSubject] = pct;
+    saveMockBest(bestStore);
+    mockResultBest.textContent = prevBest === undefined ? "🎉 This is your first attempt on this topic!" : `🎉 New best score! (Previous best: ${prevBest}%)`;
+  } else {
+    mockResultBest.textContent = `Your best score on this topic: ${prevBest}%`;
+  }
+}
+
+mockBtn.addEventListener('click', ()=>{
+  if(currentSubject) startMockTest(currentSubject);
+});
+mockNextBtn.addEventListener('click', ()=>{
+  mockIndex++;
+  if(mockIndex >= mockQuestions.length){
+    finishMockTest();
+  } else {
+    renderMockQuestion();
+  }
+});
+mockExitBtn.addEventListener('click', ()=>{
+  mockView.style.display = "none";
+  if(mockSubject){
+    subjectView.style.display = "";
+    renderQuestions(mockSubject, "");
+  } else {
+    renderHome();
+  }
+});
+mockRetakeBtn.addEventListener('click', ()=>{
+  startMockTest(mockSubject);
+});
+mockBackBtn.addEventListener('click', ()=>{
+  mockView.style.display = "none";
+  subjectView.style.display = "";
+  renderQuestions(mockSubject, "");
+});
+
+/* ================= EVENTS ================= */
+backBtn.addEventListener('click', ()=>{
+  renderHome();
+});
+searchBox.addEventListener('input', ()=>{
+  renderQuestions(currentSubject, searchBox.value);
+});
+
+updateProgressBar();
+renderHome();
+
+/* ================= EXAM SELECTOR ================= */
+const examSelect = document.getElementById('examSelect');
+const petApp = document.getElementById('petApp');
+const cglApp = document.getElementById('cglApp');
+const EXAM_KEY = "petPrepExamChoiceV1";
+
+function applyExamChoice(val){
+  if(val === 'cgl'){
+    petApp.style.display = 'none';
+    cglApp.style.display = '';
+  } else {
+    petApp.style.display = '';
+    cglApp.style.display = 'none';
+  }
+}
+examSelect.addEventListener('change', ()=>{
+  localStorage.setItem(EXAM_KEY, examSelect.value);
+  applyExamChoice(examSelect.value);
+});
+const savedExam = localStorage.getItem(EXAM_KEY) || 'pet';
+examSelect.value = savedExam;
+applyExamChoice(savedExam);
+</script>
+</body>
+</html>
