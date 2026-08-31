@@ -6,15 +6,9 @@
 <title>PET Exam Prep</title>
 <style>
   :root{
-    --bg:#0b1220;
-    --card:#141d31;
-    --card2:#1b2740;
-    --accent:#22d3ee;
-    --accent2:#f97316;
-    --accent3:#a78bfa;
-    --text:#e5edf7;
-    --muted:#94a3b8;
-    --green:#34d399;
+    --bg:#0b1220; --card:#141d31; --card2:#1b2740;
+    --accent:#22d3ee; --accent2:#f97316; --accent3:#a78bfa;
+    --text:#e5edf7; --muted:#94a3b8; --green:#34d399;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
@@ -28,683 +22,211 @@
     min-height:100vh;
     padding-bottom:60px;
   }
-  header{
-    text-align:center;
-    padding:26px 15px 8px;
-  }
+  header{ text-align:center; padding:26px 15px 8px; }
   header h1{
     font-size:24px;
     background:linear-gradient(90deg,var(--accent),var(--accent3),var(--accent2));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    font-weight:800;
+    -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:800;
   }
   .scheme{
-    max-width:860px;
-    margin:14px auto 0;
-    padding:12px 16px;
-    background:var(--card);
-    border:1px solid #26324d;
-    border-radius:14px;
-    font-size:12.5px;
-    color:var(--muted);
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px 16px;
-    justify-content:center;
+    max-width:860px; margin:14px auto 0; padding:12px 16px;
+    background:var(--card); border:1px solid #26324d; border-radius:14px;
+    font-size:12.5px; color:var(--muted); display:flex; flex-wrap:wrap; gap:6px 16px; justify-content:center;
   }
   .scheme b{color:var(--accent);}
 
   .progress-wrap{
-    max-width:860px;
-    margin:14px auto 0;
-    padding:12px 18px;
+    max-width:860px; margin:14px auto 0; padding:12px 18px;
     background:linear-gradient(135deg,var(--card),var(--card2));
-    border:1px solid #26324d;
-    border-radius:14px;
+    border:1px solid #26324d; border-radius:14px;
   }
-  .progress-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:12.5px;
-    color:var(--muted);
-    margin-bottom:8px;
-  }
+  .progress-top{ display:flex; justify-content:space-between; align-items:center; font-size:12.5px; color:var(--muted); margin-bottom:8px; }
   .progress-top b{color:var(--text);}
-  .progress-bar-outer{
-    width:100%;
-    height:9px;
-    background:#0b1220;
-    border-radius:20px;
-    overflow:hidden;
-    border:1px solid #26324d;
-  }
-  .progress-bar-inner{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,var(--accent),var(--green));
-    border-radius:20px;
-    transition:width .4s ease;
-  }
+  .progress-bar-outer{ width:100%; height:9px; background:#0b1220; border-radius:20px; overflow:hidden; border:1px solid #26324d; }
+  .progress-bar-inner{ height:100%; width:0%; background:linear-gradient(90deg,var(--accent),var(--green)); border-radius:20px; transition:width .4s ease; }
 
-  /* ===== HOME: syllabus grid ===== */
-  #homeTitle{
-    text-align:center;
-    color:var(--muted);
-    font-size:13.5px;
-    margin:22px 0 12px;
-  }
-  .grid{
-    max-width:860px;
-    margin:0 auto;
-    padding:0 15px;
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(155px,1fr));
-    gap:14px;
-  }
+  #homeTitle{ text-align:center; color:var(--muted); font-size:13.5px; margin:22px 0 12px; }
+  .grid{ max-width:860px; margin:0 auto; padding:0 15px; display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:14px; }
   .subj-card{
-    background:var(--card);
-    border:1px solid #26324d;
-    border-radius:16px;
-    padding:16px 12px;
-    cursor:pointer;
-    text-align:center;
-    transition:.18s;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:6px;
+    background:var(--card); border:1px solid #26324d; border-radius:16px; padding:16px 12px;
+    cursor:pointer; text-align:center; transition:.18s; display:flex; flex-direction:column; align-items:center; gap:6px;
   }
-  .subj-card:hover{
-    border-color:var(--accent);
-    transform:translateY(-3px);
-  }
+  .subj-card:hover{ border-color:var(--accent); transform:translateY(-3px); }
   .subj-icon{font-size:30px;}
   .subj-name{font-size:13.5px;font-weight:700;line-height:1.35;min-height:36px;}
-  .subj-marks{
-    font-size:10.5px;
-    color:#04222a;
-    background:var(--accent2);
-    padding:2px 9px;
-    border-radius:20px;
-    font-weight:700;
-  }
+  .subj-marks{ font-size:10.5px; color:#04222a; background:var(--accent2); padding:2px 9px; border-radius:20px; font-weight:700; }
   .subj-count{font-size:11px;color:var(--muted);}
-  .subj-progress-outer{
-    width:100%;height:5px;background:#0b1220;border-radius:10px;overflow:hidden;margin-top:4px;border:1px solid #26324d;
-  }
-  .subj-progress-inner{
-    height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:10px;
-  }
+  .subj-progress-outer{ width:100%;height:5px;background:#0b1220;border-radius:10px;overflow:hidden;margin-top:4px;border:1px solid #26324d; }
+  .subj-progress-inner{ height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:10px; }
 
-  /* ===== SUBJECT VIEW ===== */
-  .topbar{
-    max-width:860px;
-    margin:16px auto 4px;
-    padding:0 15px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .backbtn{
-    background:var(--card);
-    border:1px solid #334155;
-    color:var(--accent);
-    padding:9px 14px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:13px;
-    font-weight:700;
-    flex-shrink:0;
-  }
+  .topbar{ max-width:860px; margin:16px auto 4px; padding:0 15px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .backbtn{ background:var(--card); border:1px solid #334155; color:var(--accent); padding:9px 14px; border-radius:10px; cursor:pointer; font-size:13px; font-weight:700; flex-shrink:0; }
   .backbtn:hover{border-color:var(--accent);}
-  .searchBox{
-    background:var(--card);
-    color:var(--text);
-    border:1px solid #334155;
-    padding:11px 14px;
-    border-radius:10px;
-    font-size:14px;
-    outline:none;
-    flex:1;
-    min-width:0;
-  }
+  .searchBox{ background:var(--card); color:var(--text); border:1px solid #334155; padding:11px 14px; border-radius:10px; font-size:14px; outline:none; flex:1; min-width:0; }
   .searchBox:focus{border-color:var(--accent);}
   .mockbtn{
-    background:linear-gradient(90deg,var(--accent2),var(--accent3));
-    border:none;
-    color:#2a1200;
-    padding:10px 16px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:13px;
-    font-weight:800;
-    flex-shrink:0;
-    white-space:nowrap;
+    background:linear-gradient(90deg,var(--accent2),var(--accent3)); border:none; color:#2a1200;
+    padding:10px 16px; border-radius:10px; cursor:pointer; font-size:13px; font-weight:800; flex-shrink:0; white-space:nowrap;
   }
   .mockbtn:hover{filter:brightness(1.08);}
 
-
-  .stats{
-    text-align:center;
-    color:var(--muted);
-    font-size:13px;
-    margin:10px 0 6px;
-  }
-  .section-title{
-    text-align:center;
-    color:var(--accent);
-    font-size:19px;
-    font-weight:700;
-    margin:14px 0 2px;
-  }
+  .stats{ text-align:center; color:var(--muted); font-size:13px; margin:10px 0 6px; }
+  .section-title{ text-align:center; color:var(--accent); font-size:19px; font-weight:700; margin:14px 0 2px; }
   .syllabus-note{
-    max-width:860px;
-    margin:10px auto 0;
-    padding:10px 16px;
-    background:var(--card2);
-    border:1px dashed #3a4970;
-    border-radius:10px;
-    font-size:12px;
-    line-height:1.6;
-    color:var(--muted);
-    text-align:center;
+    max-width:860px; margin:10px auto 0; padding:10px 16px; background:var(--card2);
+    border:1px dashed #3a4970; border-radius:10px; font-size:12px; line-height:1.6; color:var(--muted); text-align:center;
   }
   .syllabus-note b{color:var(--accent3);}
-  #container{
-    max-width:860px;
-    margin:0 auto;
-    padding:10px 15px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-  }
-  .card{
-    background:var(--card);
-    border:1px solid #26324d;
-    border-radius:12px;
-    overflow:hidden;
-    transition:.2s;
-  }
+  #container{ max-width:860px; margin:0 auto; padding:10px 15px; display:flex; flex-direction:column; gap:12px; }
+  .card{ background:var(--card); border:1px solid #26324d; border-radius:12px; overflow:hidden; transition:.2s; }
   .card.done{border-color:var(--green);}
   .card:hover{border-color:var(--accent);}
-  .q{
-    padding:14px 16px;
-    cursor:pointer;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    font-weight:600;
-    font-size:14.5px;
-    line-height:1.5;
-  }
+  .q{ padding:14px 16px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:10px; font-weight:600; font-size:14.5px; line-height:1.5; }
   .q .qtext{flex:1;}
-  .q .side{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-shrink:0;
-  }
+  .q .side{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
   .check{
-    width:20px;height:20px;
-    border-radius:6px;
-    border:2px solid #3a4970;
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;
-    font-size:12px;
-    color:transparent;
-    flex-shrink:0;
+    width:20px;height:20px; border-radius:6px; border:2px solid #3a4970;
+    display:flex;align-items:center;justify-content:center; cursor:pointer; font-size:12px; color:transparent; flex-shrink:0;
   }
   .check.on{background:var(--green);border-color:var(--green);color:#04220f;}
   .arrow{transition:.2s; color:var(--accent); font-size:14px;}
   .card.open .arrow{transform:rotate(180deg);}
-  .a{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .3s ease;
-    background:var(--card2);
-  }
-  .card.open .a{
-    padding:14px 16px;
-    max-height:1400px;
-  }
-  .a p{
-    color:#d1d5db;
-    line-height:1.7;
-    font-size:13.8px;
-    white-space:pre-line;
-  }
-  .ans{
-    color:var(--green);
-    font-weight:700;
-  }
-  .empty{
-    text-align:center;
-    color:var(--muted);
-    padding:40px 15px;
-    line-height:1.8;
-  }
-  footer{
-    text-align:center;
-    color:var(--muted);
-    font-size:12px;
-    margin-top:30px;
-    padding:0 15px;
-  }
+  .a{ max-height:0; overflow:hidden; transition:max-height .3s ease; background:var(--card2); }
+  .card.open .a{ padding:14px 16px; max-height:1400px; }
+  .a p{ color:#d1d5db; line-height:1.7; font-size:13.8px; white-space:pre-line; }
+  .ans{ color:var(--green); font-weight:700; }
+  .empty{ text-align:center; color:var(--muted); padding:40px 15px; line-height:1.8; }
+  footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:30px; padding:0 15px; }
   ::-webkit-scrollbar{width:6px;}
   ::-webkit-scrollbar-thumb{background:#334155;border-radius:10px;}
 
-  /* ===== EXAM SELECTOR DROPDOWN ===== */
-  .exam-select-wrap{
-    max-width:860px;
-    margin:0 auto;
-    padding:14px 15px 0;
-    display:flex;
-    justify-content:center;
-  }
+  .exam-select-wrap{ max-width:860px; margin:0 auto; padding:14px 15px 0; display:flex; justify-content:center; }
   #examSelect{
-    background:var(--card);
-    color:var(--text);
-    border:1px solid #334155;
-    padding:10px 16px;
-    border-radius:12px;
-    font-size:14px;
-    font-weight:700;
-    outline:none;
-    cursor:pointer;
-    max-width:340px;
-    width:100%;
-    -webkit-appearance:none;
-    appearance:none;
+    background:var(--card); color:var(--text); border:1px solid #334155; padding:10px 16px; border-radius:12px;
+    font-size:14px; font-weight:700; outline:none; cursor:pointer; max-width:340px; width:100%;
+    -webkit-appearance:none; appearance:none;
     background-image:linear-gradient(45deg,transparent 50%,var(--accent) 50%),linear-gradient(135deg,var(--accent) 50%,transparent 50%);
     background-position:calc(100% - 20px) center,calc(100% - 15px) center;
-    background-size:5px 5px,5px 5px;
-    background-repeat:no-repeat;
+    background-size:5px 5px,5px 5px; background-repeat:no-repeat;
   }
   #examSelect:focus{border-color:var(--accent);}
   #examSelect option{background:var(--card);color:var(--text);}
 
-  /* ===== COMING SOON VIEW ===== */
   .comingsoon-wrap{
-    max-width:600px;
-    margin:60px auto;
-    padding:40px 24px;
-    background:linear-gradient(135deg,var(--card),var(--card2));
-    border:1px solid #26324d;
-    border-radius:20px;
-    text-align:center;
+    max-width:600px; margin:60px auto; padding:40px 24px;
+    background:linear-gradient(135deg,var(--card),var(--card2)); border:1px solid #26324d; border-radius:20px; text-align:center;
   }
   .comingsoon-icon{font-size:52px;margin-bottom:14px;}
   .comingsoon-wrap h2{
-    font-size:22px;
-    background:linear-gradient(90deg,var(--accent2),var(--accent3));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    font-weight:800;
-    margin-bottom:10px;
+    font-size:22px; background:linear-gradient(90deg,var(--accent2),var(--accent3));
+    -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:800; margin-bottom:10px;
   }
-  .comingsoon-wrap p{
-    color:var(--muted);
-    font-size:14px;
-    line-height:1.7;
-  }
-  .comingsoon-badge{
-    display:inline-block;
-    margin-top:16px;
-    padding:6px 16px;
-    border-radius:20px;
-    background:var(--accent2);
-    color:#2a1200;
-    font-weight:700;
-    font-size:12.5px;
-  }
+  .comingsoon-wrap p{ color:var(--muted); font-size:14px; line-height:1.7; }
+  .comingsoon-badge{ display:inline-block; margin-top:16px; padding:6px 16px; border-radius:20px; background:var(--accent2); color:#2a1200; font-weight:700; font-size:12.5px; }
 
-  /* ===== HOME TABS (Syllabus / PYQ) ===== */
-  .home-tabs{
-    max-width:860px;
-    margin:18px auto 0;
-    padding:0 15px;
-    display:flex;
-    gap:10px;
-    justify-content:center;
-  }
+  .home-tabs{ max-width:860px; margin:18px auto 0; padding:0 15px; display:flex; gap:10px; justify-content:center; }
   .home-tab-btn{
-    background:var(--card);
-    border:1px solid #334155;
-    color:var(--muted);
-    padding:10px 18px;
-    border-radius:20px;
-    cursor:pointer;
-    font-size:13px;
-    font-weight:700;
-    transition:.15s;
+    background:var(--card); border:1px solid #334155; color:var(--muted); padding:10px 18px;
+    border-radius:20px; cursor:pointer; font-size:13px; font-weight:700; transition:.15s;
   }
-  .home-tab-btn.active{
-    background:var(--accent);
-    color:#04222a;
-    border-color:var(--accent);
-  }
+  .home-tab-btn.active{ background:var(--accent); color:#04222a; border-color:var(--accent); }
   .home-tab-btn:hover{border-color:var(--accent);}
 
-  /* ===== PREVIOUS YEAR PAPERS ===== */
-  .pyq-wrap{
-    max-width:860px;
-    margin:18px auto 0;
-    padding:0 15px;
-  }
-  .pyq-intro{
-    text-align:center;
-    color:var(--muted);
-    font-size:13px;
-    margin-bottom:14px;
-    line-height:1.6;
-  }
-  .pyq-year-select-wrap{
-    display:flex;
-    justify-content:center;
-    margin-bottom:16px;
-  }
+  .pyq-wrap{ max-width:860px; margin:18px auto 0; padding:0 15px; }
+  .pyq-intro{ text-align:center; color:var(--muted); font-size:13px; margin-bottom:14px; line-height:1.6; }
+  .pyq-year-select-wrap{ display:flex; justify-content:center; margin-bottom:16px; }
   #pyqYearSelect{
-    background:var(--card);
-    color:var(--text);
-    border:1px solid #334155;
-    padding:11px 18px;
-    border-radius:12px;
-    font-size:14.5px;
-    font-weight:700;
-    outline:none;
-    cursor:pointer;
-    max-width:320px;
-    width:100%;
-    text-align:center;
-    text-align-last:center;
+    background:var(--card); color:var(--text); border:1px solid #334155; padding:11px 18px; border-radius:12px;
+    font-size:14.5px; font-weight:700; outline:none; cursor:pointer; max-width:320px; width:100%;
+    text-align:center; text-align-last:center;
   }
   #pyqYearSelect:focus{border-color:var(--accent);}
-  .pyq-viewer{
-    background:var(--card);
-    border:1px solid #26324d;
-    border-radius:16px;
-    padding:16px;
-  }
-  .pyq-viewer-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:12px;
-  }
-  .pyq-viewer-title{
-    font-size:15px;
-    font-weight:700;
-    color:var(--accent);
-  }
+  .pyq-viewer{ background:var(--card); border:1px solid #26324d; border-radius:16px; padding:16px; }
+  .pyq-viewer-header{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:12px; }
+  .pyq-viewer-title{ font-size:15px; font-weight:700; color:var(--accent); }
   .pyq-download-btn{
-    background:linear-gradient(90deg,var(--accent),var(--green));
-    color:#04121e;
-    border:none;
-    padding:9px 16px;
-    border-radius:10px;
-    font-weight:800;
-    font-size:12.5px;
-    cursor:pointer;
-    text-decoration:none;
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
+    background:linear-gradient(90deg,var(--accent),var(--green)); color:#04121e; border:none; padding:9px 16px;
+    border-radius:10px; font-weight:800; font-size:12.5px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:6px;
   }
   .pyq-download-btn:hover{filter:brightness(1.08);}
-  .pyq-frame-outer{
-    width:100%;
-    height:75vh;
-    min-height:420px;
-    border-radius:12px;
-    overflow:hidden;
-    border:1px solid #26324d;
-    background:#0b1220;
-  }
-  .pyq-frame-outer iframe{
-    width:100%;
-    height:100%;
-    border:none;
-  }
-  .pyq-missing{
-    text-align:center;
-    color:var(--muted);
-    padding:50px 20px;
-    line-height:1.8;
-    font-size:13.5px;
-  }
+  .pyq-frame-outer{ width:100%; height:75vh; min-height:420px; border-radius:12px; overflow:hidden; border:1px solid #26324d; background:#0b1220; }
+  .pyq-frame-outer iframe{ width:100%; height:100%; border:none; }
+  .pyq-missing{ text-align:center; color:var(--muted); padding:50px 20px; line-height:1.8; font-size:13.5px; }
   .pyq-missing b{color:var(--accent3);}
-  .pyq-placeholder{
-    text-align:center;
-    color:var(--muted);
-    padding:50px 20px;
-    line-height:1.8;
-    font-size:13.5px;
-  }
+  .pyq-placeholder{ text-align:center; color:var(--muted); padding:50px 20px; line-height:1.8; font-size:13.5px; }
 
-  /* ===== MOBILE RESPONSIVE ===== */
-  @media (max-width:600px){
-    header{padding:20px 12px 6px;}
-    header h1{font-size:19px;}
-    .exam-select-wrap{padding:12px 12px 0;}
-    #examSelect{font-size:13px;padding:9px 14px;max-width:100%;}
-    .scheme{
-      font-size:11px;
-      gap:5px 10px;
-      padding:10px 12px;
-      margin:12px auto 0;
-    }
-    .progress-wrap{padding:10px 14px;margin:12px auto 0;}
-    .progress-top{font-size:11.5px;}
-    #homeTitle{font-size:12.5px;margin:18px 0 10px;}
-    .grid{
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-      padding:0 12px;
-    }
-    .subj-card{padding:12px 8px;border-radius:14px;gap:5px;}
-    .subj-icon{font-size:24px;}
-    .subj-name{font-size:12px;min-height:32px;}
-    .subj-marks{font-size:10px;padding:2px 8px;}
-    .subj-count{font-size:10px;}
-    .topbar{padding:0 12px;gap:8px;flex-wrap:wrap;}
-    .backbtn{padding:8px 12px;font-size:12.5px;}
-    .searchBox{padding:9px 12px;font-size:13px;}
-    .stats{font-size:12px;}
-    .section-title{font-size:16px;}
-    #container{padding:8px 12px;gap:10px;}
-    .q{padding:12px 13px;font-size:13.5px;gap:8px;}
-    .check{width:18px;height:18px;}
-    .a p{font-size:13px;}
-    footer{font-size:11px;padding:0 12px;}
-    .comingsoon-wrap{margin:36px 16px;padding:30px 18px;}
-    .comingsoon-icon{font-size:42px;}
-    .comingsoon-wrap h2{font-size:19px;}
-    .comingsoon-wrap p{font-size:13px;}
-    .home-tabs{padding:0 12px;}
-    .home-tab-btn{padding:9px 14px;font-size:12px;}
-    .pyq-wrap{padding:0 12px;}
-    .pyq-viewer{padding:12px;}
-    .pyq-frame-outer{height:60vh;min-height:340px;}
-    .pyq-viewer-title{font-size:13.5px;}
-  }
-  @media (max-width:380px){
-    .grid{grid-template-columns:repeat(2,1fr);gap:8px;}
-    .subj-name{font-size:11.2px;}
-  }
-
-  /* ===== MOCK TEST ===== */
-  .mock-topbar{
-    max-width:700px;
-    margin:16px auto 0;
-    padding:0 15px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-  }
-  .mock-progress-text{
-    font-size:13px;
-    font-weight:700;
-    color:var(--accent);
-  }
-  .mock-progress-bar-outer{
-    max-width:700px;
-    margin:10px auto 0;
-    padding:0 15px;
-  }
+  .mock-topbar{ max-width:700px; margin:16px auto 0; padding:0 15px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .mock-progress-text{ font-size:13px; font-weight:700; color:var(--accent); }
+  .mock-progress-bar-outer{ max-width:700px; margin:10px auto 0; padding:0 15px; }
   #mockProgressBar{
-    height:8px;
-    border-radius:6px;
-    background:linear-gradient(90deg,var(--accent2),var(--accent3));
-    width:0%;
-    transition:width .3s ease;
-    max-width:670px;
-    margin:0 auto;
+    height:8px; border-radius:6px; background:linear-gradient(90deg,var(--accent2),var(--accent3));
+    width:0%; transition:width .3s ease; max-width:670px; margin:0 auto;
   }
-  .mock-card{
-    max-width:700px;
-    margin:24px auto;
-    background:linear-gradient(135deg,var(--card),var(--card2));
-    border:1px solid #26324d;
-    border-radius:18px;
-    padding:26px 22px;
-  }
-  .mock-qtext{
-    font-size:16px;
-    line-height:1.65;
-    color:var(--text);
-    font-weight:600;
-    margin-bottom:18px;
-    white-space:pre-line;
-  }
-  .mock-options{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    margin-bottom:16px;
-  }
+  .mock-card{ max-width:700px; margin:24px auto; background:linear-gradient(135deg,var(--card),var(--card2)); border:1px solid #26324d; border-radius:18px; padding:26px 22px; }
+  .mock-qtext{ font-size:16px; line-height:1.65; color:var(--text); font-weight:600; margin-bottom:18px; white-space:pre-line; }
+  .mock-options{ display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
   .mock-option-btn{
-    text-align:left;
-    background:var(--card2);
-    border:1.5px solid #334155;
-    color:var(--text);
-    padding:13px 16px;
-    border-radius:12px;
-    font-size:14px;
-    line-height:1.5;
-    cursor:pointer;
-    transition:border-color .15s ease, background .15s ease;
+    text-align:left; background:var(--card2); border:1.5px solid #334155; color:var(--text);
+    padding:13px 16px; border-radius:12px; font-size:14px; line-height:1.5; cursor:pointer; transition:border-color .15s ease, background .15s ease;
   }
   .mock-option-btn:hover{border-color:var(--accent);}
-  .mock-option-btn.correct{
-    background:#14532d;
-    border-color:#16a34a;
-    color:#dcfce7;
-    font-weight:700;
-  }
-  .mock-option-btn.wrong{
-    background:#450a0a;
-    border-color:#dc2626;
-    color:#fecaca;
-    font-weight:700;
-  }
-  .mock-option-btn.disabled{
-    cursor:default;
-    opacity:0.85;
-  }
-  .mock-option-btn .opt-label{
-    font-weight:800;
-    color:var(--accent);
-    margin-right:8px;
-  }
-  .mock-option-btn.correct .opt-label,
-  .mock-option-btn.wrong .opt-label{color:inherit;}
-  .mock-feedback{
-    text-align:center;
-    font-weight:800;
-    font-size:14px;
-    padding:10px;
-    border-radius:10px;
-    margin-bottom:14px;
-  }
+  .mock-option-btn.correct{ background:#14532d; border-color:#16a34a; color:#dcfce7; font-weight:700; }
+  .mock-option-btn.wrong{ background:#450a0a; border-color:#dc2626; color:#fecaca; font-weight:700; }
+  .mock-option-btn.disabled{ cursor:default; opacity:0.85; }
+  .mock-option-btn .opt-label{ font-weight:800; color:var(--accent); margin-right:8px; }
+  .mock-option-btn.correct .opt-label, .mock-option-btn.wrong .opt-label{color:inherit;}
+  .mock-feedback{ text-align:center; font-weight:800; font-size:14px; padding:10px; border-radius:10px; margin-bottom:14px; }
   .mock-feedback.correct{background:rgba(22,163,74,0.15);color:#4ade80;}
   .mock-feedback.wrong{background:rgba(220,38,38,0.15);color:#f87171;}
-  .mock-next-btn{
-    width:100%;
-    background:var(--accent);
-    color:#04121e;
-    border:none;
-    padding:13px;
-    border-radius:12px;
-    font-weight:800;
-    font-size:14.5px;
-    cursor:pointer;
-  }
+  .mock-next-btn{ width:100%; background:var(--accent); color:#04121e; border:none; padding:13px; border-radius:12px; font-weight:800; font-size:14.5px; cursor:pointer; }
   .mock-next-btn:hover{filter:brightness(1.08);}
 
-  .mock-result-card{
-    max-width:520px;
-    margin:50px auto;
-    background:linear-gradient(135deg,var(--card),var(--card2));
-    border:1px solid #26324d;
-    border-radius:20px;
-    padding:40px 26px;
-    text-align:center;
-  }
+  .mock-result-card{ max-width:520px; margin:50px auto; background:linear-gradient(135deg,var(--card),var(--card2)); border:1px solid #26324d; border-radius:20px; padding:40px 26px; text-align:center; }
   .mock-result-emoji{font-size:54px;margin-bottom:6px;}
   .mock-result-title{font-size:20px;font-weight:800;color:var(--text);margin-bottom:14px;}
   .mock-result-score{
-    font-size:38px;
-    font-weight:900;
-    background:linear-gradient(90deg,var(--accent2),var(--accent3));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+    font-size:38px; font-weight:900; background:linear-gradient(90deg,var(--accent2),var(--accent3));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
   }
   .mock-result-pct{font-size:15px;color:var(--muted);margin-top:4px;font-weight:700;}
   .mock-result-msg{font-size:13.5px;color:var(--text);margin-top:16px;line-height:1.6;}
   .mock-result-best{font-size:12px;color:var(--muted);margin-top:10px;}
-  .mock-result-actions{
-    display:flex;
-    gap:12px;
-    margin-top:24px;
-  }
-  .mock-retake-btn,.mock-back-btn{
-    flex:1;
-    padding:12px;
-    border-radius:12px;
-    font-weight:800;
-    font-size:13.5px;
-    cursor:pointer;
-    border:none;
-  }
+  .mock-result-actions{ display:flex; gap:12px; margin-top:24px; }
+  .mock-retake-btn,.mock-back-btn{ flex:1; padding:12px; border-radius:12px; font-weight:800; font-size:13.5px; cursor:pointer; border:none; }
   .mock-retake-btn{background:var(--accent);color:#04121e;}
   .mock-back-btn{background:var(--card2);color:var(--text);border:1px solid #334155;}
 
   @media (max-width:600px){
-    .mock-topbar{padding:0 12px;}
-    .mock-progress-bar-outer{padding:0 12px;}
-    .mock-card{margin:16px 12px;padding:20px 16px;border-radius:14px;}
-    .mock-qtext{font-size:14.5px;}
+    header{padding:20px 12px 6px;} header h1{font-size:19px;}
+    .exam-select-wrap{padding:12px 12px 0;} #examSelect{font-size:13px;padding:9px 14px;max-width:100%;}
+    .scheme{font-size:11px;gap:5px 10px;padding:10px 12px;margin:12px auto 0;}
+    .progress-wrap{padding:10px 14px;margin:12px auto 0;} .progress-top{font-size:11.5px;}
+    #homeTitle{font-size:12.5px;margin:18px 0 10px;}
+    .grid{grid-template-columns:repeat(2,1fr);gap:10px;padding:0 12px;}
+    .subj-card{padding:12px 8px;border-radius:14px;gap:5px;}
+    .subj-icon{font-size:24px;} .subj-name{font-size:12px;min-height:32px;}
+    .subj-marks{font-size:10px;padding:2px 8px;} .subj-count{font-size:10px;}
+    .topbar{padding:0 12px;gap:8px;flex-wrap:wrap;} .backbtn{padding:8px 12px;font-size:12.5px;}
+    .searchBox{padding:9px 12px;font-size:13px;} .stats{font-size:12px;} .section-title{font-size:16px;}
+    #container{padding:8px 12px;gap:10px;} .q{padding:12px 13px;font-size:13.5px;gap:8px;}
+    .check{width:18px;height:18px;} .a p{font-size:13px;} footer{font-size:11px;padding:0 12px;}
+    .comingsoon-wrap{margin:36px 16px;padding:30px 18px;} .comingsoon-icon{font-size:42px;}
+    .comingsoon-wrap h2{font-size:19px;} .comingsoon-wrap p{font-size:13px;}
+    .home-tabs{padding:0 12px;} .home-tab-btn{padding:9px 14px;font-size:12px;}
+    .pyq-wrap{padding:0 12px;} .pyq-viewer{padding:12px;} .pyq-frame-outer{height:60vh;min-height:340px;}
+    .pyq-viewer-title{font-size:13.5px;}
+    .mock-topbar{padding:0 12px;} .mock-progress-bar-outer{padding:0 12px;}
+    .mock-card{margin:16px 12px;padding:20px 16px;border-radius:14px;} .mock-qtext{font-size:14.5px;}
     .mock-option-btn{padding:12px 14px;font-size:13px;}
-    .mock-result-card{margin:30px 16px;padding:30px 18px;}
-    .mock-result-score{font-size:32px;}
+    .mock-result-card{margin:30px 16px;padding:30px 18px;} .mock-result-score{font-size:32px;}
     .mock-result-actions{flex-direction:column;}
   }
+  @media (max-width:380px){ .grid{grid-template-columns:repeat(2,1fr);gap:8px;} .subj-name{font-size:11.2px;} }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>🎯 Exam Prep</h1>
-</header>
+<header><h1>🎯 Exam Prep</h1></header>
 
 <div class="exam-select-wrap">
   <select id="examSelect">
@@ -737,13 +259,13 @@
 </div>
 
 <div id="homeView">
-  <div id="homeTitle">👇 Syllabus में से एक topic चुनें</div>
+  <div id="homeTitle">👇 Select a topic from the syllabus below</div>
   <div class="grid" id="subjGrid"></div>
 </div>
 
 <div id="pyqView" style="display:none;">
   <div class="pyq-wrap">
-    <div class="pyq-intro">पिछले वर्षों के प्रश्न पत्र (PDF) यहाँ से देखें और डाउनलोड करें<br>View and download previous years' question papers (PDF)</div>
+    <div class="pyq-intro">View and download previous years' UPSSSC PET question papers (PDF) here.</div>
     <div class="pyq-year-select-wrap">
       <select id="pyqYearSelect">
         <option value="">-- Select Year --</option>
@@ -755,7 +277,7 @@
       </select>
     </div>
     <div class="pyq-viewer" id="pyqViewer">
-      <div class="pyq-placeholder">👆 ऊपर से साल चुनें उस वर्ष का पेपर देखने के लिए<br>Select a year above to view that year's paper</div>
+      <div class="pyq-placeholder">👆 Select a year above to view that year's paper.</div>
     </div>
   </div>
 </div>
@@ -811,7 +333,7 @@
   <div class="comingsoon-wrap">
     <div class="comingsoon-icon">🚧</div>
     <h2>SSC CGL Prep</h2>
-    <p>यह सेक्शन अभी तैयार किया जा रहा है। SSC CGL के लिए सभी टॉपिक्स जल्द जोड़े जाएँगे — तब तक UPSSSC PET सेक्शन से अपनी तैयारी जारी रखें।<br><br>This section is currently being built. All SSC CGL topics will be added soon — until then, continue your prep with the UPSSSC PET section.</p>
+    <p>This section is currently being built. All SSC CGL topics will be added soon — until then, continue your prep with the UPSSSC PET section.</p>
     <div class="comingsoon-badge">Available Soon</div>
   </div>
 </div>
@@ -853,7 +375,24 @@ const DATA = {
 ["शेरशाह सूरी द्वारा बनवाई गई प्रसिद्ध सड़क कौन-सी है? / Which famous road was built by Sher Shah Suri?","ग्रांड ट्रंक रोड (शेरशाही मार्ग) / Grand Trunk Road (Sher Shahi Marg)"],
 ["औरंगजेब के शासनकाल में कौन-सा कर पुनः लगाया गया? / Which tax was reimposed during Aurangzeb's reign?","जज़िया कर / Jizya tax"],
 ["स्वतंत्रता संग्राम 1857 का नेतृत्व दिल्ली में किसने किया? / Who led the 1857 revolt in Delhi?","बहादुर शाह ज़फर / Bahadur Shah Zafar"],
-["1857 के विद्रोह में झांसी की रानी कौन थीं? / Who was the Rani of Jhansi during the 1857 revolt?","रानी लक्ष्मीबाई / Rani Lakshmibai"]
+["1857 के विद्रोह में झांसी की रानी कौन थीं? / Who was the Rani of Jhansi during the 1857 revolt?","रानी लक्ष्मीबाई / Rani Lakshmibai"],
+["गुप्त वंश का सबसे शक्तिशाली शासक किसे माना जाता है? / Who is considered the most powerful ruler of the Gupta dynasty?","समुद्रगुप्त / Samudragupta"],
+["'भारत का नेपोलियन' किस गुप्त शासक को कहा जाता है? / Which Gupta ruler is called the 'Napoleon of India'?","समुद्रगुप्त / Samudragupta"],
+["इल्तुतमिश किस वंश का शासक था? / Iltutmish belonged to which dynasty?","गुलाम वंश / Slave (Mamluk) dynasty"],
+["खिलजी वंश का सबसे शक्तिशाली शासक कौन था? / Who was the most powerful ruler of the Khilji dynasty?","अलाउद्दीन खिलजी / Alauddin Khilji"],
+["मुहम्मद बिन तुगलक ने अपनी राजधानी कहाँ स्थानांतरित की थी? / Where did Muhammad bin Tughlaq shift his capital to?","देवगिरी (दौलताबाद) / Devagiri (Daulatabad)"],
+["बाबरनामा किस भाषा में लिखी गई थी? / In which language was the Baburnama written?","तुर्की (चागताई) / Turkish (Chagatai)"],
+["अकबर के दरबार में नवरत्नों में प्रमुख विद्वान कौन थे? / Who was a leading scholar among Akbar's Navratnas?","अबुल फजल / Abul Fazl"],
+["शाहजहाँ की मृत्यु कहाँ हुई? / Where did Shah Jahan die?","आगरा किला (कैद में) / Agra Fort (in captivity)"],
+["गुरु नानक देव का जन्म कहाँ हुआ था? / Where was Guru Nanak Dev born?","तलवंडी (ननकाना साहिब) / Talwandi (Nankana Sahib)"],
+["भारत में सबसे पहले किस यूरोपीय शक्ति ने व्यापारिक चौकी स्थापित की? / Which European power first established a trading post in India?","पुर्तगाली / Portuguese"],
+["वास्को डी गामा भारत कब पहुँचा? / When did Vasco da Gama arrive in India?","1498 (कालीकट) / 1498 (Calicut)"],
+["1857 के विद्रोह के प्रमुख कारण के रूप में किस कारतूस विवाद को जाना जाता है? / What cartridge controversy is known as a major trigger of the 1857 revolt?","एनफील्ड राइफल कारतूस (चर्बी वाले) / Enfield rifle cartridges (greased)"],
+["सिकंदर लोदी ने किस शहर की स्थापना की? / Which city did Sikandar Lodi found?","आगरा / Agra"],
+["चाणक्य को किस अन्य नाम से जाना जाता है? / By which other name is Chanakya known?","कौटिल्य / विष्णुगुप्त (Kautilya / Vishnugupta)"],
+["'अर्थशास्त्र' पुस्तक के लेखक कौन थे? / Who wrote the book 'Arthashastra'?","कौटिल्य (चाणक्य) / Kautilya (Chanakya)"],
+["सतवाहन वंश का शासन मुख्यतः किस क्षेत्र में था? / The Satavahana dynasty mainly ruled over which region?","दक्षिण भारत (दक्कन क्षेत्र) / South India (Deccan region)"],
+["कनिष्क किस वंश का प्रसिद्ध शासक था? / Kanishka was a famous ruler of which dynasty?","कुषाण वंश / Kushan dynasty"]
 ],
 "2. Indian National Movement (5 marks)": [
 ["भारतीय राष्ट्रीय कांग्रेस की स्थापना कब हुई? / When was the Indian National Congress founded?","1885, ए.ओ. ह्यूम द्वारा / 1885, by A.O. Hume"],
@@ -888,7 +427,25 @@ const DATA = {
 ["1946 में भारतीय नौसेना विद्रोह कहाँ हुआ? / Where did the Royal Indian Navy Mutiny occur in 1946?","मुंबई / Bombay (Mumbai)"],
 ["'हिन्द स्वराज' पुस्तक किसने लिखी? / Who wrote the book 'Hind Swaraj'?","महात्मा गांधी / Mahatma Gandhi (1909)"],
 ["भारत छोड़ो आंदोलन कब शुरू हुआ? / When did the Quit India Movement begin?","8 अगस्त, 1942 / 8 August 1942"],
-["असहयोग आंदोलन किस वर्ष शुरू हुआ? / In which year did the Non-Cooperation Movement begin?","1920"]
+["असहयोग आंदोलन किस वर्ष शुरू हुआ? / In which year did the Non-Cooperation Movement begin?","1920"],
+["महात्मा गांधी की हत्या किस वर्ष हुई? / In which year was Mahatma Gandhi assassinated?","1948 (30 जनवरी) / 1948 (30 January)"],
+["'सत्यमेव जयते' किस उपनिषद से लिया गया है? / 'Satyameva Jayate' is taken from which Upanishad?","मुण्डक उपनिषद / Mundaka Upanishad"],
+["भारत का प्रथम गवर्नर-जनरल (कंपनी शासन के दौरान) कौन था? / Who was India's first Governor-General under company rule?","वारेन हेस्टिंग्स / Warren Hastings"],
+["भारत का अंतिम वायसराय कौन था? / Who was the last Viceroy of India?","लॉर्ड माउंटबेटन / Lord Mountbatten"],
+["'आर्य समाज' की स्थापना किसने की? / Who founded the 'Arya Samaj'?","स्वामी दयानंद सरस्वती, 1875 / Swami Dayananda Saraswati, 1875"],
+["'ब्रह्म समाज' की स्थापना किसने की? / Who founded the 'Brahmo Samaj'?","राजा राम मोहन राय, 1828 / Raja Ram Mohan Roy, 1828"],
+["सती प्रथा उन्मूलन अधिनियम किस वर्ष पारित हुआ? / In which year was the Sati Abolition Act passed?","1829 (लॉर्ड विलियम बैंटिक) / 1829 (Lord William Bentinck)"],
+["विधवा पुनर्विवाह अधिनियम पारित करवाने में किसका मुख्य योगदान था? / Who played a key role in getting the Widow Remarriage Act passed?","ईश्वर चंद्र विद्यासागर / Ishwar Chandra Vidyasagar"],
+["'केसरी' समाचार पत्र किसने शुरू किया? / Who started the newspaper 'Kesari'?","बाल गंगाधर तिलक / Bal Gangadhar Tilak"],
+["महात्मा गांधी को 'राष्ट्रपिता' किसने कहा? / Who first addressed Mahatma Gandhi as 'Father of the Nation'?","सुभाष चंद्र बोस / Subhas Chandra Bose"],
+["'दीनबंधु' की उपाधि किसे दी गई? / Who was given the title 'Deenbandhu'?","सी.एफ. एंड्रयूज / C.F. Andrews"],
+["1929 में पूर्ण स्वराज दिवस किस तारीख को मनाया गया? / On which date was Purna Swaraj Day observed in 1929/1930?","26 जनवरी, 1930 / 26 January 1930"],
+["गांधीजी ने 'सत्याग्रह' शब्द का प्रयोग सबसे पहले कहाँ किया? / Where did Gandhi first use the term 'Satyagraha'?","दक्षिण अफ्रीका / South Africa"],
+["इंडियन नेशनल आर्मी का गठन मूल रूप से किसने किया था (बोस से पहले)? / Who originally formed the Indian National Army (before Bose)?","रास बिहारी बोस / Rash Behari Bose"],
+["वर्ष 1857 के विद्रोह के बाद भारत का शासन किसके हाथ में आया? / After the 1857 revolt, governance of India passed to?","ब्रिटिश क्राउन / British Crown"],
+["सुभाष चंद्र बोस ने INC अध्यक्ष पद से इस्तीफा किस वर्ष दिया? / In which year did Subhas Chandra Bose resign as INC president?","1939"],
+["'तरुण भारत सभा' के गठन का उद्देश्य क्या था? / What was the objective of forming 'Tarun Bharat Sabha'-style revolutionary groups?","क्रांतिकारी गतिविधियों द्वारा स्वतंत्रता संग्राम को आगे बढ़ाना / Advancing the freedom struggle through revolutionary activities"],
+["सविनय अवज्ञा आंदोलन के दौरान कौन-सा कानून तोड़ा गया था? / Which law was broken during the Civil Disobedience Movement?","नमक कानून / Salt Law"]
 ],
 "3. Geography (5 marks)": [
 ["भूमिगत चट्टान परतें जो भूजल का भंडारण व संचरण करती हैं, क्या कहलाती हैं? / Underground rock layers storing and transmitting groundwater are called?","जलभृत / Aquifer"],
@@ -925,12 +482,27 @@ const DATA = {
 ["भारत की सीमा सबसे अधिक देशों के साथ किस राज्य की लगती है? / Which Indian state shares borders with the most countries?","जम्मू और कश्मीर / Jammu and Kashmir"],
 ["उत्तर प्रदेश की राजधानी क्या है? / What is the capital of Uttar Pradesh?","लखनऊ / Lucknow"],
 ["भारत के किस राज्य में सबसे अधिक जनजातीय जनसंख्या है? / Which state has the highest tribal population in India?","मध्य प्रदेश / Madhya Pradesh"],
-["भारत का एकमात्र सक्रिय ज्वालामुखी कहाँ स्थित है? / Where is India's only active volcano located?","बैरन द्वीप, अंडमान / Barren Island, Andaman"]
+["भारत का एकमात्र सक्रिय ज्वालामुखी कहाँ स्थित है? / Where is India's only active volcano located?","बैरन द्वीप, अंडमान / Barren Island, Andaman"],
+["भारत का सबसे ऊँचा बांध कौन-सा है? / Which is India's tallest dam?","टिहरी बांध / Tehri Dam"],
+["विश्व की सबसे लंबी नदी कौन-सी है? / Which is the world's longest river?","नील नदी / Nile River"],
+["भारत में सबसे बड़ा नमक उत्पादक राज्य कौन-सा है? / Which is India's largest salt-producing state?","गुजरात / Gujarat"],
+["'भारत का सिलिकॉन वैली' किस शहर को कहा जाता है? / Which city is called the 'Silicon Valley of India'?","बेंगलुरु / Bengaluru"],
+["उष्णकटिबंधीय चक्रवात मुख्यतः किस महासागर में उत्पन्न होते हैं जो भारत को प्रभावित करते हैं? / In which ocean do tropical cyclones affecting India mostly originate?","बंगाल की खाड़ी / Bay of Bengal"],
+["भारत में सबसे ऊँचा जलप्रपात कौन-सा है? / Which is India's highest waterfall?","कुंचिकल जलप्रपात, कर्नाटक / Kunchikal Falls, Karnataka"],
+["उत्तराखंड की राजधानी क्या है? / What is the capital of Uttarakhand?","देहरादून / Dehradun"],
+["राजस्थान की राजधानी क्या है? / What is the capital of Rajasthan?","जयपुर / Jaipur"],
+["भारत के किस राज्य को 'पांच नदियों की भूमि' कहा जाता है? / Which Indian state is called the 'Land of Five Rivers'?","पंजाब / Punjab"],
+["भारत का सबसे बड़ा कोयला उत्पादक राज्य कौन-सा है? / Which is India's largest coal-producing state?","झारखंड / Jharkhand"],
+["विश्व का सबसे ऊँचा पर्वत शिखर कौन-सा है? / Which is the world's highest mountain peak?","माउंट एवरेस्ट / Mount Everest"],
+["भारत में सबसे लंबी सुरंग कौन-सी है (हाल की)? / Which is India's longest tunnel (recent)?","अटल सुरंग, हिमाचल प्रदेश / Atal Tunnel, Himachal Pradesh"],
+["भारत का सबसे बड़ा नदी द्वीप कौन-सा है? / Which is India's largest river island?","माजुली, असम / Majuli, Assam"],
+["भारत में उगाई जाने वाली प्रमुख नकदी फसल कौन-सी है? / Which is a major cash crop grown in India?","कपास (Cotton)"],
+["भारत का सबसे बड़ा नमक उत्पादक क्षेत्र कच्छ का रन किस राज्य में है? / The Rann of Kutch, a major salt-producing area, is in which state?","गुजरात / Gujarat"]
 ],
 "4. Indian Economy (5 marks)": [
 ["जल-बीज-उर्वरक प्रौद्योगिकी लोकप्रिय नाम से जानी जाती है? / Water-Seed-Fertilizer technology is popularly known as?","हरित क्रांति / Green Revolution"],
 ["भारत का पहला बैंक 'बैंक ऑफ हिंदुस्तान' कब स्थापित हुआ था? / India's first bank, Bank of Hindoostan, was established in?","1770"],
-["UNCTAD का विस्तार करें। / Expand UNCTAD.","United Nations Conference on Trade and Development / यूनाइटेड नेशंस कॉन्फ्रेंस ऑन ट्रेड एंड डेवलपमेंट"],
+["UNCTAD का विस्तार करें। / Expand UNCTAD.","United Nations Conference on Trade and Development"],
 ["निजी संपत्ति को सभी सामाजिक-आर्थिक बुराइयों का कारण किसने माना? / Who considered private property the cause of all social-economic evils?","मार्क्स और एंगेल्स / Marx and Engels"],
 ["राष्ट्रीय कृषि नीति संसद में कब प्रस्तुत की गई? / The National Agricultural Policy was presented in Parliament on?","28 जुलाई, 2000 / 28 July 2000"],
 ["GDP का पूर्ण रूप क्या है? / Full form of GDP?","सकल घरेलू उत्पाद / Gross Domestic Product"],
@@ -953,10 +525,32 @@ const DATA = {
 ["मुद्रास्फीति (Inflation) मापने का मुख्य सूचकांक कौन-सा है? / Which is the main index used to measure inflation?","उपभोक्ता मूल्य सूचकांक (CPI) / Consumer Price Index (CPI)"],
 ["विश्व बैंक का मुख्यालय कहाँ है? / Where is the headquarters of the World Bank?","वाशिंगटन डी.सी., अमेरिका / Washington D.C., USA"],
 ["अंतर्राष्ट्रीय मुद्रा कोष (IMF) का मुख्यालय कहाँ है? / Where is the headquarters of the IMF?","वाशिंगटन डी.सी., अमेरिका / Washington D.C., USA"],
-["भारत में सार्वजनिक क्षेत्र का पहला बैंक राष्ट्रीयकरण किस वर्ष हुआ? / In which year was the first major bank nationalisation in India carried out?","1969 (14 बैंक) / 1969 (14 banks)"],
+["भारत में सार्वजनिक क्षेत्र का पहला बड़ा बैंक राष्ट्रीयकरण किस वर्ष हुआ? / In which year was the first major bank nationalisation in India carried out?","1969 (14 बैंक) / 1969 (14 banks)"],
 ["'मेक इन इंडिया' अभियान कब शुरू हुआ? / When was the 'Make in India' campaign launched?","2014"],
 ["'प्रधानमंत्री जन धन योजना' का उद्देश्य क्या है? / Objective of 'Pradhan Mantri Jan Dhan Yojana'?","वित्तीय समावेशन (बैंक खाते खोलना) / Financial inclusion (opening bank accounts)"],
-["भारत की अर्थव्यवस्था किस प्रकार की है? / What type of economy does India have?","मिश्रित अर्थव्यवस्था / Mixed Economy"]
+["भारत की अर्थव्यवस्था किस प्रकार की है? / What type of economy does India have?","मिश्रित अर्थव्यवस्था / Mixed Economy"],
+["भारत में GST की सर्वोच्च संस्था कौन-सी है जो दरें तय करती है? / Which apex body decides GST rates in India?","GST परिषद (GST Council) / GST Council"],
+["'अटल पेंशन योजना' का उद्देश्य क्या है? / Objective of 'Atal Pension Yojana'?","असंगठित क्षेत्र के श्रमिकों को पेंशन कवरेज / Pension coverage for unorganised sector workers"],
+["भारत में विदेशी मुद्रा भंडार का प्रबंधन कौन करता है? / Who manages India's foreign exchange reserves?","भारतीय रिज़र्व बैंक (RBI) / Reserve Bank of India"],
+["'ऑपरेशन फ्लड' किससे संबंधित है? / 'Operation Flood' is related to?","दुग्ध उत्पादन (श्वेत क्रांति) / Milk production (White Revolution)"],
+["भारत की योजना आयोग की स्थापना कब हुई थी? / When was the Planning Commission of India established?","1950"],
+["'पूंजीवाद' का मुख्य आधार क्या है? / The main basis of 'Capitalism' is?","निजी संपत्ति व मुक्त बाजार / Private property and free market"],
+["'समाजवाद' किस पर बल देता है? / 'Socialism' emphasizes on?","संसाधनों पर सामूहिक/राज्य स्वामित्व / Collective/state ownership of resources"],
+["भारत में GST के अंतर्गत कितने मुख्य कर स्लैब हैं (सामान्यतः)? / How many main GST tax slabs generally exist in India?","4 (5%, 12%, 18%, 28%)"],
+["'निर्यात संवर्धन पूंजीगत वस्तु योजना (EPCG)' का उद्देश्य क्या है? / Objective of the Export Promotion Capital Goods (EPCG) scheme?","पूंजीगत वस्तुओं के आयात पर शुल्क छूट देकर निर्यात बढ़ाना / Boosting exports via duty relief on capital goods imports"],
+["श्रम बल में महिलाओं की भागीदारी दर क्या दर्शाती है? / What does the Female Labour Force Participation Rate indicate?","कार्यबल में कार्यरत/सक्रिय महिलाओं का अनुपात / Proportion of women active/employed in the workforce"],
+["भारत में प्रतिभूति लेनदेन कर (STT) किस पर लगता है? / What is Securities Transaction Tax (STT) levied on?","शेयर बाजार लेनदेन पर / Stock market transactions"],
+["भारत की पहली विशेष आर्थिक क्षेत्र (SEZ) नीति कब लागू हुई? / When was India's first Special Economic Zone (SEZ) policy implemented?","2000"],
+["'लघु एवं मध्यम उद्यम (MSME)' क्षेत्र का भारत की अर्थव्यवस्था में क्या महत्व है? / What is the significance of the MSME sector in India's economy?","रोजगार सृजन व GDP में महत्वपूर्ण योगदान / Major contributor to employment and GDP"],
+["भारत में कृषि आय पर कौन-सा कर लागू होता है? / Which tax applies to agricultural income in India?","सामान्यतः कर मुक्त (छूट प्राप्त) / Generally tax-exempt"],
+["'स्टार्टअप इंडिया' पहल किस वर्ष शुरू हुई? / In which year was the 'Startup India' initiative launched?","2016"],
+["भारत में विनिवेश (Disinvestment) का क्या अर्थ है? / What does Disinvestment mean in the Indian context?","सरकार द्वारा सार्वजनिक उपक्रमों में अपनी हिस्सेदारी बेचना / Government selling its stake in public sector enterprises"],
+["भारत के प्रथम वित्त मंत्री कौन थे? / Who was India's first Finance Minister?","आर.के. षणमुखम चेट्टी / R.K. Shanmukham Chetty"],
+["भारत में GDP की गणना किस आधार वर्ष पर आधारित है (सामान्यतः)? / India's GDP calculation is generally based on which base year (verify latest)?","2011-12"],
+["'पूंजी बाजार' (Capital Market) से क्या तात्पर्य है? / What does 'Capital Market' refer to?","दीर्घकालिक वित्तीय प्रतिभूतियों का व्यापार बाजार / Market for trading long-term financial securities"],
+["भारत में सबसे बड़ा बैंक (संपत्ति के आधार पर) कौन-सा है? / Which is India's largest bank by assets?","भारतीय स्टेट बैंक (SBI) / State Bank of India (SBI)"],
+["भारत में मुद्रास्फीति नियंत्रण हेतु RBI किस लक्ष्य सीमा का उपयोग करता है (सामान्यतः)? / What target range does RBI generally use for inflation control?","4% (+/- 2%) CPI आधारित / 4% (+/-2%) CPI-based target"],
+["'निर्गम मूल्य (IPO)' किससे संबंधित है? / 'Initial Public Offering (IPO)' is related to?","कंपनी द्वारा पहली बार शेयर सार्वजनिक रूप से बेचना / A company selling shares to the public for the first time"]
 ],
 "5. Indian Constitution & Public Administration (5 marks)": [
 ["संविधान का अनुच्छेद 44 किससे संबंधित है? / Article 44 of the Constitution relates to?","समान नागरिक संहिता / Uniform Civil Code"],
@@ -1016,7 +610,12 @@ const DATA = {
 ["भारत में जिला प्रशासन का प्रमुख कौन होता है? / Who heads the district administration in India?","जिलाधिकारी / District Magistrate (DM)"],
 ["राज्य लोक सेवा आयोग का गठन किस अनुच्छेद के तहत होता है? / State Public Service Commission is constituted under which Article?","अनुच्छेद 315 / Article 315"],
 ["भारत में सिविल सेवाओं की भर्ती परीक्षा कौन आयोजित करता है? / Who conducts the civil services recruitment exam in India?","संघ लोक सेवा आयोग (UPSC) / Union Public Service Commission"],
-["भारत में सूचना का अधिकार अधिनियम (RTI) कब लागू हुआ? / When was the Right to Information (RTI) Act implemented?","2005"]
+["भारत में सूचना का अधिकार अधिनियम (RTI) कब लागू हुआ? / When was the Right to Information (RTI) Act implemented?","2005"],
+["संविधान की सबसे लंबी अनुसूची कौन-सी है? / Which is the longest schedule of the Constitution?","सातवीं अनुसूची (Seventh Schedule)"],
+["संविधान में 'पंचायती राज' से संबंधित अनुसूची कौन-सी है? / Which schedule of the Constitution relates to Panchayati Raj?","ग्यारहवीं अनुसूची (Eleventh Schedule)"],
+["संविधान की नौवीं अनुसूची किस उद्देश्य से जोड़ी गई थी? / For what purpose was the Ninth Schedule added to the Constitution?","भूमि सुधार कानूनों को न्यायिक समीक्षा से बचाने हेतु / To protect land reform laws from judicial review"],
+["राष्ट्रपति शासन (राज्य आपातकाल) किस अनुच्छेद के तहत लगाया जाता है? / President's Rule (State Emergency) is imposed under which Article?","अनुच्छेद 356 / Article 356"],
+["वित्तीय आपातकाल किस अनुच्छेद के तहत घोषित किया जाता है? / Financial Emergency is declared under which Article?","अनुच्छेद 360 / Article 360"]
 ],
 "6. General Science (5 marks)": [
 ["एक तांबे के तार का प्रतिरोध 2×10⁻² ओम, लंबाई 2मी और अनुप्रस्थ क्षेत्रफल 1.7×10⁻⁶ m² है। प्रतिरोधकता क्या है? / Copper wire: R=2×10⁻² Ω, L=2m, A=1.7×10⁻⁶ m². Find resistivity.","1.7 × 10⁻⁸ ओम-मीटर / 1.7 × 10⁻⁸ ohm-metre"],
@@ -1048,7 +647,27 @@ const DATA = {
 ["ओजोन परत हमें किससे बचाती है? / The ozone layer protects us from?","सूर्य की पराबैंगनी किरणों से / Sun's harmful UV rays"],
 ["पौधों की कोशिका भित्ति किससे बनी होती है? / The plant cell wall is made of?","सेल्युलोज / Cellulose"],
 ["ग्लोबल वार्मिंग के लिए मुख्यतः कौन-सी गैस उत्तरदायी है? / Which gas is primarily responsible for global warming?","कार्बन डाइऑक्साइड / Carbon Dioxide"],
-["इंसुलिन का स्राव शरीर के किस अंग से होता है? / Insulin is secreted by which organ?","अग्न्याशय (Pancreas)"]
+["इंसुलिन का स्राव शरीर के किस अंग से होता है? / Insulin is secreted by which organ?","अग्न्याशय (Pancreas)"],
+["मानव शरीर में सबसे छोटी हड्डी कौन-सी है? / Which is the smallest bone in the human body?","स्टेप्स (कान की हड्डी) / Stapes (in the ear)"],
+["परमाणु के केंद्रक (nucleus) में कौन-कौन से कण पाए जाते हैं? / Which particles are found in the nucleus of an atom?","प्रोटॉन और न्यूट्रॉन / Protons and neutrons"],
+["इलेक्ट्रॉन की खोज किसने की? / Who discovered the electron?","जे.जे. थॉमसन / J.J. Thomson"],
+["परमाणु के नाभिक की खोज किसने की? / Who discovered the nucleus of the atom?","अर्नेस्ट रदरफोर्ड / Ernest Rutherford"],
+["मानव शरीर में सबसे बड़ा अंग कौन-सा है? / Which is the largest organ in the human body?","त्वचा (Skin)"],
+["प्रकाश संश्लेषण की प्रक्रिया पादप कोशिका के किस अंगक में होती है? / In which cell organelle does photosynthesis occur in plant cells?","क्लोरोप्लास्ट (Chloroplast)"],
+["कोशिका की खोज किसने की? / Who discovered the cell?","रॉबर्ट हुक / Robert Hooke"],
+["मानव शरीर में श्वसन की मुख्य क्रिया कहाँ होती है? / The main site of respiration in the human body is?","फेफड़े (Lungs)"],
+["विद्युत धारा की SI इकाई क्या है? / What is the SI unit of electric current?","एम्पियर (Ampere)"],
+["बल की SI इकाई क्या है? / What is the SI unit of Force?","न्यूटन (Newton)"],
+["ऊर्जा की SI इकाई क्या है? / What is the SI unit of Energy?","जूल (Joule)"],
+["दाब की SI इकाई क्या है? / What is the SI unit of Pressure?","पास्कल (Pascal)"],
+["ध्वनि की तीव्रता किसमें मापी जाती है? / In what unit is the loudness of sound measured?","डेसिबल (Decibel)"],
+["मानव शरीर में पाचन क्रिया मुख्यतः कहाँ होती है? / Digestion mainly occurs in which part of the human body?","छोटी आंत (Small Intestine)"],
+["प्रकाश संश्लेषण की क्रिया में कौन-सी गैस निकलती है? / Which gas is released during photosynthesis?","ऑक्सीजन (Oxygen)"],
+["मानव शरीर में यूरिया कहाँ बनता है? / Where is urea formed in the human body?","यकृत (Liver)"],
+["चंद्रमा पर वायुमंडल क्यों नहीं है? / Why does the Moon not have an atmosphere?","गुरुत्वाकर्षण बल कम होने के कारण / Due to weak gravitational pull"],
+["श्वसन की प्रक्रिया में कौन-सी गैस अंदर ली जाती है? / Which gas is inhaled during respiration?","ऑक्सीजन (Oxygen)"],
+["मानव शरीर में सफेद रक्त कणिकाओं (WBC) का मुख्य कार्य क्या है? / What is the main function of WBCs in the human body?","संक्रमण से लड़ना (रोग प्रतिरोधक क्षमता) / Fighting infection (immunity)"],
+["ध्वनि तरंगें किस प्रकार की तरंगें होती हैं? / What type of waves are sound waves?","अनुदैर्ध्य तरंगें (Longitudinal waves)"]
 ],
 "7. Elementary Arithmetic (5 marks)": [
 ["20 मिनट एक घंटे का कितना प्रतिशत है? / 20 minutes is what percent of an hour?","33⅓%"],
@@ -1072,14 +691,35 @@ const DATA = {
 ["यदि किसी संख्या का 3/4 भाग 60 है, तो वह संख्या क्या है? / If 3/4 of a number is 60, find the number.","80"],
 ["दो अंकों की एक संख्या के अंकों का योग 9 है। यदि अंक पलट दिए जाएँ तो संख्या 27 बढ़ जाती है, संख्या ज्ञात करें। / Two-digit number: digits sum to 9; reversing digits increases number by 27. Find the number.","36"],
 ["एक व्यक्ति 40 किमी की यात्रा में औसतन 8 किमी/घंटा की गति से चलता है। यात्रा में कितना समय लगेगा? / A person travels 40 km at average speed 8 km/hr. How much time is taken?","5 घंटे / 5 hours"],
-["₹ 1200 का 15% ज्ञात करें। / Find 15% of ₹1200.","₹180"],
+["₹1200 का 15% ज्ञात करें। / Find 15% of ₹1200.","₹180"],
 ["3, 5 और 7 का LCM क्या है? / LCM of 3, 5 and 7?","105"],
 ["यदि एक वस्तु 20% छूट पर ₹640 में बेची जाती है, तो अंकित मूल्य क्या था? / An item is sold at 20% discount for ₹640; find the marked price.","₹800"],
 ["एक संख्या के दो-तिहाई और उसके आधे का अंतर 6 है। संख्या ज्ञात करें। / The difference between two-thirds and half of a number is 6. Find the number.","36"],
 ["100 से 200 के बीच 7 से विभाज्य संख्याओं की गिनती करें। / Count the numbers divisible by 7 between 100 and 200.","14"],
 ["₹5000 की राशि 2 वर्ष में साधारण ब्याज पर ₹5600 हो जाती है। ब्याज दर ज्ञात करें। / ₹5000 becomes ₹5600 in 2 years at simple interest. Find rate of interest.","6% प्रति वर्ष / 6% per annum"],
 ["4 संख्याओं का औसत 20 है। यदि एक संख्या हटा दी जाए तो शेष 3 का औसत 18 हो जाता है। हटाई गई संख्या ज्ञात करें। / Average of 4 numbers is 20; removing one makes average of remaining 3 equal to 18. Find the removed number.","26"],
-["144 का वर्गमूल क्या है? / What is the square root of 144?","12"]
+["144 का वर्गमूल क्या है? / What is the square root of 144?","12"],
+["एक दुकानदार ने ₹250 की वस्तु पर 8% लाभ पर बेचा। विक्रय मूल्य ज्ञात करें। / A shopkeeper sold an item worth ₹250 at 8% profit. Find selling price.","₹270"],
+["दो संख्याओं का योग 25 है और अंतर 5 है। बड़ी संख्या ज्ञात करें। / Sum of two numbers is 25 and difference is 5. Find the larger number.","15"],
+["एक कार 5 घंटे में 400 किमी की दूरी तय करती है। उसकी गति क्या है? / A car covers 400 km in 5 hours. Find its speed.","80 किमी/घंटा / 80 km/hr"],
+["₹800 का साधारण ब्याज 4 वर्ष में 8% वार्षिक दर पर ज्ञात करें। / Find simple interest on ₹800 for 4 years at 8% p.a.","₹256"],
+["एक भिन्न 3/8 का दशमलव रूप क्या है? / Decimal form of the fraction 3/8?","0.375"],
+["A, B से दोगुना काम करता है। यदि दोनों मिलकर 12 दिन में काम पूरा करते हैं, तो A अकेला कितने दिन में करेगा? / A works twice as fast as B. Together they finish in 12 days. How many days for A alone?","18 दिन / 18 days"],
+["48 और 60 का LCM ज्ञात करें। / Find the LCM of 48 and 60.","240"],
+["₹2500 का 12% कितना होगा? / What is 12% of ₹2500?","₹300"],
+["एक संख्या को 5 से गुणा करने पर 60 आता है, वह संख्या क्या है? / A number multiplied by 5 gives 60; find the number.","12"],
+["₹3000 का 1/3 भाग कितना है? / What is 1/3 of ₹3000?","₹1000"],
+["एक आयत की परिमिति 40 मी है और लंबाई 12 मी है, चौड़ाई ज्ञात करें। / Rectangle perimeter 40m, length 12m; find breadth.","8 मी / 8 m"],
+["30% और 20% की क्रमिक छूट के बाद कुल छूट प्रतिशत ज्ञात करें। / Find net discount % after successive discounts of 30% and 20%.","44%"],
+["एक व्यक्ति की मासिक आय ₹40,000 है और वह 25% बचत करता है, तो मासिक बचत कितनी है? / Monthly income ₹40,000, saves 25%; find monthly savings.","₹10,000"],
+["यदि एक वस्तु का क्रय मूल्य ₹450 है और 10% हानि होती है, तो विक्रय मूल्य ज्ञात करें। / Cost price ₹450, loss 10%; find selling price.","₹405"],
+["12 का वर्ग और 5 का वर्ग जोड़ने पर क्या मिलेगा? / Sum of the square of 12 and the square of 5?","169 (144+25)"],
+["₹6000 के 1/4 भाग से 1/6 भाग घटाने पर क्या शेष रहेगा? / Subtract 1/6 of ₹6000 from 1/4 of ₹6000. Find the remainder.","₹500 (1500−1000)"],
+["एक साइकिल सवार 15 किमी/घंटा की गति से 2.5 घंटे में कितनी दूरी तय करेगा? / A cyclist at 15 km/h travels how far in 2.5 hours?","37.5 किमी / 37.5 km"],
+["81 का वर्गमूल क्या है? / What is the square root of 81?","9"],
+["एक वस्तु का क्रय मूल्य ₹300 है और उस पर 25% लाभ कमाना है, तो विक्रय मूल्य ज्ञात करें। / Cost price ₹300; find selling price for 25% profit.","₹375"],
+["₹8000 पर 6% वार्षिक दर से 3 वर्ष का साधारण ब्याज ज्ञात करें। / Find simple interest on ₹8000 at 6% p.a. for 3 years.","₹1440"],
+["एक संख्या का 40% और उसी संख्या का 25% मिलाकर 130 होता है। संख्या ज्ञात करें। / 40% and 25% of a number together give 130. Find the number.","200"]
 ],
 "8. General Hindi (5 marks)": [
 ["'दाता' पुल्लिंग शब्द है, उसका स्त्रीलिंग रूप क्या है? / 'दाता' is masculine; its feminine form is?","दात्री"],
@@ -1109,7 +749,29 @@ const DATA = {
 ["क्रिया के मुख्यतः कितने भेद होते हैं? / How many main types of क्रिया (verb) are there?","दो: सकर्मक और अकर्मक / Two: transitive and intransitive"],
 ["'दूध का दूध पानी का पानी' मुहावरे का अर्थ क्या है? / Meaning of 'दूध का दूध पानी का पानी'?","पूरा न्याय करना / To do complete justice"],
 ["'कर्मधारय' समास का उदाहरण चुनें: 'नीलकमल'। इसका अर्थ क्या है? / Example of कर्मधारय समास 'नीलकमल' means?","नीला कमल / Blue lotus"],
-["शुद्ध वाक्य चुनिए: 'मैं कल जाऊँगा' या 'मैं कल जाएगा'? / Choose correct: 'मैं कल जाऊँगा' or 'मैं कल जाएगा'?","मैं कल जाऊँगा"]
+["शुद्ध वाक्य चुनिए: 'मैं कल जाऊँगा' या 'मैं कल जाएगा'? / Choose correct: 'मैं कल जाऊँगा' or 'मैं कल जाएगा'?","मैं कल जाऊँगा"],
+["'हाथ पर हाथ धरे बैठना' मुहावरे का अर्थ क्या है? / Meaning of the idiom 'हाथ पर हाथ धरे बैठना'?","निष्क्रिय रहना, कुछ न करना / To remain idle, do nothing"],
+["'ईश्वर' का पर्यायवाची शब्द बताइए। / Give a synonym of 'ईश्वर'.","परमात्मा / भगवान"],
+["'अमृत' का विलोम शब्द क्या है? / Antonym of 'अमृत'?","विष"],
+["वचन कितने प्रकार के होते हैं? / How many types of वचन (number) are there?","दो: एकवचन, बहुवचन / Two: singular, plural"],
+["लिंग कितने प्रकार के होते हैं? / How many types of लिंग (gender) are there in Hindi?","दो: पुल्लिंग, स्त्रीलिंग / Two: masculine, feminine"],
+["'तत्पुरुष' समास किसे कहते हैं? / What is a 'तत्पुरुष' समास?","जिसमें उत्तर पद प्रधान होता है व बीच का कारक चिन्ह लुप्त हो जाता है / Where the second word is dominant and the case marker is dropped"],
+["'बहुव्रीहि' समास की क्या विशेषता है? / What is the characteristic of 'बहुव्रीहि' समास?","न तो पहला न दूसरा पद प्रधान, अर्थ किसी तीसरे पद की ओर संकेत करता है / Neither word is dominant; meaning refers to a third entity"],
+["'राजा' का स्त्रीलिंग रूप क्या है? / Feminine form of 'राजा'?","रानी"],
+["'बूढ़ा' का स्त्रीलिंग रूप क्या है? / Feminine form of 'बूढ़ा'?","बूढ़ी"],
+["'कवि' का स्त्रीलिंग रूप क्या है? / Feminine form of 'कवि'?","कवयित्री"],
+["'नदी' का पर्यायवाची शब्द बताइए। / Give a synonym of 'नदी'.","सरिता / तटिनी"],
+["'पर्वत' का पर्यायवाची शब्द बताइए। / Give a synonym of 'पर्वत'.","पहाड़ / गिरि"],
+["'जल' का पर्यायवाची शब्द बताइए। / Give a synonym of 'जल'.","पानी / नीर"],
+["'अपमान' का विलोम शब्द क्या है? / Antonym of 'अपमान'?","सम्मान"],
+["'शत्रु' का विलोम शब्द क्या है? / Antonym of 'शत्रु'?","मित्र"],
+["'हार मानना' मुहावरे का अर्थ क्या है? / Meaning of the idiom 'हार मानना'?","पराजय स्वीकार करना / To accept defeat"],
+["'दो-दो हाथ करना' मुहावरे का अर्थ क्या है? / Meaning of the idiom 'दो-दो हाथ करना'?","मुकाबला करना / To confront/fight"],
+["'द्विगु' समास किसे कहते हैं? / What is 'द्विगु' समास?","जिसमें पहला पद संख्यावाचक हो / Where the first word is a numeral"],
+["'फूल' का पर्यायवाची शब्द बताइए। / Give a synonym of 'फूल'.","पुष्प / कुसुम"],
+["'रोशनी' का पर्यायवाची शब्द बताइए। / Give a synonym of 'रोशनी'.","प्रकाश / उजाला"],
+["'बड़ा' का विलोम शब्द क्या है? / Antonym of 'बड़ा'?","छोटा"],
+["'गरीब' का विलोम शब्द क्या है? / Antonym of 'गरीब'?","अमीर"]
 ],
 "9. General English (5 marks)": [
 ["Choose the indirect form: He said, \"I shall do my best\".","He said that he would do his best."],
@@ -1139,7 +801,29 @@ const DATA = {
 ["One word substitution: A person who speaks many languages:","Polyglot"],
 ["Choose the correct plural of 'Mouse':","Mice"],
 ["Idiom meaning 'very rare':","Once in a blue moon"],
-["Choose the correct passive voice: 'They are building a house.'","A house is being built by them."]
+["Choose the correct passive voice: 'They are building a house.'","A house is being built by them."],
+["Synonym of 'Diligent':","Hardworking"],
+["Antonym of 'Optimistic':","Pessimistic"],
+["Choose the correct sentence: 'Each of the students have submitted their assignment.' / 'Each of the students has submitted his assignment.'","Each of the students has submitted his assignment."],
+["Idiom meaning 'to keep something secret':","Keep it under wraps"],
+["Fill in the blank with correct article: I saw ___ elephant at the zoo.","an"],
+["One word substitution: A person who can speak two languages:","Bilingual"],
+["Fill in the blank with correct preposition: The train arrived ___ time.","on"],
+["Synonym of 'Benevolent':","Kind"],
+["Choose the correct direct form: She said, \"I am going to the market.\"","She said that she was going to the market."],
+["One word substitution: A person who studies the stars and planets:","Astronomer"],
+["Fill in the blank: Neither the teacher nor the students ___ present.","were"],
+["Choose the correct spelling: Occassion / Occasion / Ocassion / Occassion","Occasion"],
+["Synonym of 'Courageous':","Brave"],
+["Antonym of 'Courageous':","Cowardly"],
+["Idiom meaning 'to do something impossible':","Reach for the stars"],
+["One word substitution: A place where money is coined:","Mint"],
+["Choose the correct sentence: 'He has gone to school.' / 'He have gone to school.'","He has gone to school."],
+["Fill in the blank with correct preposition: The cat jumped ___ the wall.","over"],
+["Choose the correct past tense of 'go':","went"],
+["Synonym of 'Reluctant':","Unwilling"],
+["Antonym of 'Reluctant':","Willing"],
+["One word substitution: A person who repairs shoes:","Cobbler"]
 ],
 "10. Logical Reasoning (5 marks)": [
 ["विनोद ने विशाल को अपने पिता की पत्नी के इकलौते भाई के बेटे के रूप में पेश किया। विनोद का विशाल से क्या संबंध है? / Vinod introduces Vishal as the son of the only brother of his father's wife. How is Vinod related to Vishal?","ममेरा भाई / Cousin (maternal uncle's son)"],
@@ -1165,7 +849,33 @@ const DATA = {
 ["एक घन के 6 फलक हैं, उसे 3 रंगों से रंगा गया है। यदि घन को 27 छोटे घनों में काटा जाए तो कितने घनों के 2 फलक रंगे होंगे? / A cube's 6 faces painted, cut into 27 small cubes. How many cubes have exactly 2 painted faces?","12"],
 ["श्रृंखला: सोमवार, बुधवार, शुक्रवार, ? / Series: Monday, Wednesday, Friday, ?","रविवार (एक दिन छोड़कर पैटर्न) / Sunday (skip-one-day pattern)"],
 ["यदि उत्तर-पूर्व को उत्तर कहा जाए, दक्षिण-पूर्व को पूर्व कहा जाए, तो दक्षिण को क्या कहा जाएगा? / If North-East is called North, South-East is called East, what will South be called?","दक्षिण-पश्चिम / South-West"],
-["कोडिंग: यदि 5 × 3 = 34, 7 × 2 = 33, तो 6 × 4 = ? (पैटर्न: a×b = a²+b) / Coding: If 5×3=34, 7×2=33, then 6×4=? (Pattern: a×b = a²+b)","40 (36+4)"]
+["कोडिंग: यदि 5 × 3 = 34, 7 × 2 = 33, तो 6 × 4 = ? (पैटर्न: a×b = a²+b) / Coding: If 5×3=34, 7×2=33, then 6×4=? (Pattern: a×b = a²+b)","40 (36+4)"],
+["सादृश्य: कलम : लिखना :: कैंची : ? / Analogy: Pen : Write :: Scissors : ?","काटना / Cut"],
+["एक व्यक्ति दक्षिण की ओर मुँह करके खड़ा है और बाईं ओर 90° घूमता है। अब उसका मुँह किस दिशा में है? / A person faces South and turns 90° left. Which direction does he face now?","पूर्व / East"],
+["श्रृंखला पूरी करें: J, F, M, A, M, J, ? (महीनों के प्रथम अक्षर) / Complete the series: J,F,M,A,M,J,? (first letters of months)","J (जुलाई / July)"],
+["यदि सभी गुलाब फूल हैं और कुछ फूल लाल हैं, तो कौन-सा निष्कर्ष अनिवार्य रूप से सत्य है? / If all roses are flowers, and some flowers are red, which conclusion necessarily follows?","कुछ फूल गुलाब हैं (निश्चित निष्कर्ष नहीं निकाला जा सकता कि गुलाब लाल हैं) / Some flowers are roses (cannot conclude all roses are red)"],
+["विषम संख्या छाँटें: 121, 144, 169, 200 / Find the odd number: 121, 144, 169, 200","200 (शेष सभी पूर्ण वर्ग हैं / others are perfect squares)"],
+["यदि 1 जनवरी रविवार है, तो उसी वर्ष 1 फरवरी (गैर-लीप वर्ष) किस दिन होगा? / If 1 January is Sunday, what day is 1 February in a non-leap year?","बुधवार / Wednesday"],
+["सादृश्य: अध्यापक : विद्यालय :: वकील : ? / Analogy: Teacher : School :: Lawyer : ?","न्यायालय / Court"],
+["श्रृंखला पूरी करें: 100, 96, 89, 79, ? / Complete the series: 100, 96, 89, 79, ?","66 (घटता अंतर -4,-7,-10,-13 / decreasing gap -4,-7,-10,-13)"],
+["यदि सोमवार को कल है, तो आज कौन-सा दिन है? / If tomorrow is Monday, what day is today?","रविवार / Sunday"],
+["विषम शब्द छाँटिए: गाय, बकरी, भेड़, शेर / Find the odd one out: Cow, Goat, Sheep, Lion","शेर (यह मांसाहारी है, शेष शाकाहारी) / Lion (carnivore; others are herbivores)"],
+["एक पंक्ति में A, B, C, D, E बैठे हैं। B, A के दायें और C, B के दायें है। बाएं से क्रम क्या है? / A,B,C,D,E in a row; B is right of A, C is right of B. Order from left?","A, B, C, ... / A, B, C, ..."],
+["सादृश्य: मछली : पानी :: पक्षी : ? / Analogy: Fish : Water :: Bird : ?","आकाश (हवा) / Sky (air)"],
+["यदि 'सफेद' को 'काला' कहा जाए और 'काला' को 'लाल' कहा जाए, तो दूध का रंग क्या कहलाएगा? / If 'white' is called 'black' and 'black' is called 'red', what will milk's colour be called?","काला / Black"],
+["श्रृंखला पूरी करें: 7, 14, 28, 56, ? / Complete the series: 7, 14, 28, 56, ?","112 (प्रत्येक संख्या ×2 / each number ×2)"],
+["यदि 'DELHI' को कोड में 'CDKGH' लिखा जाए, तो पैटर्न क्या है? / If 'DELHI' is coded as 'CDKGH', what is the pattern?","प्रत्येक अक्षर −1 / each letter −1"],
+["सादृश्य: सूर्य : दिन :: चंद्रमा : ? / Analogy: Sun : Day :: Moon : ?","रात / Night"],
+["एक कक्षा में रोहन की रैंक ऊपर से 10वीं और नीचे से 25वीं है। कक्षा में कुल कितने छात्र हैं? / Rohan ranks 10th from top and 25th from bottom in class. Total students?","34 (10+25−1)"],
+["विषम संख्या छाँटें: 8, 27, 64, 100 / Find the odd number: 8, 27, 64, 100","100 (शेष सभी पूर्ण घन हैं / others are perfect cubes)"],
+["श्रृंखला: Z, X, V, T, ? / Series: Z, X, V, T, ?","R (प्रत्येक बार 2 अक्षर पीछे / each time 2 letters back)"],
+["यदि किसी परिवार में P, Q का पिता है और Q, R की बहन है, तो P का R से क्या संबंध है? / If P is Q's father and Q is R's sister, how is P related to R?","पिता / Father"],
+["सादृश्य: अंडा : मुर्गी :: बीज : ? / Analogy: Egg : Hen :: Seed : ?","पौधा / Plant"],
+["एक व्यक्ति पश्चिम की ओर मुँह करके खड़ा है, वह 90° दाईं ओर घूमता है और फिर 180° घूमता है। अब वह किस दिशा में है? / A person faces West, turns 90° right, then 180°. Now facing?","पूर्व / East"],
+["सादृश्य: शिक्षक : ज्ञान :: किसान : ? / Analogy: Teacher : Knowledge :: Farmer : ?","फसल / Crop"],
+["विषम शब्द छाँटिए: गिटार, वायलिन, तबला, कुर्सी / Find the odd one out: Guitar, Violin, Tabla, Chair","कुर्सी (यह वाद्य यंत्र नहीं है) / Chair (not a musical instrument)"],
+["श्रृंखला पूरी करें: 11, 13, 17, 19, 23, ? / Complete the series: 11, 13, 17, 19, 23, ?","29 (अभाज्य संख्याएँ / prime numbers)"],
+["यदि किसी कूट भाषा में 'RAIN' को 'SBJO' लिखा जाए, तो 'SNOW' को कैसे लिखेंगे? / If 'RAIN' is coded as 'SBJO', how is 'SNOW' coded?","TOPX (प्रत्येक अक्षर +1)"]
 ],
 "11. Current Affairs (10 marks)": [
 ["डिफेंस रिसर्च एण्ड डेवलपमेंट ऑर्गनाइजेशन (DRDO) द्वारा विकसित नाग मार्क 2 किस प्रकार की मिसाइल है? / What type of missile is Nag Mark 2 by DRDO?","फायर-एण्ड-फॉरगेट एंटी-टैंक गाइडेड मिसाइल / Fire-and-Forget Anti-Tank Guided Missile"],
@@ -1188,10 +898,37 @@ const DATA = {
 ["आदित्य-L1 मिशन किसका अध्ययन करने के लिए भेजा गया? / Aditya-L1 mission was launched to study?","सूर्य / The Sun"],
 ["भारत की पहली हाइड्रोजन ट्रेन किस मार्ग पर चलाई गई (जाँच नवीनतम)? / India's first hydrogen train route (verify latest)?","जींद-सोनीपत, हरियाणा / Jind-Sonipat, Haryana (pilot route)"],
 ["राष्ट्रीय शिक्षा नीति (NEP) कब लागू हुई? / When was the National Education Policy (NEP) implemented?","2020 (29 जुलाई) / 2020 (29 July)"],
-["भारत ने किस वर्ष अपना पहला डिजिटल जनगणना/सर्वेक्षण शुरू किया (नवीनतम जाँचें)? / Check latest for India's recent census/survey digitisation initiatives.","नवीनतम स्रोत से जाँचें / Verify from latest official source"],
 ["'खेलो इंडिया' अभियान किस वर्ष शुरू हुआ? / In which year was the 'Khelo India' scheme launched?","2018"],
 ["भारत का पहला निजी क्षेत्र का रॉकेट लॉन्च किसने किया? / Which company launched India's first private-sector rocket?","स्काईरूट एयरोस्पेस / Skyroot Aerospace (Vikram-S, 2022)"],
-["उत्तर प्रदेश सरकार की प्रमुख योजना 'कन्या सुमंगला योजना' का उद्देश्य क्या है? / Objective of UP government's 'Kanya Sumangala Yojana'?","बालिकाओं के जन्म व शिक्षा को प्रोत्साहन / Promoting the birth and education of girl children"]
+["उत्तर प्रदेश सरकार की प्रमुख योजना 'कन्या सुमंगला योजना' का उद्देश्य क्या है? / Objective of UP government's 'Kanya Sumangala Yojana'?","बालिकाओं के जन्म व शिक्षा को प्रोत्साहन / Promoting the birth and education of girl children"],
+["भारत ने किस वर्ष अपना पहला 5G नेटवर्क लॉन्च किया? / In which year did India launch its first 5G network?","2022"],
+["'डिजिटल इंडिया' अभियान कब शुरू हुआ था? / When was the 'Digital India' campaign launched?","2015 (1 जुलाई) / 2015 (1 July)"],
+["भारत का सबसे लंबा एक्सप्रेसवे (हाल में उद्घाटन) कौन-सा है (नवीनतम जाँचें)? / India's longest expressway (recently inaugurated) — verify latest.","दिल्ली-मुंबई एक्सप्रेसवे / Delhi-Mumbai Expressway"],
+["भारत ने अपना पहला स्वदेशी विमानवाहक पोत किस नाम से कमीशन किया? / What is the name of India's first indigenous aircraft carrier?","आईएनएस विक्रांत / INS Vikrant"],
+["'फिट इंडिया मूवमेंट' किस वर्ष शुरू हुआ? / In which year was the 'Fit India Movement' launched?","2019"],
+["भारत का पहला वंदे भारत एक्सप्रेस मार्ग कौन-सा था? / What was India's first Vande Bharat Express route?","नई दिल्ली-वाराणसी / New Delhi-Varanasi (2019)"],
+["'स्वच्छ भारत मिशन' किस वर्ष शुरू हुआ? / In which year was the 'Swachh Bharat Mission' launched?","2014 (2 अक्टूबर) / 2014 (2 October)"],
+["भारत सरकार की 'उज्ज्वला योजना' का उद्देश्य क्या है? / Objective of the government's 'Ujjwala Yojana'?","गरीब परिवारों को LPG कनेक्शन देना / Providing LPG connections to poor households"],
+["'आयुष्मान भारत योजना' किससे संबंधित है? / 'Ayushman Bharat Yojana' is related to?","स्वास्थ्य बीमा कवरेज / Health insurance coverage"],
+["भारत का पहला बुलेट ट्रेन प्रोजेक्ट किस मार्ग पर निर्माणाधीन है? / India's first bullet train project under construction is on which route?","मुंबई-अहमदाबाद / Mumbai-Ahmedabad"],
+["भारत की पहली महिला अंतरिक्ष यात्री कौन थीं? / Who was India's first woman astronaut?","कल्पना चावला / Kalpana Chawla"],
+["भारत में कोविड-19 का पहला टीका किस नाम से बना? / What was the name of India's first indigenous COVID-19 vaccine?","कोवैक्सिन (Covaxin)"],
+["ISRO का चंद्रयान-2 मिशन किस वर्ष लॉन्च हुआ था? / In which year was ISRO's Chandrayaan-2 mission launched?","2019"],
+["भारत ने 'एक देश एक राशन कार्ड' योजना कब लागू की (सामान्यतः)? / When was 'One Nation One Ration Card' broadly rolled out?","2020 के आसपास (चरणबद्ध) / Around 2020 (phased rollout)"],
+["भारत का सबसे बड़ा सौर ऊर्जा पार्क कहाँ स्थित है (हाल में)? / Where is one of India's largest solar parks located (recent)?","भदला सोलर पार्क, राजस्थान / Bhadla Solar Park, Rajasthan"],
+["भारत में 'वन नेशन वन इलेक्शन' किस अवधारणा से संबंधित है? / What does 'One Nation One Election' refer to?","लोकसभा व सभी राज्य विधानसभाओं के चुनाव एक साथ कराना / Holding Lok Sabha and all state assembly elections simultaneously"],
+["भारत की पहली स्वदेशी 5G तकनीक किस संस्थान द्वारा विकसित की गई (सामान्यतः उल्लेखित)? / India's indigenous 5G technology stack is commonly associated with which institution?","IIT मद्रास (व अन्य) / IIT Madras (and others) — verify latest"],
+["भारत सरकार की 'पीएम सूर्य घर योजना' का उद्देश्य क्या है? / Objective of the 'PM Surya Ghar Yojana'?","घरों की छतों पर सौर पैनल के माध्यम से मुफ्त बिजली / Free electricity via rooftop solar panels"],
+["भारत का पहला हरित हाइड्रोजन हब कहाँ स्थापित किया जा रहा है (नवीनतम जाँचें)? / Where is India's first Green Hydrogen Hub being set up (verify latest)?","नवीनतम स्रोत से जाँचें (कई राज्यों में परियोजनाएं) / Verify from latest source (projects across multiple states)"],
+["भारत की डिजिटल मुद्रा (e-Rupee/CBDC) किसने लॉन्च की? / Who launched India's digital currency (e-Rupee/CBDC)?","भारतीय रिज़र्व बैंक (RBI) / Reserve Bank of India (RBI), पायलट 2022"],
+["भारत की जनगणना कितने वर्षों के अंतराल पर होती है (सामान्यतः)? / At what interval is India's census generally conducted?","हर 10 वर्ष में / Every 10 years"],
+["'प्रधानमंत्री गरीब कल्याण अन्न योजना' किससे संबंधित है? / 'Pradhan Mantri Garib Kalyan Anna Yojana' is related to?","गरीबों को मुफ्त खाद्यान्न वितरण / Free foodgrain distribution to the poor"],
+["भारत में हर वर्ष 'राष्ट्रीय मतदाता दिवस' कब मनाया जाता है? / When is 'National Voters' Day' observed in India every year?","25 जनवरी / 25 January"],
+["भारत की पहली महिला रक्षा मंत्री कौन थीं? / Who was India's first woman Defence Minister?","निर्मला सीतारमण / Nirmala Sitharaman"],
+["'प्रधानमंत्री आवास योजना' का उद्देश्य क्या है? / Objective of 'Pradhan Mantri Awas Yojana'?","सभी के लिए किफायती आवास उपलब्ध कराना / Providing affordable housing for all"],
+["भारत में 'एक जिला एक उत्पाद (ODOP)' योजना का उद्देश्य क्या है? / Objective of the 'One District One Product (ODOP)' scheme?","हर जिले के विशिष्ट उत्पाद को बढ़ावा देना / Promoting each district's unique local product"],
+["भारत की जी20 अध्यक्षता किस थीम के साथ जुड़ी थी? / What was the theme associated with India's G20 presidency?","'वसुधैव कुटुम्बकम' (एक पृथ्वी, एक परिवार, एक भविष्य) / 'Vasudhaiva Kutumbakam' (One Earth, One Family, One Future)"],
+["भारत का प्रथम निजी अंतरिक्ष यात्री सुविधा केंद्र किस राज्य में विकसित हो रहा है (नवीनतम जाँचें)? / Verify latest: India's evolving private spaceport-related facility state.","नवीनतम स्रोत से जाँचें / Verify from latest source"]
 ],
 "12. General Awareness / Static GK (10 marks)": [
 ["क्रोना निम्नलिखित में से किस देश की मुद्रा है? / Krona is the currency of which country?","स्वीडन / Sweden"],
@@ -1222,7 +959,28 @@ const DATA = {
 ["विश्व का सबसे बड़ा लोकतंत्र किसे कहा जाता है? / Which country is called the 'largest democracy in the world'?","भारत / India"],
 ["भारत का प्रथम उपग्रह कौन-सा था? / What was India's first satellite?","आर्यभट्ट, 1975 / Aryabhata, 1975"],
 ["ISRO का मुख्यालय कहाँ है? / Where is the headquarters of ISRO?","बेंगलुरु / Bengaluru"],
-["संयुक्त राष्ट्र सुरक्षा परिषद के स्थायी सदस्य कितने हैं? / How many permanent members does the UN Security Council have?","5"]
+["संयुक्त राष्ट्र सुरक्षा परिषद के स्थायी सदस्य कितने हैं? / How many permanent members does the UN Security Council have?","5"],
+["विश्व का सबसे बड़ा देश (क्षेत्रफल में) कौन-सा है? / Which is the largest country in the world by area?","रूस / Russia"],
+["विश्व का सबसे छोटा देश कौन-सा है? / Which is the smallest country in the world?","वेटिकन सिटी / Vatican City"],
+["'यूनेस्को' का मुख्यालय कहाँ है? / Where is the headquarters of UNESCO?","पेरिस, फ्रांस / Paris, France"],
+["विश्व की सबसे बड़ी अर्थव्यवस्था (GDP में) कौन-सी है? / Which is the world's largest economy by GDP?","अमेरिका / United States"],
+["भारत का सबसे पुराना राष्ट्रीय उद्यान कौन-सा है? / Which is India's oldest national park?","जिम कॉर्बेट राष्ट्रीय उद्यान / Jim Corbett National Park"],
+["'भारत छोड़ो' आंदोलन किस वर्ष हुआ (सामान्य ज्ञान पुनरावृत्ति)? / In which year was the Quit India Movement (general knowledge revision)?","1942"],
+["एशियाई खेलों का आयोजन कितने वर्षों के अंतराल पर होता है? / At what interval are the Asian Games held?","हर 4 वर्ष में / Every 4 years"],
+["कॉमनवेल्थ खेलों का आयोजन कितने वर्षों के अंतराल पर होता है? / At what interval are the Commonwealth Games held?","हर 4 वर्ष में / Every 4 years"],
+["भारत का राष्ट्रीय कैलेंडर किस पर आधारित है? / India's National Calendar is based on?","शक संवत् / Saka Era"],
+["भारत का सबसे बड़ा संग्रहालय कौन-सा है? / Which is India's largest museum?","भारतीय संग्रहालय, कोलकाता / Indian Museum, Kolkata"],
+["विश्व की सबसे लंबी दीवार कौन-सी है? / Which is the world's longest wall?","चीन की महान दीवार / Great Wall of China"],
+["ग्रैमी अवॉर्ड किस क्षेत्र से संबंधित है? / The Grammy Award is related to which field?","संगीत / Music"],
+["भारत रत्न पाने वाले पहले खिलाड़ी कौन थे? / Who was the first sportsperson to receive the Bharat Ratna?","सचिन तेंदुलकर / Sachin Tendulkar"],
+["भारत का सबसे पुराना अखबार कौन-सा है? / Which is India's oldest newspaper (still published)?","द बॉम्बे समाचार / The Bombay Samachar"],
+["एशिया का सबसे बड़ा फूलों का बाजार कहाँ स्थित है? / Where is Asia's largest flower market located?","बेंगलुरु (केआर मार्केट) / Bengaluru (K.R. Market) — commonly cited"],
+["भारत के सबसे युवा मुख्यमंत्री बनने का रिकॉर्ड (ऐतिहासिक रूप से) किसके नाम है (सामान्य ज्ञान हेतु उदाहरण)? / Example GK: which is a commonly cited record for youngest CM in India's history?","विभिन्न राज्यों में समय-समय पर बदलता रहा है / Varies by state and time — verify latest"],
+["विश्व पर्यावरण दिवस कब मनाया जाता है? / World Environment Day is observed on?","5 जून / 5 June"],
+["विश्व जल दिवस कब मनाया जाता है? / World Water Day is observed on?","22 मार्च / 22 March"],
+["विश्व स्वास्थ्य दिवस कब मनाया जाता है? / World Health Day is observed on?","7 अप्रैल / 7 April"],
+["अंतर्राष्ट्रीय महिला दिवस कब मनाया जाता है? / International Women's Day is observed on?","8 मार्च / 8 March"],
+["भारत का राष्ट्रीय विज्ञान दिवस कब मनाया जाता है? / India's National Science Day is observed on?","28 फरवरी / 28 February"]
 ],
 "13. Hindi Unseen Passage Practice (10 marks)": [
 ["गद्यांश 1: भारतीय साहित्य के क्षेत्र में सर्वप्रथम सैद्धांतिक आलोचना का विकास हुआ जिसे 'काव्य-शास्त्र' या 'अलंकार-शास्त्र' कहा जाता है। उपलब्ध ग्रंथों में प्राचीनतम रचना भरतमुनि द्वारा रचित 'नाट्य-शास्त्र' है जिसमें साहित्य के मानदंड के रूप में 'रस-सिद्धांत' की प्रतिष्ठा की गई है।\n\nQ: उपलब्ध ग्रंथों में प्राचीनतम रचना भरतमुनि द्वारा रचित कौन-सी है?","नाट्य-शास्त्र"],
@@ -1246,7 +1004,37 @@ const DATA = {
 ["(इसी गद्यांश पर आधारित) गद्यांश के अनुसार भारत कैसा देश है?","कृषि प्रधान देश"],
 ["गद्यांश 6: समय का सदुपयोग सफलता की कुंजी है। जो व्यक्ति समय के महत्व को समझते हैं और उसका सदुपयोग करते हैं, वे जीवन में अवश्य सफल होते हैं। इसके विपरीत, जो समय को व्यर्थ गँवाते हैं, उन्हें बाद में पछताना पड़ता है।\n\nQ: सफलता की कुंजी क्या है?","समय का सदुपयोग"],
 ["(इसी गद्यांश पर आधारित) कौन लोग जीवन में सफल होते हैं?","जो समय के महत्व को समझते हैं और उसका सदुपयोग करते हैं"],
-["(इसी गद्यांश पर आधारित) समय व्यर्थ गँवाने वालों का क्या हश्र होता है?","उन्हें बाद में पछताना पड़ता है"]
+["(इसी गद्यांश पर आधारित) समय व्यर्थ गँवाने वालों का क्या हश्र होता है?","उन्हें बाद में पछताना पड़ता है"],
+["गद्यांश 7: वृक्ष हमारे जीवन के अभिन्न अंग हैं। वे न केवल हमें प्राणवायु प्रदान करते हैं, बल्कि मिट्टी के कटाव को रोकने, वर्षा लाने और जैव विविधता बनाए रखने में भी सहायक होते हैं। दुर्भाग्यवश, बढ़ती जनसंख्या और शहरीकरण के कारण वनों की कटाई तेज़ी से हो रही है।\n\nQ: वृक्ष हमें क्या प्रदान करते हैं?","प्राणवायु (ऑक्सीजन)"],
+["(इसी गद्यांश पर आधारित) वृक्ष मिट्टी के कटाव को रोकने के अलावा और क्या करते हैं?","वर्षा लाने और जैव विविधता बनाए रखने में सहायक होते हैं"],
+["(इसी गद्यांश पर आधारित) वनों की कटाई किस कारण तेज़ी से हो रही है?","बढ़ती जनसंख्या और शहरीकरण के कारण"],
+["गद्यांश 8: भारतीय संस्कृति विविधता में एकता का उत्कृष्ट उदाहरण है। यहाँ अनेक भाषाएँ, धर्म, जातियाँ और रीति-रिवाज होने के बावजूद लोग एक राष्ट्र के रूप में एकजुट रहते हैं। यही विविधता भारत की सबसे बड़ी शक्ति है।\n\nQ: भारतीय संस्कृति किसका उत्कृष्ट उदाहरण है?","विविधता में एकता"],
+["(इसी गद्यांश पर आधारित) गद्यांश के अनुसार भारत की सबसे बड़ी शक्ति क्या है?","विविधता"],
+["(इसी गद्यांश पर आधारित) अनेक भाषाएँ, धर्म व जातियाँ होने के बावजूद भारतीय लोग कैसे रहते हैं?","एक राष्ट्र के रूप में एकजुट"],
+["गद्यांश 9: पुस्तकें मनुष्य की सच्ची मित्र होती हैं। वे न केवल हमारा ज्ञानवर्धन करती हैं, बल्कि एकांत के क्षणों में हमारी साथी भी बनती हैं। जो व्यक्ति नियमित रूप से अच्छी पुस्तकें पढ़ता है, उसका व्यक्तित्व निखर जाता है।\n\nQ: लेखक के अनुसार पुस्तकें क्या हैं?","मनुष्य की सच्ची मित्र"],
+["(इसी गद्यांश पर आधारित) पुस्तकें एकांत के क्षणों में क्या करती हैं?","हमारी साथी बनती हैं"],
+["(इसी गद्यांश पर आधारित) नियमित रूप से अच्छी पुस्तकें पढ़ने से क्या होता है?","व्यक्तित्व निखर जाता है"],
+["गद्यांश 10: स्वास्थ्य ही सबसे बड़ा धन है। एक स्वस्थ शरीर में ही स्वस्थ मन का वास होता है। नियमित व्यायाम, संतुलित आहार और पर्याप्त नींद स्वस्थ जीवन के तीन प्रमुख आधार हैं।\n\nQ: लेखक के अनुसार सबसे बड़ा धन क्या है?","स्वास्थ्य"],
+["(इसी गद्यांश पर आधारित) स्वस्थ मन का वास कहाँ होता है?","स्वस्थ शरीर में"],
+["(इसी गद्यांश पर आधारित) स्वस्थ जीवन के तीन प्रमुख आधार क्या बताए गए हैं?","नियमित व्यायाम, संतुलित आहार और पर्याप्त नींद"],
+["गद्यांश 11: भारतीय किसान देश की रीढ़ हैं। वे कड़ी मेहनत करके पूरे देश के लिए अन्न उपजाते हैं, फिर भी उन्हें अक्सर उचित मूल्य नहीं मिल पाता। सरकार द्वारा न्यूनतम समर्थन मूल्य जैसी योजनाएँ किसानों की सहायता के लिए बनाई गई हैं।\n\nQ: लेखक के अनुसार भारतीय किसान देश के लिए क्या हैं?","देश की रीढ़"],
+["(इसी गद्यांश पर आधारित) किसानों को अक्सर क्या नहीं मिल पाता?","उचित मूल्य (उनकी उपज का)"],
+["(इसी गद्यांश पर आधारित) किसानों की सहायता हेतु सरकार ने कौन-सी योजना बनाई है?","न्यूनतम समर्थन मूल्य (MSP) जैसी योजनाएँ"],
+["गद्यांश 12: इंटरनेट ने आज संचार की दुनिया में क्रांति ला दी है। दूर बैठे लोग पलक झपकते ही एक-दूसरे से जुड़ सकते हैं। किंतु इसके साथ ही साइबर अपराध जैसी नई चुनौतियाँ भी सामने आई हैं, जिनसे सतर्क रहना आवश्यक है।\n\nQ: इंटरनेट ने किस क्षेत्र में क्रांति ला दी है?","संचार (Communication) की दुनिया में"],
+["(इसी गद्यांश पर आधारित) इंटरनेट के साथ कौन-सी नई चुनौतियाँ सामने आई हैं?","साइबर अपराध जैसी चुनौतियाँ"],
+["(इसी गद्यांश पर आधारित) गद्यांश के अनुसार क्या आवश्यक है?","साइबर अपराध से सतर्क रहना"],
+["गद्यांश 13: भारत की विविधता में उसकी लोक कलाएँ भी शामिल हैं, जो हर राज्य की अपनी अलग पहचान रखती हैं। मधुबनी चित्रकला, वारली पेंटिंग और पट्टचित्र जैसी शैलियाँ न केवल कला हैं, बल्कि सदियों पुरानी परंपराओं का जीवंत दस्तावेज़ भी हैं।\n\nQ: गद्यांश में किन लोक कला शैलियों का उल्लेख किया गया है?","मधुबनी चित्रकला, वारली पेंटिंग और पट्टचित्र"],
+["(इसी गद्यांश पर आधारित) ये कला शैलियाँ किसका दस्तावेज़ मानी गई हैं?","सदियों पुरानी परंपराओं का"],
+["(इसी गद्यांश पर आधारित) हर राज्य की लोक कलाएँ क्या रखती हैं?","अपनी अलग पहचान"],
+["गद्यांश 14: अनुशासन जीवन की सफलता की पहली सीढ़ी है। जो व्यक्ति समय का पाबंद है और नियमों का पालन करता है, वह जीवन के हर क्षेत्र में आगे बढ़ता है। अनुशासनहीनता व्यक्ति को असफलता की ओर ले जाती है।\n\nQ: लेखक के अनुसार सफलता की पहली सीढ़ी क्या है?","अनुशासन"],
+["(इसी गद्यांश पर आधारित) समय का पाबंद व्यक्ति कैसा होता है?","वह जीवन के हर क्षेत्र में आगे बढ़ता है"],
+["(इसी गद्यांश पर आधारित) अनुशासनहीनता व्यक्ति को किस ओर ले जाती है?","असफलता की ओर"],
+["गद्यांश 15: भारत में त्योहारों का विशेष महत्व है। ये न केवल धार्मिक आस्था का प्रतीक हैं, बल्कि सामाजिक एकता को भी बढ़ावा देते हैं। दीपावली, ईद, क्रिसमस और गुरुपर्व जैसे त्योहार अलग-अलग समुदायों को एक सूत्र में बांधते हैं।\n\nQ: भारत में त्योहारों का क्या महत्व बताया गया है?","धार्मिक आस्था का प्रतीक व सामाजिक एकता को बढ़ावा"],
+["(इसी गद्यांश पर आधारित) कौन-कौन से त्योहारों का उल्लेख किया गया है?","दीपावली, ईद, क्रिसमस और गुरुपर्व"],
+["(इसी गद्यांश पर आधारित) ये त्योहार समुदायों को कैसे जोड़ते हैं?","एक सूत्र में बांधते हैं"],
+["गद्यांश 16: प्रदूषण आज विश्व की सबसे बड़ी समस्याओं में से एक है। वायु, जल और भूमि प्रदूषण मानव स्वास्थ्य के साथ-साथ संपूर्ण पारिस्थितिकी तंत्र को भी नुकसान पहुंचा रहे हैं। इसके नियंत्रण के लिए सामूहिक प्रयासों की आवश्यकता है।\n\nQ: प्रदूषण को क्या बताया गया है?","विश्व की सबसे बड़ी समस्याओं में से एक"],
+["(इसी गद्यांश पर आधारित) प्रदूषण के कितने प्रकार बताए गए हैं?","तीन: वायु, जल और भूमि प्रदूषण"],
+["(इसी गद्यांश पर आधारित) प्रदूषण नियंत्रण हेतु क्या आवश्यक बताया गया है?","सामूहिक प्रयास"]
 ],
 "14. Graph Analysis & Interpretation (10 marks)": [
 ["पाई चार्ट: 5 देशों द्वारा लॉन्च किए गए कुल उपग्रह = 12000। नॉर्वे 30%, आयरलैंड 20%, कनाडा 15%, बेल्जियम 25%, रोमानिया 10%। Q: बेल्जियम द्वारा प्रक्षेपित उपग्रहों की संख्या नॉर्वे की संख्या का कितना प्रतिशत है? / Belgium's satellites as % of Norway's satellites?","83.33% (बेल्जियम=3000, नॉर्वे=3600 → 3000/3600×100)"],
@@ -1269,7 +1057,36 @@ const DATA = {
 ["बार ग्राफ: 4 कंपनियों (P,Q,R,S) का वार्षिक लाभ (लाख ₹ में): P=50, Q=70, R=40, S=60। Q: सभी कंपनियों के औसत लाभ से कितना अधिक लाभ Q कंपनी को हुआ? / Bar graph annual profit (₹ lakh): P=50,Q=70,R=40,S=60. How much more than average did Q earn?","15 लाख (औसत=55, Q−औसत=15)"],
 ["(इसी बार ग्राफ पर आधारित) P और R का संयुक्त लाभ, Q और S के संयुक्त लाभ का कितना प्रतिशत है? / P+R's combined profit is what % of Q+S's combined profit?","69.23% (90/130×100)"],
 ["तालिका: 5 विद्यालयों में छात्र संख्या और पास प्रतिशत दिया गया है (जैसे विद्यालय A: 200 छात्र, 80% पास)। Q: विद्यालय A में कितने छात्र पास हुए? / Table: school enrolment & pass %; School A: 200 students, 80% pass. How many students passed?","160 (200×80/100)"],
-["(इसी तालिका शैली पर आधारित) यदि विद्यालय B में 250 छात्र हैं और 72% पास हुए, तो कितने छात्र फेल हुए? / School B: 250 students, 72% passed. How many failed?","70 (250×28/100)"]
+["(इसी तालिका शैली पर आधारित) यदि विद्यालय B में 250 छात्र हैं और 72% पास हुए, तो कितने छात्र फेल हुए? / School B: 250 students, 72% passed. How many failed?","70 (250×28/100)"],
+["तालिका: 4 फैक्ट्रियों (P,Q,R,S) का मासिक उत्पादन (टन में): P=120, Q=150, R=100, S=130। Q: चारों फैक्ट्रियों का कुल उत्पादन कितना है? / Table monthly output (tons): P=120,Q=150,R=100,S=130. Find total output.","500 टन (120+150+100+130)"],
+["(इसी तालिका पर आधारित) R का उत्पादन, Q के उत्पादन का कितना प्रतिशत है? / R's output is what % of Q's output?","66.67% (100/150×100)"],
+["बार ग्राफ: 5 महीनों में किसी दुकान की बिक्री (₹हज़ार में): Jan=20, Feb=25, Mar=22, Apr=30, May=28। Q: सबसे अधिक बिक्री वाला महीना कौन-सा था और कितनी थी? / Bar graph shop sales (₹'000): Jan=20,Feb=25,Mar=22,Apr=30,May=28. Which month had highest sales and how much?","अप्रैल, ₹30,000 / April, ₹30,000"],
+["(इसी बार ग्राफ पर आधारित) जनवरी से मई तक कुल बिक्री का औसत ज्ञात करें। / Find the average sales from January to May.","₹25,000 ((20+25+22+30+28)/5 हज़ार)"],
+["तालिका: 3 गांवों (X,Y,Z) की जनसंख्या: X=5000, Y=7000, Z=6000। Q: तीनों गांवों की कुल जनसंख्या का कितना % गांव Y में है? / Table population: X=5000,Y=7000,Z=6000. What % of total population is in village Y?","38.9% (7000/18000×100, लगभग)"],
+["(इसी तालिका पर आधारित) गांव X और Z की जनसंख्या का योग, गांव Y की जनसंख्या से कितना अधिक है? / How much more is X+Z's population than Y's?","4000 (11000−7000)"],
+["रेखा-ग्राफ: किसी शहर का तापमान (°C में) 5 दिनों में: Mon=30, Tue=32, Wed=29, Thu=31, Fri=33। Q: सप्ताह के इन 5 दिनों का औसत तापमान ज्ञात करें। / Line graph temperature (°C) over 5 days: Mon=30,Tue=32,Wed=29,Thu=31,Fri=33. Find average temperature.","31°C ((30+32+29+31+33)/5)"],
+["पाई चार्ट: किसी कॉलेज में 4 विषयों में छात्र नामांकन — विज्ञान 40%, वाणिज्य 25%, कला 20%, अन्य 15% (कुल 800 छात्र)। Q: विज्ञान विषय में कितने छात्र नामांकित हैं? / Pie chart: college enrolment by stream — Science 40%, Commerce 25%, Arts 20%, Other 15% (total 800). How many students in Science?","320 (800×40/100)"],
+["(इसी पाई चार्ट पर आधारित) वाणिज्य और कला विषयों के छात्रों की कुल संख्या ज्ञात करें। / Find the total number of students in Commerce and Arts combined.","360 (25%+20%=45% of 800)"],
+["बार ग्राफ: 3 शहरों (A,B,C) में साइकिल की बिक्री (सैकड़ों में): A=15, B=22, C=18। Q: तीनों शहरों की कुल बिक्री ज्ञात करें। / Bar graph bicycle sales (hundreds): A=15,B=22,C=18. Find total sales.","5500 (55 सैकड़ा / 55 hundred)"],
+["(इसी बार ग्राफ पर आधारित) शहर B की बिक्री, शहर A की बिक्री से कितने % अधिक है? / City B's sales are what % more than city A's?","46.67% ((22−15)/15×100)"],
+["तालिका: 4 महीनों में किसी वेबसाइट के विज़िटर (हज़ार में): Jan=12, Feb=15, Mar=18, Apr=20। Q: अप्रैल में विज़िटर, जनवरी की तुलना में कितने % बढ़े? / Table website visitors ('000): Jan=12,Feb=15,Mar=18,Apr=20. % increase in April vs January?","66.67% ((20−12)/12×100)"],
+["(इसी तालिका पर आधारित) 4 महीनों के कुल विज़िटर की औसत संख्या ज्ञात करें। / Find the average visitors over the 4 months.","16,250 ((12+15+18+20)/4 हज़ार)"],
+["पाई चार्ट: किसी परिवार का मासिक बजट ₹50,000 — भोजन 30%, शिक्षा 20%, किराया 25%, बचत 15%, अन्य 10%। Q: शिक्षा और बचत पर कुल खर्च कितना है? / Pie chart family budget ₹50,000: food 30%, education 20%, rent 25%, savings 15%, other 10%. Total on education and savings?","₹17,500 (20%+15%=35% of 50,000)"],
+["(इसी पाई चार्ट पर आधारित) किराए पर खर्च, भोजन पर खर्च से कितना कम है? / How much less is spent on rent than on food?","₹2,500 (30%−25%=5% of 50,000)"],
+["तालिका: 5 खिलाड़ियों के क्रिकेट स्कोर: A=45, B=60, C=38, D=72, E=55। Q: सभी खिलाड़ियों का औसत स्कोर ज्ञात करें। / Table cricket scores: A=45,B=60,C=38,D=72,E=55. Find the average score.","54 ((45+60+38+72+55)/5)"],
+["(इसी तालिका पर आधारित) सर्वाधिक और न्यूनतम स्कोर के बीच अंतर ज्ञात करें। / Find the difference between the highest and lowest scores.","34 (72−38)"],
+["बार ग्राफ: 4 त्रैमासिकों में कंपनी की बिक्री (₹ लाख में): Q1=80, Q2=95, Q3=70, Q4=110। Q: वर्ष की कुल बिक्री ज्ञात करें। / Bar graph company sales by quarter (₹ lakh): Q1=80,Q2=95,Q3=70,Q4=110. Find total annual sales.","₹355 लाख / ₹355 lakh"],
+["(इसी बार ग्राफ पर आधारित) Q4 की बिक्री, Q3 की बिक्री से कितने % अधिक है? / Q4 sales are what % more than Q3 sales?","57.14% ((110−70)/70×100)"],
+["तालिका: 4 राज्यों की साक्षरता दर: UP=68%, MP=70%, Bihar=62%, Kerala=94%। Q: सबसे अधिक और सबसे कम साक्षरता दर के बीच अंतर ज्ञात करें। / Table literacy rates: UP=68%,MP=70%,Bihar=62%,Kerala=94%. Find the gap between highest and lowest.","32% (94−62)"],
+["(इसी तालिका पर आधारित) चारों राज्यों की औसत साक्षरता दर ज्ञात करें। / Find the average literacy rate of all four states.","73.5% ((68+70+62+94)/4)"],
+["पाई चार्ट: किसी शहर के परिवहन साधनों का प्रयोग — बस 35%, कार 25%, बाइक 30%, साइकिल 10% (कुल 4000 लोग)। Q: बाइक और साइकिल का प्रयोग करने वालों की कुल संख्या ज्ञात करें। / Pie chart transport modes: bus 35%, car 25%, bike 30%, cycle 10% (total 4000 people). Find total using bike and cycle.","1600 (30%+10%=40% of 4000)"],
+["(इसी पाई चार्ट पर आधारित) बस और कार का प्रयोग करने वालों की संख्या का अंतर ज्ञात करें। / Find the difference between the number of people using bus and car.","400 (35%−25%=10% of 4000)"],
+["तालिका: 5 वर्षों में किसी कंपनी का शुद्ध लाभ (₹ करोड़ में): 2020=10, 2021=14, 2022=12, 2023=18, 2024=22। Q: 2020 से 2024 तक कुल % वृद्धि ज्ञात करें। / Table net profit (₹ crore): 2020=10,2021=14,2022=12,2023=18,2024=22. Find total % increase from 2020 to 2024.","120% ((22−10)/10×100)"],
+["(इसी तालिका पर आधारित) किस वर्ष में पिछले वर्ष की तुलना में लाभ घटा? / In which year did profit fall compared to the previous year?","2022 (14 से घटकर 12)"],
+["(इसी तालिका पर आधारित) 5 वर्षों का औसत वार्षिक लाभ ज्ञात करें। / Find the average annual profit over the 5 years.","₹15.2 करोड़ / ₹15.2 crore ((10+14+12+18+22)/5)"],
+["बार ग्राफ: 4 विभागों (A,B,C,D) में कर्मचारियों की संख्या: A=25, B=40, C=30, D=35। Q: सभी विभागों की कुल कर्मचारी संख्या ज्ञात करें। / Bar graph employees by department: A=25,B=40,C=30,D=35. Find total employees.","130"],
+["(इसी बार ग्राफ पर आधारित) विभाग B में कर्मचारियों की संख्या, विभाग A से कितने % अधिक है? / Department B's employees are what % more than department A's?","60% ((40−25)/25×100)"],
+["तालिका: 3 उत्पादों (X,Y,Z) की कीमत व बिक्री मात्रा — X: ₹50/यूनिट, 200 यूनिट; Y: ₹80/यूनिट, 150 यूनिट। Q: X और Y से कुल आय ज्ञात करें। / Table: X ₹50/unit, 200 units; Y ₹80/unit, 150 units. Find total revenue from X and Y.","₹22,000 ((50×200)+(80×150) = 10,000+12,000)"]
 ]
 };
 
@@ -1370,7 +1187,6 @@ function renderHome(){
     card.addEventListener('click', ()=> openSubject(subject));
     subjGrid.appendChild(card);
   });
-  homeView.style.display = (pyqView.style.display === "none") ? "" : homeView.style.display;
   subjectView.style.display = "none";
 }
 
@@ -1393,7 +1209,7 @@ function renderQuestions(subject, query=""){
     .filter(it => (it.q+it.a).toLowerCase().includes(query.toLowerCase()));
 
   sectionTitle.textContent = `${iconFor(subject)} ${shortName(subject)}`;
-  syllabusNote.innerHTML = `<b>Note:</b> These are practice questions covering key areas of this topic as per the official UPSSSC PET syllabus. The actual exam may include additional questions from other parts of the syllabus too — use these to build your concepts, then revise the full syllabus topic-by-topic for complete coverage.`;
+  syllabusNote.innerHTML = `<b>Note:</b> These are practice questions covering key areas of this topic as per the official UPSSSC PET syllabus. Read through all of them first, then tap "🎯 Mock Test" above to test yourself with multiple-choice questions.`;
   statsBar.textContent = `${items.length} of ${allItems.length} questions shown`;
 
   if(items.length===0){
@@ -1496,7 +1312,7 @@ function buildOptionsFor(subject, correctAnswer, excludeIdx){
     if(distractors.length === 3) break;
   }
   while(distractors.length < 3){
-    distractors.push("इनमें से कोई नहीं / None of the above");
+    distractors.push("None of the above");
   }
   const options = shuffleArray([correctAnswer, ...distractors]);
   return options;
@@ -1675,16 +1491,14 @@ function pdfPathForYear(year){
 }
 
 function renderPyqPlaceholder(){
-  pyqViewer.innerHTML = `<div class="pyq-placeholder">👆 ऊपर से साल चुनें उस वर्ष का पेपर देखने के लिए<br>Select a year above to view that year's paper</div>`;
+  pyqViewer.innerHTML = `<div class="pyq-placeholder">👆 Select a year above to view that year's paper.</div>`;
 }
 
 function renderPyqMissing(year){
   const path = pdfPathForYear(year);
   pyqViewer.innerHTML = `
     <div class="pyq-missing">
-      📄 ${year} का पेपर अभी जोड़ा नहीं गया है।<br>
-      The ${year} paper hasn't been added yet.<br><br>
-      इसे जोड़ने के लिए, इस फ़ाइल को अपने प्रोजेक्ट में डालें:<br>
+      📄 The ${year} paper hasn't been added yet.<br><br>
       To add it, place this file in your project:<br>
       <b>${path}</b>
     </div>
@@ -1711,8 +1525,6 @@ pyqYearSelect.addEventListener('change', ()=>{
     return;
   }
   const path = pdfPathForYear(year);
-  // Check if the file actually exists before showing the viewer,
-  // so we can show a friendly message instead of a blank/broken frame.
   fetch(path, { method: 'HEAD' })
     .then(res => {
       if(res.ok){
@@ -1722,8 +1534,6 @@ pyqYearSelect.addEventListener('change', ()=>{
       }
     })
     .catch(()=>{
-      // Some static hosts don't support HEAD well or block cross-check;
-      // fall back to just trying to show the viewer directly.
       renderPyqViewer(year);
     });
 });
@@ -1739,6 +1549,7 @@ searchBox.addEventListener('input', ()=>{
 
 updateProgressBar();
 renderHome();
+setHomeTab('syllabus');
 
 /* ================= EXAM SELECTOR ================= */
 const examSelect = document.getElementById('examSelect');
