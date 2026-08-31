@@ -1154,6 +1154,9 @@ const backBtn = document.getElementById('backBtn');
 /* ================= HOME TABS (Syllabus / PYQ) ================= */
 function setHomeTab(tab){
   document.querySelectorAll('.home-tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  // Always fully close any subject/mock view first so nothing renders underneath
+  subjectView.style.display = "none";
+  if(typeof mockView !== 'undefined'){ mockView.style.display = "none"; }
   if(tab === 'syllabus'){
     homeView.style.display = "";
     pyqView.style.display = "none";
@@ -1342,10 +1345,23 @@ function startMockTest(subject){
   renderMockQuestion();
 }
 
+let mockAutoNextTimer = null;
+
+function goToNextMockQuestion(){
+  if(mockAutoNextTimer){ clearTimeout(mockAutoNextTimer); mockAutoNextTimer = null; }
+  mockIndex++;
+  if(mockIndex >= mockQuestions.length){
+    finishMockTest();
+  } else {
+    renderMockQuestion();
+  }
+}
+
 function renderMockQuestion(){
   const total = mockQuestions.length;
   const q = mockQuestions[mockIndex];
   mockAnswered = false;
+  if(mockAutoNextTimer){ clearTimeout(mockAutoNextTimer); mockAutoNextTimer = null; }
   mockProgressText.textContent = `Question ${mockIndex+1} / ${total}`;
   mockProgressBar.style.width = `${Math.round((mockIndex/total)*100)}%`;
   mockQText.textContent = `${mockIndex+1}. ${q.q}`;
@@ -1392,6 +1408,10 @@ function selectMockOption(btn, chosenText, correctText){
   mockFeedback.style.display = "";
   mockNextBtn.style.display = "";
   mockNextBtn.textContent = (mockIndex+1 >= mockQuestions.length) ? "Finish & See Score →" : "Next Question →";
+
+  // Auto-advance to the next question after a short pause so the person
+  // can see whether they were right, without needing to tap Next.
+  mockAutoNextTimer = setTimeout(goToNextMockQuestion, 1100);
 }
 
 function finishMockTest(){
@@ -1438,15 +1458,9 @@ function finishMockTest(){
 mockBtn.addEventListener('click', ()=>{
   if(currentSubject) startMockTest(currentSubject);
 });
-mockNextBtn.addEventListener('click', ()=>{
-  mockIndex++;
-  if(mockIndex >= mockQuestions.length){
-    finishMockTest();
-  } else {
-    renderMockQuestion();
-  }
-});
+mockNextBtn.addEventListener('click', goToNextMockQuestion);
 mockExitBtn.addEventListener('click', ()=>{
+  if(mockAutoNextTimer){ clearTimeout(mockAutoNextTimer); mockAutoNextTimer = null; }
   mockView.style.display = "none";
   if(mockSubject){
     subjectView.style.display = "";
